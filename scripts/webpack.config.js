@@ -23,6 +23,7 @@ const PATHS = {
 	appSrc: resolveApp('src'),
 	appBuild: resolveApp('dist'),
 	appMainJs: resolveApp('src/js/main.js'),
+	appPolyfillJs: resolveApp('src/js/polyfills/customEvent.js'),
 	appNodeModules: resolveApp('node_modules'),
 	scssLoader: resolveApp('scripts/loaders/scss-loader.js'),
 };
@@ -34,10 +35,13 @@ module.exports = {
 	mode: DEV ? 'development' : 'production',
 	target: 'web',
 	devtool: DEV ? 'cheap-eval-source-map' : 'source-map',
-	entry: ['babel-polyfill', PATHS.appMainJs],
+	entry: {
+		main: ['babel-polyfill', PATHS.appMainJs],
+		polyfill: [PATHS.appPolyfillJs]
+	},
 	output: {
 		path: PATHS.appBuild,
-		filename: 'main.js',
+		filename: '[name].js',
 	},
 	module: {
 		rules: [

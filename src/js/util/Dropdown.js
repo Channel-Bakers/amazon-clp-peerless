@@ -2,6 +2,8 @@
 
 import env from '../../../env';
 import {isObjectEmpty, uniqueObjectValues} from './helpers/object';
+import {numToCurrency} from './helpers/number';
+import {capitalize} from './helpers/string';
 
 export default class Dropdown {
 	constructor(params) {
@@ -12,6 +14,8 @@ export default class Dropdown {
 		};
 
 		this.params = {...defaultParams, ...params};
+		this.activeOption = {};
+		this.elements = {};
 
 		return (async () => {
 			return await this._init();
@@ -20,22 +24,27 @@ export default class Dropdown {
 
 	async _sortOptions(options) {
 		const OPTIONS = uniqueObjectValues([...options], 'asin');
-		const SORTED_OPTIONS = [...OPTIONS.sort((a, b) => a.size < b.size ? -1 : a.size > b.size ? 1 : 0)];
+		const SORTED_OPTIONS = [
+			...OPTIONS.sort((a, b) =>
+				a.size < b.size ? -1 : a.size > b.size ? 1 : 0
+			),
+		];
 
 		return SORTED_OPTIONS;
 	}
 
-	async _renderOptions(select) {
-
-		const ACTIVE_COLOR = document
-			.querySelector(`.${env.clientPrefix}-builder-container`)
-			.getAttribute('data-active-color');
+	async _renderOptions(color = false) {
+		const ACTIVE_COLOR = color
+			? color
+			: document
+					.querySelector(`.${env.clientPrefix}-builder-container`)
+					.getAttribute('data-active-color');
 
 		const OPTIONS = this.params.data[ACTIVE_COLOR];
 
 		const OPTIONS_SORTED = await this._sortOptions(OPTIONS);
 
-		OPTIONS_SORTED.forEach(option => {
+		OPTIONS_SORTED.forEach((option) => {
 			const OPTION_ELEMENT = document.createElement('option');
 			OPTION_ELEMENT.value = option.size;
 			OPTION_ELEMENT.innerText = option.size;
@@ -44,15 +53,100 @@ export default class Dropdown {
 				asin: option.asin,
 				price: option.price,
 				image: option.image,
-				offeringID: option.offeringID
+				offeringID: option.offeringID,
 			};
 
-			OPTION_ELEMENT.setAttribute('data-option-params', JSON.stringify(OPTION_DATA));
+			OPTION_ELEMENT.setAttribute(
+				'data-option-params',
+				JSON.stringify(OPTION_DATA)
+			);
 
-			select.append(OPTION_ELEMENT);
+			this.elements.select.appendChild(OPTION_ELEMENT);
 		});
 
 		return this;
+	}
+
+	rebuildOptions(color) {
+		this.elements.select.innerHTML = '';
+
+		const RENDER = new Promise((resolve, reject) => {
+			this._renderOptions(color);
+			resolve();
+		});
+
+		RENDER.then(() => {
+			this._selectChange();
+		});
+
+		return this;
+	}
+
+	buildATCLink() {
+		let atcURL = new URL(this.elements.atc.href);
+		atcURL.searchParams.set('offeringID.1', this.activeOption.offeringID);
+
+		this.elements.atc.href = atcURL.href;
+
+		return this;
+	}
+
+	_renderATCLink() {
+		const CTA = document.createElement('a');
+		CTA.classList.add(`${env.clientPrefix}-addToCart`);
+		CTA.setAttribute('data-select-id', this.params.id);
+		CTA.href =
+			'https://www.amazon.com/gp/item-dispatch?submit.addToCart=addToCart';
+		CTA.innerText = 'Add to Bag';
+
+		this.elements.atc = CTA;
+
+		return CTA;
+	}
+
+	_renderSelect() {
+		const SELECT_WRAPPER = document.createElement('div');
+		SELECT_WRAPPER.classList.add(`${env.clientPrefix}-select-container`);
+
+		this.elements.selectWrapper = SELECT_WRAPPER;
+
+		const SELECT = document.createElement('select');
+		SELECT.setAttribute('name', this.params.id);
+		SELECT.setAttribute('id', this.params.id);
+
+		this.elements.select = SELECT;
+
+		const CTA = this._renderATCLink();
+
+		SELECT_WRAPPER.appendChild(SELECT);
+		SELECT_WRAPPER.appendChild(CTA);
+
+		return SELECT_WRAPPER;
+	}
+
+	_renderPrice() {
+		const PRICE = this.elements.wrapper.querySelector(
+			`.${env.clientPrefix}-dropdown-price`
+		);
+		PRICE.innerText = numToCurrency(this.activeOption.price);
+	}
+
+	_renderTitle(color = false) {
+		const ACTIVE_COLOR = color
+			? color
+			: this.params.builder.params.colors.reduce(
+					(color) => color.active && color.name
+			  );
+
+		const TITLE = document.createElement('h4');
+		TITLE.classList.add(`${env.clientPrefix}-dropdown-title`);
+
+		let titleText = this.params.title;
+		titleText = titleText.replace('{{COLOR}}', capitalize(ACTIVE_COLOR));
+
+		TITLE.innerText = titleText;
+
+		return TITLE;
 	}
 
 	async _render() {
@@ -63,43 +157,67 @@ export default class Dropdown {
 
 		DROPDOWN_WRAPPER.setAttribute('data-select-id', this.params.id);
 
-		DROPDOWN_WRAPPER.innerHTML = `
-			<h4 class="title">${this.params.title}</h4>
-			<p class="price"></p>
-		`;
+		const DROPDOWN_TITLE = this._renderTitle();
+		const DROPDOWN_PRICE = document.createElement('h6');
+		DROPDOWN_PRICE.classList.add(`${env.clientPrefix}-dropdown-price`);
 
-		const SELECT_WRAPPER = document.createElement('div');
-		SELECT_WRAPPER.classList.add(`${env.clientPrefix}-select-container`);
+		DROPDOWN_WRAPPER.appendChild(DROPDOWN_TITLE);
+		DROPDOWN_WRAPPER.appendChild(DROPDOWN_PRICE);
 
-		const SELECT = document.createElement('select');
-		SELECT.setAttribute('name', this.params.id);
-		SELECT.setAttribute('id', this.params.id);
+		this.elements.wrapper = DROPDOWN_WRAPPER;
 
-		const CTA = document.createElement('a');
-		CTA.href = 'https://www.amazon.com/gp/item-dispatch?submit.addToCart=addToCart';
-		CTA.innerText = 'Add to Bag';
+		const SELECT_WRAPPER = this._renderSelect();
 
-		SELECT_WRAPPER.append(SELECT);
-		SELECT_WRAPPER.append(CTA);
-		DROPDOWN_WRAPPER.append(SELECT_WRAPPER);
+		DROPDOWN_WRAPPER.appendChild(SELECT_WRAPPER);
 
 		this.html = DROPDOWN_WRAPPER;
 
 		if (!isObjectEmpty(this.params.data)) {
-			await this._renderOptions(SELECT);
+			await this._renderOptions();
 		}
 
-		await this._events(SELECT);
+		await this._events();
+		this._selectChange();
 
 		return this;
 	}
 
-	async _events(select) {
-		select.addEventListener('change', () => {
-			const SELECTED_OPTION = select.options[select.selectedIndex];
-			const SELECTED_OPTION_DATA = JSON.parse(SELECTED_OPTION.getAttribute('data-option-params'));
+	_selectChange() {
+		const SELECTED_OPTION = this.elements.select.options[
+			this.elements.select.selectedIndex
+		];
+		const SELECTED_OPTION_DATA = JSON.parse(
+			SELECTED_OPTION.getAttribute('data-option-params')
+		);
 
-			console.log(SELECTED_OPTION_DATA.price);
+		this.activeOption = SELECTED_OPTION_DATA;
+
+		const OPTION_CHANGE = new CustomEvent('dropdown.option.change', {
+			detail: SELECTED_OPTION_DATA,
+		});
+
+		this.params.builder.elements.wrapper.dispatchEvent(OPTION_CHANGE);
+
+		this._renderPrice();
+		this.buildATCLink();
+
+		return this;
+	}
+
+	async _events() {
+		const SELECT = this.elements.select;
+
+		SELECT.addEventListener('change', () => {
+			this._selectChange();
+		});
+
+		SELECT.addEventListener('builder.color.change', (event) => {
+			this.rebuildOptions(event.detail.color);
+
+			// update title
+			this.elements.wrapper
+				.querySelector(`.${env.clientPrefix}-dropdown-title`)
+				.replaceWith(this._renderTitle(event.detail.color));
 		});
 
 		return this;

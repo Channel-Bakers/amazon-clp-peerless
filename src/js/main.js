@@ -7,37 +7,38 @@ import Builder from './util/Builder';
 	const slimSuitJackets = jackets.default;
 	const slimSuitPants = pants.default;
 
-	const slimSuitBuilder = new Builder({
+	const slimSuitOptions = {
 		target: 'slimSuit',
-		title: 'Lazio Grey Suit',
+		title: `Slim Fit {{COLOR}} Suit`,
 		caption:
 			"Slim, polished, and versatile enough for just about any occasion. This handsome grey Lazio suit is cut from pure S110's wool by Vitale Barberis Canonico.",
 		colors: [
 			{
 				name: 'charcoal',
 				hex: '#DDDDDD',
-				active: true
+				active: true,
 			},
 			{
 				name: 'black',
 				hex: '#000000',
+				active: false,
 			},
 		],
 		dropdowns: [
 			{
-				title: 'Lazio Dark Grey Jacket',
+				title: `Slim Fit {{COLOR}} Jacket`,
 				id: 'slimSuitJackets',
 				data: slimSuitJackets,
 			},
 			{
-				title: 'Dark Grey Brescia Trousers',
+				title: `Slim Fit {{COLOR}} Pants`,
 				id: 'slimSuitPants',
 				data: slimSuitPants,
 			},
 		],
-	});
+	};
 
-	// console.log(slimSuitBuilder);
-	// console.log(`Jackets: `, slimSuitJackets);
-	// console.log(`Pants: `, slimSuitPants);
+	const slimSuitBuilder = new Builder({
+		...slimSuitOptions,
+	});
 })();

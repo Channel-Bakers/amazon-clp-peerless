@@ -44,7 +44,7 @@ export default class Builder {
 				COLOR_WRAPPER.setAttribute('title', color.name);
 				COLOR_WRAPPER.style.backgroundColor = color.hex;
 
-				COLOR_PICKER_WRAPPER.append(COLOR_WRAPPER);
+				COLOR_PICKER_WRAPPER.appendChild(COLOR_WRAPPER);
 
 				const COLOR_EVENT = new CustomEvent('builder.color.change', {
 					detail: {color: color.name},
@@ -85,7 +85,7 @@ export default class Builder {
 					builder: this,
 				});
 				this.dropdowns.push(DROPDOWN);
-				this.elements.wrapper.append(DROPDOWN.html);
+				this.elements.wrapper.appendChild(DROPDOWN.html);
 
 				if (this.dropdowns.length === this.params.dropdowns.length)
 					resolve();

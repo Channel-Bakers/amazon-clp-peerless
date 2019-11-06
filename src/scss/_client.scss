@@ -91,6 +91,7 @@ CLIENT_PREFIX {
 
 			&:after {
 				content: '';
+				display: flex;
 				position: absolute;
 				z-index: -1;
 				background-color: rgb(221, 221, 221);

@@ -151,7 +151,11 @@ body {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  background-color: #fff; }
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%0A%3Csvg width='46px' height='25px' viewBox='0 0 46 25' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' stroke-linecap='square'%3E%3Cg id='Group' transform='translate(2.000000, 2.000000)' stroke='%23000000' stroke-width='2'%3E%3Cpath d='M0.148033202,0.128545207 L20.9778633,20.9583753' id='Line'%3E%3C/path%3E%3Cpath d='M41.8076933,0.128545207 L20.9778633,20.9583753' id='Line-2'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat, repeat;
+  background-position: right .7em top 50%, 0 0;
+  background-size: .65em auto, 100%; }
   .ck-select-dropdown::-ms-expand {
     display: none; }
   .ck-select-dropdown:hover {

@@ -1,6 +1,6 @@
 'use strict';
 
-import env from '../../../js-env-variables';
+import env from '../../../env';
 import {isObjectEmpty, uniqueObjectValues} from './helpers/object';
 
 export default class Dropdown {

@@ -1,4 +1,4 @@
-const env = require('./js-env-variables');
+const env = require('../../env');
 
 module.exports = (source) => {
 	const CLIENT_PREFIX = env.clientPrefix;

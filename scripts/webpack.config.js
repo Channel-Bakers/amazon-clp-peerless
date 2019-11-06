@@ -38,9 +38,11 @@ module.exports = {
 	entry: {
 		main: ['babel-polyfill', PATHS.appMainJs],
 		polyfill: [
+			'url-polyfill',
 			resolveApp('src/js/polyfills/customEvent.js'),
-			resolveApp('src/js/polyfills/prepend.js')
-		]
+			resolveApp('src/js/polyfills/replaceWith.js'),
+			resolveApp('src/js/polyfills/prepend.js'),
+		],
 	},
 	output: {
 		path: PATHS.appBuild,

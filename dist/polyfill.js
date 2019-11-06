@@ -3860,6 +3860,17 @@ eval("(function () {\n  if (typeof window.CustomEvent === 'function') return fal
 
 /***/ }),
 
+/***/ "./src/js/polyfills/nodeListForEach.js":
+/*!*********************************************!*\
+  !*** ./src/js/polyfills/nodeListForEach.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("if (window.NodeList && !NodeList.prototype.forEach) {\n  NodeList.prototype.forEach = function (callback, thisArg) {\n    thisArg = thisArg || window;\n\n    for (var i = 0; i < this.length; i++) {\n      callback.call(thisArg, this[i], i, this);\n    }\n  };\n}//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvanMvcG9seWZpbGxzL25vZGVMaXN0Rm9yRWFjaC5qcy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9qcy9wb2x5ZmlsbHMvbm9kZUxpc3RGb3JFYWNoLmpzPzM0ZmUiXSwic291cmNlc0NvbnRlbnQiOlsiaWYgKHdpbmRvdy5Ob2RlTGlzdCAmJiAhTm9kZUxpc3QucHJvdG90eXBlLmZvckVhY2gpIHtcbiAgTm9kZUxpc3QucHJvdG90eXBlLmZvckVhY2ggPSBmdW5jdGlvbiAoY2FsbGJhY2ssIHRoaXNBcmcpIHtcbiAgICB0aGlzQXJnID0gdGhpc0FyZyB8fCB3aW5kb3c7XG5cbiAgICBmb3IgKHZhciBpID0gMDsgaSA8IHRoaXMubGVuZ3RoOyBpKyspIHtcbiAgICAgIGNhbGxiYWNrLmNhbGwodGhpc0FyZywgdGhpc1tpXSwgaSwgdGhpcyk7XG4gICAgfVxuICB9O1xufSJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/js/polyfills/nodeListForEach.js\n");
+
+/***/ }),
+
 /***/ "./src/js/polyfills/prepend.js":
 /*!*************************************!*\
   !*** ./src/js/polyfills/prepend.js ***!
@@ -3883,9 +3894,9 @@ eval("function _typeof(obj) { if (typeof Symbol === \"function\" && typeof Symbo
 /***/ }),
 
 /***/ 1:
-/*!*******************************************************************************************************************************************!*\
-  !*** multi babel-polyfill url-polyfill ./src/js/polyfills/customEvent.js ./src/js/polyfills/replaceWith.js ./src/js/polyfills/prepend.js ***!
-  \*******************************************************************************************************************************************/
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** multi babel-polyfill url-polyfill ./src/js/polyfills/customEvent.js ./src/js/polyfills/replaceWith.js ./src/js/polyfills/prepend.js ./src/js/polyfills/nodeListForEach.js ***!
+  \*********************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3893,7 +3904,8 @@ __webpack_require__(/*! babel-polyfill */"./node_modules/babel-polyfill/lib/inde
 __webpack_require__(/*! url-polyfill */"./node_modules/url-polyfill/url-polyfill.js");
 __webpack_require__(/*! /Users/ryand/Development/clp/atc-builder/src/js/polyfills/customEvent.js */"./src/js/polyfills/customEvent.js");
 __webpack_require__(/*! /Users/ryand/Development/clp/atc-builder/src/js/polyfills/replaceWith.js */"./src/js/polyfills/replaceWith.js");
-module.exports = __webpack_require__(/*! /Users/ryand/Development/clp/atc-builder/src/js/polyfills/prepend.js */"./src/js/polyfills/prepend.js");
+__webpack_require__(/*! /Users/ryand/Development/clp/atc-builder/src/js/polyfills/prepend.js */"./src/js/polyfills/prepend.js");
+module.exports = __webpack_require__(/*! /Users/ryand/Development/clp/atc-builder/src/js/polyfills/nodeListForEach.js */"./src/js/polyfills/nodeListForEach.js");
 
 
 /***/ })

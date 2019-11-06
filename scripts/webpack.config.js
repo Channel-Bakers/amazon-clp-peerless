@@ -43,6 +43,7 @@ module.exports = {
 			resolveApp('src/js/polyfills/customEvent.js'),
 			resolveApp('src/js/polyfills/replaceWith.js'),
 			resolveApp('src/js/polyfills/prepend.js'),
+			resolveApp('src/js/polyfills/nodeListForEach.js'),
 		],
 	},
 	output: {

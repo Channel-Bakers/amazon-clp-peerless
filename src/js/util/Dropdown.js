@@ -93,7 +93,7 @@ export default class Dropdown {
 
 	_renderATCLink() {
 		const CTA = document.createElement('a');
-		CTA.classList.add(`${env.clientPrefix}-addToCart`);
+		CTA.classList.add(`${env.clientPrefix}-select-addToCart`);
 		CTA.setAttribute('data-select-id', this.params.id);
 		CTA.href =
 			'https://www.amazon.com/gp/item-dispatch?submit.addToCart=addToCart';
@@ -111,6 +111,7 @@ export default class Dropdown {
 		this.elements.selectWrapper = SELECT_WRAPPER;
 
 		const SELECT = document.createElement('select');
+		SELECT.classList.add(`${env.clientPrefix}-select-dropdown`)
 		SELECT.setAttribute('name', this.params.id);
 		SELECT.setAttribute('id', this.params.id);
 

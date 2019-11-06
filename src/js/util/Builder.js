@@ -28,12 +28,21 @@ export default class Builder {
 	_renderColorPicker() {
 		if (this.params.colors && !isObjectEmpty(this.params.colors)) {
 			const COLOR_PICKER_WRAPPER = document.createElement('div');
+			COLOR_PICKER_WRAPPER.classList.add(
+				`${env.clientPrefix}-color-picker-container`
+			);
 
 			this.params.colors.forEach((color) => {
 				const COLOR_WRAPPER = document.createElement('a');
+
+				COLOR_WRAPPER.classList.add(
+					`${env.clientPrefix}-color-container`
+				);
+				if (color.active) COLOR_WRAPPER.classList.add('active');
+
 				COLOR_WRAPPER.href = '#';
-				COLOR_WRAPPER.innerText = color.name;
-				COLOR_WRAPPER.style.color = color.hex;
+				COLOR_WRAPPER.setAttribute('title', color.name);
+				COLOR_WRAPPER.style.backgroundColor = color.hex;
 
 				COLOR_PICKER_WRAPPER.append(COLOR_WRAPPER);
 
@@ -43,6 +52,17 @@ export default class Builder {
 
 				COLOR_WRAPPER.addEventListener('click', (event) => {
 					event.preventDefault();
+
+					const COLORS = document.querySelectorAll(
+						`.${env.clientPrefix}-color-container`
+					);
+
+					COLORS.forEach((color) => {
+						color.classList.remove('active');
+					});
+
+					event.target.classList.add('active');
+
 					this.elements.wrapper.dispatchEvent(COLOR_EVENT);
 
 					this.dropdowns.forEach((dropdown) => {
@@ -97,9 +117,7 @@ export default class Builder {
 	_renderTitle(color = false) {
 		const ACTIVE_COLOR = color
 			? color
-			: this.params.colors.reduce(
-					(color) => color.active && color.name
-			  );
+			: this.params.colors.reduce((color) => color.active && color.name);
 
 		const TITLE = document.createElement('h4');
 		TITLE.classList.add(`${env.clientPrefix}-builder-title`);
@@ -155,7 +173,6 @@ export default class Builder {
 		TARGET.appendChild(BUILDER_TITLE);
 		TARGET.appendChild(BUILDER_PRICE);
 		TARGET.appendChild(BUILDER_CAPTION);
-
 
 		if (!isObjectEmpty(this.params.colors)) {
 			this.params.colors.forEach((color) => {

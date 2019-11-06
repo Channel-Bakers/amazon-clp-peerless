@@ -15,7 +15,7 @@ import Builder from './util/Builder';
 		colors: [
 			{
 				name: 'charcoal',
-				hex: '#DDDDDD',
+				hex: '#454f54',
 				active: true,
 			},
 			{

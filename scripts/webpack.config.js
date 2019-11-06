@@ -36,8 +36,9 @@ module.exports = {
 	target: 'web',
 	devtool: DEV ? 'cheap-eval-source-map' : 'source-map',
 	entry: {
-		main: ['babel-polyfill', PATHS.appMainJs],
+		main: [PATHS.appMainJs],
 		polyfill: [
+			'babel-polyfill',
 			'url-polyfill',
 			resolveApp('src/js/polyfills/customEvent.js'),
 			resolveApp('src/js/polyfills/replaceWith.js'),

@@ -37,7 +37,10 @@ module.exports = {
 	devtool: DEV ? 'cheap-eval-source-map' : 'source-map',
 	entry: {
 		main: ['babel-polyfill', PATHS.appMainJs],
-		polyfill: [PATHS.appPolyfillJs]
+		polyfill: [
+			resolveApp('src/js/polyfills/customEvent.js'),
+			resolveApp('src/js/polyfills/prepend.js')
+		]
 	},
 	output: {
 		path: PATHS.appBuild,

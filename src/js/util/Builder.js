@@ -180,7 +180,7 @@ export default class Builder {
 					TARGET.setAttribute('data-active-color', color.name);
 			});
 
-			this._renderColorPicker();
+			// this._renderColorPicker();
 		}
 
 		if (this.params.dropdowns.length) {

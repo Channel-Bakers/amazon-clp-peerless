@@ -1,0 +1,48 @@
+body {
+	margin: 0;
+}
+
+CLIENT_PREFIX {
+	&-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background: #f6f6f6;
+
+		h6, h5, h4, h3, h2, h1, p {
+			margin: 0;
+		}
+	}
+
+	&-image-container {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		img {
+			max-width: 300px;
+		}
+	}
+
+	&-builder-container {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: flex-start;
+	}
+
+	&-dropdown-container {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+
+	&-select-container {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
+}

@@ -23,7 +23,6 @@ const PATHS = {
 	appSrc: resolveApp('src'),
 	appBuild: resolveApp('dist'),
 	appMainJs: resolveApp('src/js/main.js'),
-	appPolyfillJs: resolveApp('src/js/polyfills/customEvent.js'),
 	appNodeModules: resolveApp('node_modules'),
 	scssLoader: resolveApp('scripts/loaders/scss-loader.js'),
 };
@@ -36,15 +35,16 @@ module.exports = {
 	target: 'web',
 	devtool: DEV ? 'cheap-eval-source-map' : 'source-map',
 	entry: {
-		main: [PATHS.appMainJs],
-		polyfill: [
+		main: [
 			'babel-polyfill',
 			'url-polyfill',
 			'whatwg-fetch',
+			'mutation-observer',
 			resolveApp('src/js/polyfills/customEvent.js'),
 			resolveApp('src/js/polyfills/replaceWith.js'),
 			resolveApp('src/js/polyfills/prepend.js'),
 			resolveApp('src/js/polyfills/nodeListForEach.js'),
+			PATHS.appMainJs
 		],
 	},
 	output: {

@@ -12,15 +12,18 @@ import Builder from './util/Builder';
 		title: `Slim Fit {{COLOR}} Suit`,
 		caption:
 			"Slim, polished, and versatile enough for just about any occasion. This handsome grey Lazio suit is cut from pure S110's wool by Vitale Barberis Canonico.",
+		image: true,
 		colors: [
 			{
 				name: 'charcoal',
 				hex: '#454f54',
+				image: 'https://images-na.ssl-images-amazon.com/images/I/61grhh2qwmL._AC_UY741_.jpg',
 				active: true,
 			},
 			{
 				name: 'black',
 				hex: '#000000',
+				image: 'https://images-na.ssl-images-amazon.com/images/I/61NhWRvi5eL._AC_SY679._SX._UX._SY._UY_.jpg',
 				active: false,
 			},
 		],

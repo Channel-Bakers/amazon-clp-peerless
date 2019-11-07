@@ -25,6 +25,10 @@ export default class Builder {
 		})();
 	}
 
+	_getActiveColor() {
+		return this.params.colors.reduce((color) => color.active && color);
+	}
+
 	_renderColorPicker() {
 		if (this.params.colors && !isObjectEmpty(this.params.colors)) {
 			const COLOR_PICKER_WRAPPER = document.createElement('div');
@@ -117,13 +121,13 @@ export default class Builder {
 	_renderTitle(color = false) {
 		const ACTIVE_COLOR = color
 			? color
-			: this.params.colors.reduce((color) => color.active && color.name);
+			: this._getActiveColor();
 
 		const TITLE = document.createElement('h4');
 		TITLE.classList.add(`${env.clientPrefix}-builder-title`);
 
 		let titleText = this.params.title;
-		titleText = titleText.replace('{{COLOR}}', capitalize(ACTIVE_COLOR));
+		titleText = titleText.replace('{{COLOR}}', capitalize(ACTIVE_COLOR.name));
 
 		TITLE.innerText = titleText;
 
@@ -152,14 +156,38 @@ export default class Builder {
 	}
 
 	async _render() {
-		const TARGET = document.querySelector(
+		const WRAPPER = document.querySelector(
 			`[data-builder-target="${this.params.target}"]`
 		);
 
-		this.elements.wrapper = TARGET;
+		WRAPPER.classList.add(`${env.clientPrefix}-container`);
+
+		if (this.params.image) {
+			const IMAGE_WRAPPER = document.createElement('div');
+			IMAGE_WRAPPER.classList.add(`${env.clientPrefix}-image-container`);
+
+			const IMAGE = document.createElement('img');
+
+			const ACTIVE_COLOR = (this.params.colors.length)
+				? this._getActiveColor()
+				: this.params.image;
+
+			console.log(ACTIVE_COLOR.image);
+
+			IMAGE.src = (typeof ACTIVE_COLOR !== 'object') ? ACTIVE_COLOR : ACTIVE_COLOR.image;
+
+			IMAGE_WRAPPER.appendChild(IMAGE);
+
+			WRAPPER.appendChild(IMAGE_WRAPPER);
+		}
+
+		const TARGET = document.createElement('div');
 
 		if (!TARGET.classList.contains(`${env.clientPrefix}-builder-container`))
 			TARGET.classList.add(`${env.clientPrefix}-builder-container`);
+
+		WRAPPER.appendChild(TARGET);
+		this.elements.wrapper = TARGET;
 
 		const BUILDER_TITLE = this._renderTitle();
 

@@ -119,15 +119,20 @@ export default class Builder {
 	}
 
 	_renderTitle(color = false) {
-		const ACTIVE_COLOR = color
-			? color
-			: this._getActiveColor();
+		const ACTIVE_COLOR = color ? color : this._getActiveColor();
 
 		const TITLE = document.createElement('h4');
 		TITLE.classList.add(`${env.clientPrefix}-builder-title`);
 
 		let titleText = this.params.title;
-		titleText = titleText.replace('{{COLOR}}', capitalize((typeof ACTIVE_COLOR !== "object") ? ACTIVE_COLOR : ACTIVE_COLOR.name));
+		titleText = titleText.replace(
+			'{{COLOR}}',
+			capitalize(
+				typeof ACTIVE_COLOR !== 'object'
+					? ACTIVE_COLOR
+					: ACTIVE_COLOR.name
+			)
+		);
 
 		TITLE.innerText = titleText;
 
@@ -141,7 +146,10 @@ export default class Builder {
 			const ACTIVE_COLOR = TARGET.getAttribute('data-active-color');
 
 			if (ACTIVE_COLOR !== event.detail.color.name) {
-				TARGET.setAttribute('data-active-color', event.detail.color.name);
+				TARGET.setAttribute(
+					'data-active-color',
+					event.detail.color.name
+				);
 
 				// update title
 				this.elements.wrapper
@@ -149,7 +157,7 @@ export default class Builder {
 					.replaceWith(this._renderTitle(event.detail.color.name));
 
 				// update image
-				this.elements.image.src = event.detail.color.image;
+				this.elements.image.style.backgroundImage = `url('${event.detail.color.image}')`;
 			}
 		});
 
@@ -164,25 +172,6 @@ export default class Builder {
 		);
 
 		WRAPPER.classList.add(`${env.clientPrefix}-container`);
-
-		if (this.params.image) {
-			const IMAGE_WRAPPER = document.createElement('div');
-			IMAGE_WRAPPER.classList.add(`${env.clientPrefix}-image-container`);
-
-			const IMAGE = document.createElement('img');
-
-			const ACTIVE_COLOR = (this.params.colors.length)
-				? this._getActiveColor()
-				: this.params.image;
-
-			IMAGE.src = (typeof ACTIVE_COLOR !== 'object') ? ACTIVE_COLOR : ACTIVE_COLOR.image;
-
-			IMAGE_WRAPPER.appendChild(IMAGE);
-
-			this.elements.image = IMAGE;
-
-			WRAPPER.appendChild(IMAGE_WRAPPER);
-		}
 
 		const TARGET = document.createElement('div');
 
@@ -216,6 +205,42 @@ export default class Builder {
 
 		if (this.params.dropdowns.length) {
 			await this._renderDropdowns();
+		}
+
+		if (this.params.image) {
+			const IMAGE_POSITION = this.params.image.position;
+
+			if (IMAGE_POSITION)
+				TARGET.classList.add(
+					IMAGE_POSITION === 'right' ? 'left' : 'right'
+				);
+
+			const IMAGE_WRAPPER = document.createElement('div');
+			IMAGE_WRAPPER.classList.add(`${env.clientPrefix}-image-container`);
+
+			const IMAGE = document.createElement('div');
+			IMAGE.classList.add(`${env.clientPrefix}-image`);
+
+			const ACTIVE_COLOR = this.params.colors.length
+				? this._getActiveColor()
+				: this.params.image;
+
+			IMAGE.style.backgroundImage = `url('${
+				typeof ACTIVE_COLOR !== 'object'
+					? ACTIVE_COLOR
+					: ACTIVE_COLOR.image
+			}')`;
+
+			IMAGE_WRAPPER.appendChild(IMAGE);
+
+			this.elements.image = IMAGE;
+
+			const ATTACH_METHOD =
+				IMAGE_POSITION && IMAGE_POSITION === 'right'
+					? 'appendChild'
+					: 'prepend';
+
+			WRAPPER[ATTACH_METHOD](IMAGE_WRAPPER);
 		}
 
 		await this._events();

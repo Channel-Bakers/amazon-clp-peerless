@@ -5,9 +5,11 @@ import Builder from './util/Builder';
 import {getCookie} from './util/helpers/cookies';
 
 (() => {
+	if (window.location.host === 'advertising.amazon.com') return;
+
 	let CB = {};
-    window.CB = CB;
-    CB.sessionID = getCookie('session-id');
+	window.CB = CB;
+	CB.sessionID = getCookie('session-id');
 
 	const slimSuitJackets = jackets.default;
 	const slimSuitPants = pants.default;

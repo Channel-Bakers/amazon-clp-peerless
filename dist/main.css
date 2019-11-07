@@ -190,7 +190,7 @@ body {
 .ck-select-addToCart {
   width: 50%;
   background: #333333;
-  color: white;
+  color: white !important;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 100;
@@ -202,6 +202,8 @@ body {
       justify-content: center;
   -ms-flex-align: center;
       align-items: center; }
+  .ck-select-addToCart:active, .ck-select-addToCart:link, .ck-select-addToCart:visited, .ck-select-addToCart:hover {
+    color: white !important; }
 
 .loading {
   background: #fff;

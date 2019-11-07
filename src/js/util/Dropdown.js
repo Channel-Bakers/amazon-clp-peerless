@@ -213,12 +213,12 @@ export default class Dropdown {
 		});
 
 		SELECT.addEventListener('builder.color.change', (event) => {
-			this.rebuildOptions(event.detail.color);
+			this.rebuildOptions(event.detail.color.name);
 
 			// update title
 			this.elements.wrapper
 				.querySelector(`.${env.clientPrefix}-dropdown-title`)
-				.replaceWith(this._renderTitle(event.detail.color));
+				.replaceWith(this._renderTitle(event.detail.color.name));
 		});
 
 		return this;

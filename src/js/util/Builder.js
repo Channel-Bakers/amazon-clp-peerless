@@ -51,7 +51,7 @@ export default class Builder {
 				COLOR_PICKER_WRAPPER.appendChild(COLOR_WRAPPER);
 
 				const COLOR_EVENT = new CustomEvent('builder.color.change', {
-					detail: {color: color.name},
+					detail: {color: {...color}},
 				});
 
 				COLOR_WRAPPER.addEventListener('click', (event) => {
@@ -127,7 +127,7 @@ export default class Builder {
 		TITLE.classList.add(`${env.clientPrefix}-builder-title`);
 
 		let titleText = this.params.title;
-		titleText = titleText.replace('{{COLOR}}', capitalize(ACTIVE_COLOR.name));
+		titleText = titleText.replace('{{COLOR}}', capitalize((typeof ACTIVE_COLOR !== "object") ? ACTIVE_COLOR : ACTIVE_COLOR.name));
 
 		TITLE.innerText = titleText;
 
@@ -140,13 +140,16 @@ export default class Builder {
 		TARGET.addEventListener('builder.color.change', (event) => {
 			const ACTIVE_COLOR = TARGET.getAttribute('data-active-color');
 
-			if (ACTIVE_COLOR !== event.detail.color) {
-				TARGET.setAttribute('data-active-color', event.detail.color);
+			if (ACTIVE_COLOR !== event.detail.color.name) {
+				TARGET.setAttribute('data-active-color', event.detail.color.name);
 
 				// update title
 				this.elements.wrapper
 					.querySelector(`.${env.clientPrefix}-builder-title`)
-					.replaceWith(this._renderTitle(event.detail.color));
+					.replaceWith(this._renderTitle(event.detail.color.name));
+
+				// update image
+				this.elements.image.src = event.detail.color.image;
 			}
 		});
 
@@ -172,11 +175,11 @@ export default class Builder {
 				? this._getActiveColor()
 				: this.params.image;
 
-			console.log(ACTIVE_COLOR.image);
-
 			IMAGE.src = (typeof ACTIVE_COLOR !== 'object') ? ACTIVE_COLOR : ACTIVE_COLOR.image;
 
 			IMAGE_WRAPPER.appendChild(IMAGE);
+
+			this.elements.image = IMAGE;
 
 			WRAPPER.appendChild(IMAGE_WRAPPER);
 		}

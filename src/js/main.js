@@ -5,10 +5,12 @@ import Builder from './util/Builder';
 import {getCookie} from './util/helpers/cookies';
 
 (() => {
-	const init = () => {
-		let CB = {};
-		window.CB = CB;
-		CB.sessionID = getCookie('session-id');
+	const init = (amazon = false) => {
+		if (amazon) {
+			let CB = {};
+			window.CB = CB;
+			CB.sessionID = getCookie('session-id');
+		}
 
 		const slimSuitJackets = jackets.default;
 		const slimSuitPants = pants.default;
@@ -64,7 +66,7 @@ import {getCookie} from './util/helpers/cookies';
 				const NODE = mutation.addedNodes[i];
 
 				if (NODE.getAttribute('id') === 'ad-landing-page-wrap') {
-					init();
+					init(true);
 					observer.disconnect();
 				}
 			}

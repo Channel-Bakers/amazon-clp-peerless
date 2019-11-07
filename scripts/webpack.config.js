@@ -40,6 +40,7 @@ module.exports = {
 		polyfill: [
 			'babel-polyfill',
 			'url-polyfill',
+			'whatwg-fetch',
 			resolveApp('src/js/polyfills/customEvent.js'),
 			resolveApp('src/js/polyfills/replaceWith.js'),
 			resolveApp('src/js/polyfills/prepend.js'),

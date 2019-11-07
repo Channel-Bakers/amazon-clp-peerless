@@ -1,9 +1,14 @@
 'use strict';
 
 import env from '../../../env';
-import {isObjectEmpty, uniqueObjectValues} from './helpers/object';
+import {
+	isObjectEmpty,
+	uniqueObjectValues,
+	serializeObject,
+} from './helpers/object';
 import {numToCurrency} from './helpers/number';
 import {capitalize} from './helpers/string';
+import {getCookie} from './helpers/cookies';
 
 export default class Dropdown {
 	constructor(params) {
@@ -83,8 +88,13 @@ export default class Dropdown {
 	}
 
 	buildATCLink() {
-		let atcURL = new URL(this.elements.atc.href);
+		let atcURL = new URL('https://www.amazon.com/gp/item-dispatch/');
+		atcURL.searchParams.set('submit.addToCart', 'addToCart');
 		atcURL.searchParams.set('offeringID.1', this.activeOption.offeringID);
+
+		const SESSION_ID = CB.sessionID || getCookie('session-id');
+
+		if (SESSION_ID) atcURL.searchParams.set('session-id', SESSION_ID);
 
 		this.elements.atc.href = atcURL.href;
 
@@ -95,8 +105,7 @@ export default class Dropdown {
 		const CTA = document.createElement('a');
 		CTA.classList.add(`${env.clientPrefix}-select-addToCart`);
 		CTA.setAttribute('data-select-id', this.params.id);
-		CTA.href =
-			'https://www.amazon.com/gp/item-dispatch?submit.addToCart=addToCart';
+		CTA.href = '#';
 		CTA.innerText = 'Add to Bag';
 
 		this.elements.atc = CTA;
@@ -111,7 +120,7 @@ export default class Dropdown {
 		this.elements.selectWrapper = SELECT_WRAPPER;
 
 		const SELECT = document.createElement('select');
-		SELECT.classList.add(`${env.clientPrefix}-select-dropdown`)
+		SELECT.classList.add(`${env.clientPrefix}-select-dropdown`);
 		SELECT.setAttribute('name', this.params.id);
 		SELECT.setAttribute('id', this.params.id);
 
@@ -207,6 +216,7 @@ export default class Dropdown {
 
 	async _events() {
 		const SELECT = this.elements.select;
+		const ATC = this.elements.atc;
 
 		SELECT.addEventListener('change', () => {
 			this._selectChange();
@@ -219,6 +229,96 @@ export default class Dropdown {
 			this.elements.wrapper
 				.querySelector(`.${env.clientPrefix}-dropdown-title`)
 				.replaceWith(this._renderTitle(event.detail.color.name));
+		});
+
+		ATC.addEventListener('click', async (event) => {
+			event.preventDefault();
+
+			const SESSION_ID = CB.sessionID || getCookie('session-id');
+
+			if (SESSION_ID) {
+				try {
+					const LOADING_ICON = `<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+						<defs>
+							<linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
+								<stop stop-color="#7B827B" stop-opacity="0" offset="0%"/>
+								<stop stop-color="#7B827B" stop-opacity=".631" offset="63.146%"/>
+								<stop stop-color="#7B827B" offset="100%"/>
+							</linearGradient>
+						</defs>
+						<g fill="none" fill-rule="evenodd">
+							<g transform="translate(1 1)">
+								<path d="M36 18c0-9.94-8.06-18-18-18" id="Oval-2" stroke="url(#a)" stroke-width="3" transform="rotate(293.261 18 18)">
+									<animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"/>
+								</path>
+								<circle fill="#7B827B" cx="36" cy="18" r="1" transform="rotate(293.261 18 18)">
+									<animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"/>
+								</circle>
+							</g>
+						</g>
+					</svg>`;
+	
+					const LOADED_ICON = `<svg width="19px" height="14px" viewBox="0 0 19 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+								<polyline id="Line" stroke="#007600" stroke-width="2" points="2 7.33333333 7 12 17.6452904 1.61165461"></polyline>
+							</g>
+						</svg>`;
+	
+					const ATC_DATA = {
+						verificationSessionID: SESSION_ID,
+						offerListingID: this.activeOption.offeringID,
+						quantity: '1',
+						ASIN: this.activeOption.asin,
+					};
+	
+					const ATC_REQUEST = await fetch(
+						'https://www.amazon.com/gp/add-to-cart/json',
+						{
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded',
+							},
+							body: serializeObject(ATC_DATA),
+						}
+					);
+	
+					const LOADER_WRAPPER = document.createElement('div');
+					const LOADER_CONTENT = document.createElement('div');
+					const LOADER = document.createElement('div');
+	
+					LOADER_WRAPPER.classList.add('loading-wrapper');
+					LOADER_WRAPPER.classList.add('is-loading');
+					LOADER_CONTENT.classList.add('loading-content');
+					LOADER.classList.add('loading');
+					LOADER.innerHTML = LOADING_ICON;
+	
+					LOADER_CONTENT.appendChild(LOADER);
+					LOADER_WRAPPER.appendChild(LOADER_CONTENT);
+					document.body.appendChild(LOADER_WRAPPER);
+	
+					const ATC_RESPONSE = await ATC_REQUEST.json();
+	
+					if (ATC_RESPONSE.isOK) {
+						const CART = document.getElementById('nav-cart-count');
+	
+						if (CART) CART.innerHTML = ATC_RESPONSE.cartQuantity;
+	
+						LOADER_WRAPPER.classList.remove('is-loading');
+						LOADER_WRAPPER.classList.add('is-loaded');
+	
+						LOADER.innerHTML = LOADED_ICON;
+						LOADER.innerHTML += '<h4>Added to Cart</h4>';
+	
+						setTimeout(() => {
+							LOADER_WRAPPER.outerHTML = '';
+						}, 1000);
+					}
+				} catch (error) {
+					window.open(event.target.href, '_blank');
+				}
+			} else {
+				window.open(event.target.href, '_blank');
+			}
 		});
 
 		return this;

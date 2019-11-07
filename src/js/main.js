@@ -2,8 +2,13 @@ import '../scss/main.scss';
 import * as jackets from './asins/suits/slim/jackets.json';
 import * as pants from './asins/suits/slim/pants.json';
 import Builder from './util/Builder';
+import {getCookie} from './util/helpers/cookies';
 
 (() => {
+	let CB = {};
+    window.CB = CB;
+    CB.sessionID = getCookie('session-id');
+
 	const slimSuitJackets = jackets.default;
 	const slimSuitPants = pants.default;
 
@@ -13,7 +18,7 @@ import Builder from './util/Builder';
 		caption:
 			"Slim, polished, and versatile enough for just about any occasion. This handsome grey Lazio suit is cut from pure S110's wool by Vitale Barberis Canonico.",
 		image: {
-			position: 'right',
+			position: 'left',
 		},
 		colors: [
 			{

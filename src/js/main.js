@@ -56,34 +56,31 @@ import {getCookie} from './util/helpers/cookies';
 		});
 	};
 
+	const watchForNewNodes = (mutations, observer) => {
+		mutations.forEach((mutation) => {
+			if (!mutation.addedNodes) return;
+
+			for (var i = 0; i < mutation.addedNodes.length; i++) {
+				const NODE = mutation.addedNodes[i];
+
+				if (NODE.getAttribute('id') === 'ad-landing-page-wrap') {
+					init();
+					observer.disconnect();
+				}
+			}
+		});
+	};
+
+	const TARGET_NODE = document.body;
+	const CONFIG = {childList: true, subtree: true};
+	const OBSERVER = new MutationObserver(watchForNewNodes);
+
 	(() => {
 		switch (window.location.host) {
 			case 'advertising.amazon.com':
 				break;
 			case 'amazon.com':
-				const watchForNewNodes = (mutations, observer) => {
-					mutations.forEach((mutation) => {
-						if (!mutation.addedNodes) return;
-
-						for (var i = 0; i < mutation.addedNodes.length; i++) {
-							const NODE = mutation.addedNodes[i];
-
-							if (
-								NODE.getAttribute('id') ===
-								'ad-landing-page-wrap'
-							) {
-								init();
-								observer.disconnect();
-							}
-						}
-					});
-				};
-
-				const TARGET_NODE = document.body;
-				const CONFIG = {childList: true, subtree: true};
-
-				const observer = new MutationObserver(watchForNewNodes);
-				observer.observe(TARGET_NODE, CONFIG);
+				OBSERVER.observe(TARGET_NODE, CONFIG);
 				break;
 			default:
 				init();

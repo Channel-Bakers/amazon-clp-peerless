@@ -5,9 +5,7 @@ import Builder from './util/Builder';
 import {getCookie} from './util/helpers/cookies';
 
 (() => {
-	setTimeout(() => {
-		if (window.location.host === 'advertising.amazon.com') return;
-
+	const init = () => {
 		let CB = {};
 		window.CB = CB;
 		CB.sessionID = getCookie('session-id');
@@ -56,5 +54,40 @@ import {getCookie} from './util/helpers/cookies';
 		const slimSuitBuilder = new Builder({
 			...slimSuitOptions,
 		});
-	}, 500);
+	};
+
+	(() => {
+		switch (window.location.host) {
+			case 'advertising.amazon.com':
+				break;
+			case 'amazon.com':
+				const watchForNewNodes = (mutations, observer) => {
+					mutations.forEach((mutation) => {
+						if (!mutation.addedNodes) return;
+
+						for (var i = 0; i < mutation.addedNodes.length; i++) {
+							const NODE = mutation.addedNodes[i];
+
+							if (
+								NODE.getAttribute('id') ===
+								'ad-landing-page-wrap'
+							) {
+								init();
+								observer.disconnect();
+							}
+						}
+					});
+				};
+
+				const TARGET_NODE = document.body;
+				const CONFIG = {childList: true, subtree: true};
+
+				const observer = new MutationObserver(watchForNewNodes);
+				observer.observe(TARGET_NODE, CONFIG);
+				break;
+			default:
+				init();
+				break;
+		}
+	})();
 })();

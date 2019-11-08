@@ -16,4 +16,13 @@ const isAmazonAdvertising = (url = false) => {
 	}
 };
 
-export {isAmazon, isAmazonAdvertising};
+const getCurrentAmazonTab = (url = false) => {
+	try {
+		const newUrl = new URL(url ? url : window.location.href);
+		return newUrl.searchParams.has('tab') ? newUrl.searchParams.get('tab').toLowerCase() : false;
+	} catch (error) {
+		return false;
+	}
+};
+
+export {isAmazon, isAmazonAdvertising, getCurrentAmazonTab};

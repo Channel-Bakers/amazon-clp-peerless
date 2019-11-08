@@ -4,13 +4,14 @@ import {isAmazon, isAmazonAdvertising} from './util/helpers/amazon';
 import {getCookie} from './util/helpers/cookies';
 
 (() => {
-	const init = (route = false) => {
+	const init = () => {
 		const DEV_ROUTE = 'suits';
 
 		if (isAmazon()) {
 			let CB = {};
 			window.CB = CB;
 			CB.sessionID = getCookie('session-id');
+			CB.tab = getCurrentAmazonTab();
 
 			const FALLBACK_NODE = '.carousel-wrap';
 			const FALLBACK_NODES = document.querySelectorAll(FALLBACK_NODE);
@@ -22,26 +23,12 @@ import {getCookie} from './util/helpers/cookies';
 			}
 
 			const PRIMARY_ROUTE = 'suits';
-			const LOCATION = window.location.href;
+			const CURRENT_ROUTE = CB.tab;
 
-			if (route) {
-				routes[route].init();
+			if (CB.tab) {
+				routes[CURRENT_ROUTE].init();
 			} else {
-				try {
-					const url = new URL(LOCATION);
-	
-					if (url.searchParams.has('tab')) {
-						const TAB = url.searchParams.get('tab').toLowerCase();
-
-						console.log(TAB);
-
-						routes[TAB].init();
-					} else {
-						routes[PRIMARY_ROUTE].init();
-					}
-				} catch (error) {
-					console.log(error);
-				}
+				routes[PRIMARY_ROUTE].init();
 			}
 		} else {
 			console.log('DEV');
@@ -80,19 +67,19 @@ import {getCookie} from './util/helpers/cookies';
 				init();
 			}
 
-			const TABS = document.querySelectorAll('a[data-component-type="Tab"]');
+			// const TABS = document.querySelectorAll('a[data-component-type="Tab"]');
 
-			TABS.forEach((tab) => {
-				tab.addEventListener('click', () => {
-					console.log('Tab clicked');
+			// TABS.forEach((tab) => {
+			// 	tab.addEventListener('click', () => {
+			// 		console.log('Tab clicked');
 
-					let route = tab.href;
-					route = new URL(href);
-					route = route.searchParams.get('tab').toLowerCase();
+			// 		let route = tab.href;
+			// 		route = new URL(route);
+			// 		route = route.searchParams.get('tab').toLowerCase();
 
-					init(route);
-				});
-			});
+			// 		init(route);
+			// 	});
+			// });
 		} else {
 			if (!isAmazonAdvertising()) {
 				init();

@@ -105,6 +105,8 @@ import {getCookie} from './util/helpers/cookies';
 			for (var i = 0; i < mutation.addedNodes.length; i++) {
 				const NODE = mutation.addedNodes[i];
 
+				console.log(NODE)
+
 				if (NODE.getAttribute('id') === 'ad-landing-page-wrap') {
 					init(true);
 					observer.disconnect();

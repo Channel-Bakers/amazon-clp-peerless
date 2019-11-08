@@ -25,10 +25,10 @@ import {getCookie} from './util/helpers/cookies';
 			const LOCATION = window.location.href;
 
 			try {
-				const URL = new URL(LOCATION);
+				const url = new URL(LOCATION);
 
-				if (URL.searchParams.has('tab')) {
-					const TAB = URL.searchParams.get('tab').toLowerCase();
+				if (url.searchParams.has('tab')) {
+					const TAB = url.searchParams.get('tab').toLowerCase();
 					routes[TAB].init();
 				} else {
 					routes[PRIMARY_ROUTE].init();
@@ -38,7 +38,6 @@ import {getCookie} from './util/helpers/cookies';
 			}
 		} else {
 			console.log('DEV');
-			console.log(isAmazon());
 			routes[DEV_ROUTE].init();
 		}
 	};

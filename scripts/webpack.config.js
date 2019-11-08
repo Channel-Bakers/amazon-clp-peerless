@@ -36,7 +36,7 @@ module.exports = {
 	devtool: DEV ? 'cheap-eval-source-map' : 'source-map',
 	entry: {
 		main: [
-			'babel-polyfill',
+			'idempotent-babel-polyfill',
 			'url-polyfill',
 			'whatwg-fetch',
 			'mutation-observer',

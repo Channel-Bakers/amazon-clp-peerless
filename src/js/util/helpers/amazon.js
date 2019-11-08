@@ -1,7 +1,7 @@
 const isAmazon = (url = false) => {
 	try {
 		const newUrl = new URL(url ? url : window.location.href);
-		return newUrl.host.includes('amazon') && !url.host.includes('advertising');
+		return newUrl.host.includes('amazon') && !newUrl.host.includes('advertising');
 	} catch (error) {
 		return false;
 	}
@@ -10,7 +10,7 @@ const isAmazon = (url = false) => {
 const isAmazonAdvertising = (url = false) => {
 	try {
 		const newUrl = new URL(url ? url : window.location.href);
-		return newUrl.host.includes('amazon') && url.host.includes('advertising');
+		return newUrl.host.includes('amazon') && newUrl.host.includes('advertising');
 	} catch (error) {
 		return false;
 	}

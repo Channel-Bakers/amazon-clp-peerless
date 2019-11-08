@@ -124,7 +124,6 @@ import {getCookie} from './util/helpers/cookies';
 	const OBSERVER = new MutationObserver(watchForNewNodes);
 
 	(() => {
-		// If this is the first page load, use mutation observer to wait for our LP wrapper to appear
 		switch (window.location.host) {
 			case 'advertising.amazon.com':
 				break;
@@ -142,7 +141,5 @@ import {getCookie} from './util/helpers/cookies';
 				init();
 				break;
 		}
-
-		// If tab is clicked, skip mutation observer and just call init()
 	})();
 })();

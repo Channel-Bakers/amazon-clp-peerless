@@ -143,11 +143,126 @@ export default class Dropdown {
 		return SELECT_WRAPPER;
 	}
 
-	_renderPrice() {
-		const PRICE = this.elements.wrapper.querySelector(
+	_parsePrice(html) {
+		const PRICES = {};
+		let regularPrice;
+		let salePrice;
+
+		try {
+			const PRICE_TABLE = html.querySelector('#price');
+			let prices = [];
+
+			PRICE_TABLE.querySelectorAll(
+				'tr:not(#regularprice_savings):not(.aok-hidden) td > span:not(#listPriceLegalMessage):not(#ourprice_shippingmessage)'
+			).forEach(function(element) {
+				if (element.innerText.includes('$')) {
+					if (
+						'primeExclusivePricingMessage' ===
+						element.getAttribute('id')
+					) {
+						let primePrice = element
+							.querySelector('a:not(span)')
+							.innerText.trim()
+							.split('$')[1]
+							.split(' ')[0]
+							.split(',')
+							.join('');
+						primePrice = parseFloat(primePrice);
+						if (!isNaN(primePrice) && prices.length) {
+							prices.push(prices[0] - primePrice);
+						}
+					} else {
+						let thisElement = element.innerText
+							.trim()
+							.split('$')[1]
+							.split(',')
+							.join('');
+						thisElement = parseFloat(thisElement);
+						if (!isNaN(thisElement)) {
+							prices.push(thisElement);
+						}
+					}
+				}
+			});
+
+			if (1 < prices.length) {
+				regularPrice = Math.max(...prices);
+			} else {
+				regularPrice = null;
+			}
+
+			salePrice = Math.min(...prices);
+
+			if (regularPrice) {
+				PRICES.regularPrice = regularPrice;
+			}
+
+			if (salePrice) {
+				PRICES.salePrice = salePrice;
+			}
+
+			return PRICES;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async _scrapePrice() {
+		const ASIN = this.activeOption.asin;
+
+		const ASIN_REQUEST = await fetch(
+			`https://www.amazon.com/dp/${ASIN}?th=1&psc=1`,
+			{
+				mode: 'no-cors',
+				headers: new Headers({
+					Accept: 'application/text',
+				}),
+			}
+		);
+
+		const ASIN_RESPONSE = await ASIN_REQUEST.text();
+
+		const PARSER = new DOMParser();
+		const HTML = PARSER.parseFromString(ASIN_RESPONSE, 'text/html');
+
+		const PRICES = this._parsePrice(HTML);
+
+		return PRICES ? PRICES.salePrice : this.activeOption.price;
+	}
+
+	async _renderPrice() {
+		const PRICE_WRAPPER = this.elements.wrapper.querySelector(
 			`.${env.clientPrefix}-dropdown-price`
 		);
-		PRICE.innerText = numToCurrency(this.activeOption.price);
+
+		PRICE_WRAPPER.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+				<defs>
+					<linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
+						<stop stop-color="#7B827B" stop-opacity="0" offset="0%"/>
+						<stop stop-color="#7B827B" stop-opacity=".631" offset="63.146%"/>
+						<stop stop-color="#7B827B" offset="100%"/>
+					</linearGradient>
+				</defs>
+				<g fill="none" fill-rule="evenodd">
+					<g transform="translate(1 1)">
+						<path d="M36 18c0-9.94-8.06-18-18-18" id="Oval-2" stroke="url(#a)" stroke-width="3" transform="rotate(293.261 18 18)">
+							<animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"/>
+						</path>
+						<circle fill="#7B827B" cx="36" cy="18" r="1" transform="rotate(293.261 18 18)">
+							<animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"/>
+						</circle>
+					</g>
+				</g>
+			</svg>`;
+
+		// const PRICE =
+		// 	window.location.host === 'amazon.com'
+		// 		? this._scrapePrice()
+		// 		: this.activeOption.price;
+
+		const PRICE = await this._scrapePrice();
+
+		PRICE_WRAPPER.innerHTML = numToCurrency(PRICE);
 	}
 
 	_renderTitle(color = false) {
@@ -213,6 +328,7 @@ export default class Dropdown {
 		const SELECTED_OPTION = this.elements.select.options[
 			this.elements.select.selectedIndex
 		];
+
 		const SELECTED_OPTION_DATA = JSON.parse(
 			SELECTED_OPTION.getAttribute('data-option-params')
 		);

@@ -54,6 +54,13 @@ import {getCookie} from './util/helpers/cookies';
 			],
 		};
 
+		const FALLBACK_NODE = '.carousel-wrap';
+		const FALLBACK_NODES = document.querySelectorAll(FALLBACK_NODE);
+
+		FALLBACK_NODES.forEach((node) => {
+			node.remove();
+		});
+
 		const slimSuitBuilder = new Builder({
 			...slimSuitOptions,
 		});

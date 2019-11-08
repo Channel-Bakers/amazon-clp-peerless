@@ -32,6 +32,9 @@ import {getCookie} from './util/helpers/cookies';
 	
 					if (url.searchParams.has('tab')) {
 						const TAB = url.searchParams.get('tab').toLowerCase();
+
+						console.log(TAB);
+
 						routes[TAB].init();
 					} else {
 						routes[PRIMARY_ROUTE].init();

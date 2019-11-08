@@ -200,6 +200,8 @@ export default class Builder {
 			`[data-builder-target="${this.params.target}"]`
 		);
 
+		if (!WRAPPER) return;
+
 		WRAPPER.classList.add(`${env.clientPrefix}-container`);
 
 		const TARGET = document.createElement('div');

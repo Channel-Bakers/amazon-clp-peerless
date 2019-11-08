@@ -209,15 +209,13 @@ export default class Dropdown {
 
 	async _scrapePrice() {
 		const ASIN = this.activeOption.asin;
+		const PROXY =
+			window.location.host !== 'amazon.com'
+				? 'https://cors-anywhere.herokuapp.com/'
+				: '';
 
 		const ASIN_REQUEST = await fetch(
-			`https://www.amazon.com/dp/${ASIN}?th=1&psc=1`,
-			{
-				mode: 'no-cors',
-				headers: new Headers({
-					Accept: 'application/text',
-				}),
-			}
+			`${PROXY}https://www.amazon.com/dp/${ASIN}?th=1&psc=1`
 		);
 
 		const ASIN_RESPONSE = await ASIN_REQUEST.text();
@@ -227,7 +225,7 @@ export default class Dropdown {
 
 		const PRICES = this._parsePrice(HTML);
 
-		return PRICES ? PRICES.salePrice : this.activeOption.price;
+		return PRICES ? PRICES : this.activeOption.price;
 	}
 
 	async _renderPrice() {
@@ -260,9 +258,28 @@ export default class Dropdown {
 		// 		? this._scrapePrice()
 		// 		: this.activeOption.price;
 
-		const PRICE = await this._scrapePrice();
+		const PRICES = await this._scrapePrice();
 
-		PRICE_WRAPPER.innerHTML = numToCurrency(PRICE);
+		PRICE_WRAPPER.innerHTML = '';
+
+		Object.entries(PRICES).forEach(([key, value]) => {
+			const PRICE_EL = document.createElement('span');
+			PRICE_EL.classList.add(key);
+			PRICE_EL.innerText = numToCurrency(value);
+
+			const ATTACH_METHOD =
+				key === 'salePrice' ? 'appendChild' : 'prepend';
+
+			PRICE_WRAPPER[ATTACH_METHOD](PRICE_EL);
+		});
+
+		const PRICE_CHANGE = new CustomEvent('dropdown.price.update', {
+			detail: PRICES,
+		});
+
+		this.params.builder.elements.wrapper.dispatchEvent(PRICE_CHANGE);
+
+		return this;
 	}
 
 	_renderTitle(color = false) {

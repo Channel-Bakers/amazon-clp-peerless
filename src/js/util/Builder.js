@@ -82,40 +82,45 @@ export default class Builder {
 	}
 
 	async _renderDropdowns() {
-		const BUILD_DROPDOWNS = new Promise((resolve, reject) => {
-			this.params.dropdowns.forEach(async (dropdown) => {
-				const DROPDOWN = await new Dropdown({
-					...dropdown,
-					builder: this,
-				});
-				this.dropdowns.push(DROPDOWN);
-				this.elements.wrapper.appendChild(DROPDOWN.html);
-
-				if (this.dropdowns.length === this.params.dropdowns.length)
-					resolve();
+		this.params.dropdowns.forEach(async (dropdown) => {
+			const DROPDOWN = await new Dropdown({
+				...dropdown,
+				builder: this,
 			});
-		});
-
-		BUILD_DROPDOWNS.then(() => {
-			this._renderPrice();
+			this.dropdowns.push(DROPDOWN);
+			this.elements.wrapper.appendChild(DROPDOWN.html);
 		});
 
 		return this;
 	}
 
-	_renderPrice() {
+	_renderPrice(event) {
 		const DROPDOWN_PRICES = [];
 
 		this.dropdowns.forEach((dropdown) => {
-			const DROPDOWN_PRICE = strToNumber(dropdown.activeOption.price);
+			const PRICE_WRAPPER = dropdown.elements.wrapper.querySelector(
+				`.${env.clientPrefix}-dropdown-price`
+			);
+
+			const SALE_PRICE = PRICE_WRAPPER.querySelector('.salePrice');
+
+			if (!SALE_PRICE) return;
+
+			const DROPDOWN_PRICE = strToNumber(SALE_PRICE.innerText);
 			DROPDOWN_PRICES.push(DROPDOWN_PRICE);
 		});
+
+		if (DROPDOWN_PRICES.length !== this.dropdowns.length) return;
+
+		console.log(DROPDOWN_PRICES);
 
 		const TOTAL_PRICE = DROPDOWN_PRICES.reduce((a, b) => a + b, 0);
 
 		this.elements.wrapper.querySelector(
 			`.${env.clientPrefix}-builder-price`
-		).innerText = numToCurrency(TOTAL_PRICE);
+		).innerHTML = numToCurrency(TOTAL_PRICE);
+
+		return this;
 	}
 
 	_renderTitle(color = false) {
@@ -163,8 +168,33 @@ export default class Builder {
 			}
 		});
 
-		TARGET.addEventListener('dropdown.option.change', (event) => {
-			this._renderPrice();
+		TARGET.addEventListener('dropdown.option.change', () => {
+			this.elements.wrapper.querySelector(
+				`.${env.clientPrefix}-builder-price`
+			).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+					<defs>
+						<linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
+							<stop stop-color="#7B827B" stop-opacity="0" offset="0%"/>
+							<stop stop-color="#7B827B" stop-opacity=".631" offset="63.146%"/>
+							<stop stop-color="#7B827B" offset="100%"/>
+						</linearGradient>
+					</defs>
+					<g fill="none" fill-rule="evenodd">
+						<g transform="translate(1 1)">
+							<path d="M36 18c0-9.94-8.06-18-18-18" id="Oval-2" stroke="url(#a)" stroke-width="3" transform="rotate(293.261 18 18)">
+								<animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"/>
+							</path>
+							<circle fill="#7B827B" cx="36" cy="18" r="1" transform="rotate(293.261 18 18)">
+								<animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"/>
+							</circle>
+						</g>
+					</g>
+				</svg>`;
+		});
+
+		TARGET.addEventListener('dropdown.price.update', (event) => {
+			console.log(event.detail);
+			this._renderPrice(event);
 		});
 	}
 
@@ -227,7 +257,7 @@ export default class Builder {
 
 			const ACTIVE_COLOR = COLORS
 				? this._getActiveColor()
-				: this.params.image
+				: this.params.image;
 
 			const IMAGE_SRC = COLORS
 				? typeof ACTIVE_COLOR !== 'object'

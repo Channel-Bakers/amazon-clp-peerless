@@ -72,6 +72,8 @@ body {
   font-size: 16px;
   margin: 4px 0;
   width: 100%; }
+  .ck-builder-price svg {
+    height: 19px; }
 
 .ck-builder-caption {
   color: #919191;
@@ -142,6 +144,12 @@ body {
   color: #8f8f8f;
   font-size: 14px;
   margin: 4px 0; }
+  .ck-dropdown-price .regularPrice {
+    margin-right: 6px;
+    color: #c16363;
+    text-decoration: line-through; }
+  .ck-dropdown-price svg {
+    height: 16px; }
 
 .ck-select-container {
   width: 100%;

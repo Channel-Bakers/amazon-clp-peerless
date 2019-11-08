@@ -75,6 +75,10 @@ CLIENT_PREFIX {
 			font-size: 16px;
 			margin: 4px 0;
 			width: 100%;
+
+			svg {
+				height: 19px;
+			}
 		}
 
 		&-caption {
@@ -155,6 +159,16 @@ CLIENT_PREFIX {
 			color: #8f8f8f;
 			font-size: 14px;
 			margin: 4px 0;
+
+			.regularPrice {
+				margin-right: 6px;
+				color: rgb(193, 99, 99);
+				text-decoration: line-through;
+			}
+
+			svg {
+				height: 16px;
+			}
 		}
 	}
 

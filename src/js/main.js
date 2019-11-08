@@ -4,7 +4,7 @@ import {isAmazon, isAmazonAdvertising} from './util/helpers/amazon';
 import {getCookie} from './util/helpers/cookies';
 
 (() => {
-	const init = () => {
+	const init = (route = false) => {
 		const DEV_ROUTE = 'suits';
 
 		if (isAmazon()) {
@@ -24,17 +24,21 @@ import {getCookie} from './util/helpers/cookies';
 			const PRIMARY_ROUTE = 'suits';
 			const LOCATION = window.location.href;
 
-			try {
-				const url = new URL(LOCATION);
-
-				if (url.searchParams.has('tab')) {
-					const TAB = url.searchParams.get('tab').toLowerCase();
-					routes[TAB].init();
-				} else {
-					routes[PRIMARY_ROUTE].init();
+			if (route) {
+				routes[route].init();
+			} else {
+				try {
+					const url = new URL(LOCATION);
+	
+					if (url.searchParams.has('tab')) {
+						const TAB = url.searchParams.get('tab').toLowerCase();
+						routes[TAB].init();
+					} else {
+						routes[PRIMARY_ROUTE].init();
+					}
+				} catch (error) {
+					console.log(error);
 				}
-			} catch (error) {
-				console.log(error);
 			}
 		} else {
 			console.log('DEV');
@@ -72,6 +76,20 @@ import {getCookie} from './util/helpers/cookies';
 			} else {
 				init();
 			}
+
+			const TABS = document.querySelectorAll('a[data-component-type="Tab"]');
+
+			TABS.forEach((tab) => {
+				tab.addEventListener('click', () => {
+					console.log('Tab clicked');
+
+					let route = tab.href;
+					route = new URL(href);
+					route = route.searchParams.get('tab').toLowerCase();
+
+					init(route);
+				});
+			});
 		} else {
 			if (!isAmazonAdvertising()) {
 				init();

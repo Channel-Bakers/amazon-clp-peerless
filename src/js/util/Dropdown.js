@@ -15,7 +15,7 @@ export default class Dropdown {
 		const defaultParams = {
 			title: '',
 			id: '',
-			data: '',
+			data: [],
 		};
 
 		this.params = {...defaultParams, ...params};
@@ -39,13 +39,21 @@ export default class Dropdown {
 	}
 
 	async _renderOptions(color = false) {
-		const ACTIVE_COLOR = color
-			? color
-			: document
-					.querySelector(`.${env.clientPrefix}-builder-container`)
-					.getAttribute('data-active-color');
+		const COLORS =
+			this.params.builder.params.colors &&
+			this.params.builder.params.colors.length > 0;
 
-		const OPTIONS = this.params.data[ACTIVE_COLOR];
+		const ACTIVE_COLOR = COLORS
+			? color
+				? color
+				: document
+						.querySelector(`.${env.clientPrefix}-builder-container`)
+						.getAttribute('data-active-color')
+			: null;
+
+		const OPTIONS = COLORS
+			? this.params.data[ACTIVE_COLOR]
+			: this.params.data;
 
 		const OPTIONS_SORTED = await this._sortOptions(OPTIONS);
 
@@ -92,7 +100,8 @@ export default class Dropdown {
 		atcURL.searchParams.set('submit.addToCart', 'addToCart');
 		atcURL.searchParams.set('offeringID.1', this.activeOption.offeringID);
 
-		const SESSION_ID = CB.sessionID || getCookie('session-id');
+		const SESSION_ID =
+			(window.CB && window.CB.sessionID) || getCookie('session-id');
 
 		if (SESSION_ID) atcURL.searchParams.set('session-id', SESSION_ID);
 
@@ -142,17 +151,25 @@ export default class Dropdown {
 	}
 
 	_renderTitle(color = false) {
-		const ACTIVE_COLOR = color
-			? color
-			: this.params.builder.params.colors.reduce(
-					(color) => color.active && color.name
-			  );
-
 		const TITLE = document.createElement('h4');
 		TITLE.classList.add(`${env.clientPrefix}-dropdown-title`);
 
 		let titleText = this.params.title;
-		titleText = titleText.replace('{{COLOR}}', capitalize(ACTIVE_COLOR));
+
+		if (
+			this.params.builder.params.colors &&
+			this.params.builder.params.colors.length > 0
+		) {
+			const ACTIVE_COLOR = color
+				? color
+				: this.params.builder.params.colors.reduce(
+						(color) => color.active && color.name
+				  );
+			titleText = titleText.replace(
+				'{{COLOR}}',
+				capitalize(ACTIVE_COLOR)
+			);
+		}
 
 		TITLE.innerText = titleText;
 
@@ -234,7 +251,8 @@ export default class Dropdown {
 		ATC.addEventListener('click', async (event) => {
 			event.preventDefault();
 
-			const SESSION_ID = CB.sessionID || getCookie('session-id');
+			const SESSION_ID =
+				(window.CB && window.CB.sessionID) || getCookie('session-id');
 
 			if (SESSION_ID) {
 				try {
@@ -257,58 +275,59 @@ export default class Dropdown {
 							</g>
 						</g>
 					</svg>`;
-	
+
 					const LOADED_ICON = `<svg width="19px" height="14px" viewBox="0 0 19 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
 								<polyline id="Line" stroke="#007600" stroke-width="2" points="2 7.33333333 7 12 17.6452904 1.61165461"></polyline>
 							</g>
 						</svg>`;
-	
+
 					const ATC_DATA = {
 						verificationSessionID: SESSION_ID,
 						offerListingID: this.activeOption.offeringID,
 						quantity: '1',
 						ASIN: this.activeOption.asin,
 					};
-	
+
 					const ATC_REQUEST = await fetch(
 						'https://www.amazon.com/gp/add-to-cart/json',
 						{
 							method: 'POST',
 							headers: {
-								'Content-Type': 'application/x-www-form-urlencoded',
+								'Content-Type':
+									'application/x-www-form-urlencoded',
 							},
 							body: serializeObject(ATC_DATA),
 						}
 					);
-	
+
 					const LOADER_WRAPPER = document.createElement('div');
 					const LOADER_CONTENT = document.createElement('div');
 					const LOADER = document.createElement('div');
-	
+
 					LOADER_WRAPPER.classList.add('loading-wrapper');
 					LOADER_WRAPPER.classList.add('is-loading');
 					LOADER_CONTENT.classList.add('loading-content');
 					LOADER.classList.add('loading');
 					LOADER.innerHTML = LOADING_ICON;
-	
+
 					LOADER_CONTENT.appendChild(LOADER);
 					LOADER_WRAPPER.appendChild(LOADER_CONTENT);
 					document.body.appendChild(LOADER_WRAPPER);
-	
+
 					const ATC_RESPONSE = await ATC_REQUEST.json();
-	
+
 					if (ATC_RESPONSE.isOK) {
 						const CART = document.getElementById('nav-cart-count');
-	
+
 						if (CART) CART.innerHTML = ATC_RESPONSE.cartQuantity;
-	
+
 						LOADER_WRAPPER.classList.remove('is-loading');
 						LOADER_WRAPPER.classList.add('is-loaded');
-	
+
 						LOADER.innerHTML = LOADED_ICON;
 						LOADER.innerHTML += '<h4>Added to Cart</h4>';
-	
+
 						setTimeout(() => {
 							LOADER_WRAPPER.outerHTML = '';
 						}, 1000);

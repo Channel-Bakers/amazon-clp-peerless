@@ -12,7 +12,7 @@ export default class Builder {
 			target: 'atcBuilder', // The data-builder-target attribute of the wrapper element
 			title: '',
 			caption: '',
-			colors: {},
+			colors: [],
 			dropdowns: [],
 		};
 
@@ -119,20 +119,22 @@ export default class Builder {
 	}
 
 	_renderTitle(color = false) {
-		const ACTIVE_COLOR = color ? color : this._getActiveColor();
-
 		const TITLE = document.createElement('h4');
 		TITLE.classList.add(`${env.clientPrefix}-builder-title`);
 
 		let titleText = this.params.title;
-		titleText = titleText.replace(
-			'{{COLOR}}',
-			capitalize(
-				typeof ACTIVE_COLOR !== 'object'
-					? ACTIVE_COLOR
-					: ACTIVE_COLOR.name
-			)
-		);
+
+		if (this.params.colors && this.params.colors.length > 0) {
+			const ACTIVE_COLOR = color ? color : this._getActiveColor();
+			titleText = titleText.replace(
+				'{{COLOR}}',
+				capitalize(
+					typeof ACTIVE_COLOR !== 'object'
+						? ACTIVE_COLOR
+						: ACTIVE_COLOR.name
+				)
+			);
+		}
 
 		TITLE.innerText = titleText;
 
@@ -221,17 +223,23 @@ export default class Builder {
 			const IMAGE = document.createElement('div');
 			IMAGE.classList.add(`${env.clientPrefix}-image`);
 
-			const ACTIVE_COLOR = this.params.colors.length
-				? this._getActiveColor()
-				: this.params.image;
+			const COLORS = this.params.colors && this.params.colors.length > 0;
 
-			IMAGE.style.backgroundImage = `url('${
-				typeof ACTIVE_COLOR !== 'object'
+			const ACTIVE_COLOR = COLORS
+				? this._getActiveColor()
+				: this.params.image
+
+			const IMAGE_SRC = COLORS
+				? typeof ACTIVE_COLOR !== 'object'
 					? ACTIVE_COLOR
 					: ACTIVE_COLOR.image
-			}')`;
+				: this.params.image.src
+				? this.params.image.src
+				: null;
 
-			IMAGE_WRAPPER.appendChild(IMAGE);
+			IMAGE.style.backgroundImage = `url('${IMAGE_SRC}')`;
+
+			if (IMAGE_SRC) IMAGE_WRAPPER.appendChild(IMAGE);
 
 			this.elements.image = IMAGE;
 

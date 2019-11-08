@@ -105,9 +105,13 @@ import {getCookie} from './util/helpers/cookies';
 			for (var i = 0; i < mutation.addedNodes.length; i++) {
 				const NODE = mutation.addedNodes[i];
 
-				console.log(NODE)
+				console.log(NODE);
 
-				if (NODE.getAttribute('id') === 'ad-landing-page-wrap') {
+				if (
+					NODE instanceof Node &&
+					NODE.hasAttribute('id') &&
+					NODE.getAttribute('id') === 'ad-landing-page-wrap'
+				) {
 					init(true);
 					observer.disconnect();
 				}
@@ -120,15 +124,25 @@ import {getCookie} from './util/helpers/cookies';
 	const OBSERVER = new MutationObserver(watchForNewNodes);
 
 	(() => {
+		// If this is the first page load, use mutation observer to wait for our LP wrapper to appear
 		switch (window.location.host) {
 			case 'advertising.amazon.com':
 				break;
+
+			case 'amazon.com':
 			case 'www.amazon.com':
-				OBSERVER.observe(TARGET_NODE, CONFIG);
+				if (!document.getElementById('ad-landing-page-wrap')) {
+					OBSERVER.observe(TARGET_NODE, CONFIG);
+				} else {
+					init();
+				}
 				break;
+
 			default:
 				init();
 				break;
 		}
+
+		// If tab is clicked, skip mutation observer and just call init()
 	})();
 })();

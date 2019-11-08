@@ -37,6 +37,8 @@ import {getCookie} from './util/helpers/cookies';
 				console.log(error);
 			}
 		} else {
+			console.log('DEV');
+			console.log(isAmazon());
 			routes[DEV_ROUTE].init();
 		}
 	};

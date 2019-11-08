@@ -65,20 +65,6 @@ import {getCookie} from './util/helpers/cookies';
 			} else {
 				init();
 			}
-
-			// const TABS = document.querySelectorAll('a[data-component-type="Tab"]');
-
-			// TABS.forEach((tab) => {
-			// 	tab.addEventListener('click', () => {
-			// 		console.log('Tab clicked');
-
-			// 		let route = tab.href;
-			// 		route = new URL(route);
-			// 		route = route.searchParams.get('tab').toLowerCase();
-
-			// 		init(route);
-			// 	});
-			// });
 		} else {
 			if (!isAmazonAdvertising()) {
 				init();

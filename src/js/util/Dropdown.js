@@ -210,7 +210,7 @@ export default class Dropdown {
 	async _scrapePrice() {
 		const ASIN = this.activeOption.asin;
 		const PROXY =
-			window.location.host !== 'amazon.com'
+			window.location.host !== 'amazon.com' || window.location.host !== 'www.amazon.com'
 				? 'https://cors-anywhere.herokuapp.com/'
 				: '';
 

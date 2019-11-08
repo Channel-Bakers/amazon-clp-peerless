@@ -112,6 +112,7 @@ import {getCookie} from './util/helpers/cookies';
 		switch (window.location.host) {
 			case 'advertising.amazon.com':
 				break;
+			case 'www.amazon.com':
 			case 'amazon.com':
 				OBSERVER.observe(TARGET_NODE, CONFIG);
 				break;

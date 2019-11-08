@@ -1,6 +1,6 @@
 import '../scss/main.scss';
 import routes from './routes/routes';
-import {isAmazon, isAmazonAdvertising} from './util/helpers/amazon';
+import {isAmazon, isAmazonAdvertising, getCurrentAmazonTab} from './util/helpers/amazon';
 import {getCookie} from './util/helpers/cookies';
 
 (() => {

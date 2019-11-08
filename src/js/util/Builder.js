@@ -112,8 +112,6 @@ export default class Builder {
 
 		if (DROPDOWN_PRICES.length !== this.dropdowns.length) return;
 
-		console.log(DROPDOWN_PRICES);
-
 		const TOTAL_PRICE = DROPDOWN_PRICES.reduce((a, b) => a + b, 0);
 
 		this.elements.wrapper.querySelector(
@@ -193,7 +191,6 @@ export default class Builder {
 		});
 
 		TARGET.addEventListener('dropdown.price.update', (event) => {
-			console.log(event.detail);
 			this._renderPrice(event);
 		});
 	}

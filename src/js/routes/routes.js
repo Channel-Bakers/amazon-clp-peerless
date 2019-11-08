@@ -1,10 +1,10 @@
 'use strict';
 
 import suits from './suits';
-import jackets from './suits';
-import pants from './suits';
-import tuxedos from './suits';
-import outerwear from './suits';
+import jackets from './jackets';
+import pants from './pants';
+import tuxedos from './tuxedos';
+import outerwear from './outerwear';
 
 export default {
 	suits,

@@ -31,7 +31,6 @@ import {getCookie} from './util/helpers/cookies';
 				routes[PRIMARY_ROUTE].init();
 			}
 		} else {
-			console.log('DEV');
 			routes[DEV_ROUTE].init();
 		}
 	};

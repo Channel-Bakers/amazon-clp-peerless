@@ -211,8 +211,8 @@ export default class Dropdown {
 		const ASIN = this.activeOption.asin;
 		const PROXY =
 			window.location.host.includes('amazon')
-				? 'https://cors-anywhere.herokuapp.com/'
-				: '';
+				? ''
+				: 'https://cors-anywhere.herokuapp.com/';
 
 		const ASIN_REQUEST = await fetch(
 			`${PROXY}https://www.amazon.com/dp/${ASIN}?th=1&psc=1`

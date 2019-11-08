@@ -12,6 +12,7 @@ export default {
 		const tuxedoPantData = tuxedoPants.default;
 		const tuxedoOptions = {
 			target: 'tuxedo',
+			backgroundColor: '#f2f1f6',
 			title: `Tuxedo`,
 			caption:
 				"Slim, polished, and versatile enough for just about any occasion. This handsome grey Lazio suit is cut from pure S110's wool by Vitale Barberis Canonico.",

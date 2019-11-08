@@ -204,6 +204,12 @@ export default class Builder {
 
 		WRAPPER.classList.add(`${env.clientPrefix}-container`);
 
+		if (this.params.backgroundColor) {
+			WRAPPER.style.background = this.params.backgroundColor;
+		} else {
+			WRAPPER.style.background = '#FFFFFF';
+		}
+
 		const TARGET = document.createElement('div');
 
 		if (!TARGET.classList.contains(`${env.clientPrefix}-builder-container`))

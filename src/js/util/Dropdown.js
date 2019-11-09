@@ -27,6 +27,12 @@ export default class Dropdown {
 		})();
 	}
 
+	_getActiveColor() {
+		return this.params.builder.params.colors.reduce(
+			(color) => color.active && color
+		);
+	}
+
 	async _sortOptions(options) {
 		const OPTIONS = uniqueObjectValues([...options], 'asin');
 		const SORTED_OPTIONS = [
@@ -46,13 +52,11 @@ export default class Dropdown {
 		const ACTIVE_COLOR = COLORS
 			? color
 				? color
-				: document
-						.querySelector(`.${env.clientPrefix}-builder-container`)
-						.getAttribute('data-active-color')
+				: this._getActiveColor()
 			: null;
 
 		const OPTIONS = COLORS
-			? this.params.data[ACTIVE_COLOR]
+			? this.params.data[ACTIVE_COLOR.name]
 			: this.params.data;
 
 		const OPTIONS_SORTED = await this._sortOptions(OPTIONS);
@@ -209,10 +213,9 @@ export default class Dropdown {
 
 	async _scrapePrice() {
 		const ASIN = this.activeOption.asin;
-		const PROXY =
-			window.location.host.includes('amazon')
-				? ''
-				: 'https://cors-anywhere.herokuapp.com/';
+		const PROXY = window.location.host.includes('amazon')
+			? ''
+			: 'https://cors-anywhere.herokuapp.com/';
 
 		const ASIN_REQUEST = await fetch(
 			`${PROXY}https://www.amazon.com/dp/${ASIN}?th=1&psc=1`
@@ -292,14 +295,14 @@ export default class Dropdown {
 			this.params.builder.params.colors &&
 			this.params.builder.params.colors.length > 0
 		) {
-			const ACTIVE_COLOR = color
-				? color
-				: this.params.builder.params.colors.reduce(
-						(color) => color.active && color.name
-				  );
+			const ACTIVE_COLOR = color ? color : this._getActiveColor();
 			titleText = titleText.replace(
 				'{{COLOR}}',
-				capitalize(ACTIVE_COLOR)
+				capitalize(
+					typeof ACTIVE_COLOR !== 'object'
+						? ACTIVE_COLOR
+						: ACTIVE_COLOR.name
+				)
 			);
 		}
 

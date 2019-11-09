@@ -6,8 +6,6 @@ import * as slimPants from '../asins/suits/slim/pants.json';
 
 export default {
 	init() {
-		console.log('Suits');
-
 		const slimSuitJackets = slimJackets.default;
 		const slimSuitPants = slimPants.default;
 		const slimSuitOptions = {

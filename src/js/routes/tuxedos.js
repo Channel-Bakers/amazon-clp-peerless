@@ -6,8 +6,6 @@ import * as tuxedoPants from '../asins/tuxedos/pants.json';
 
 export default {
 	init() {
-		console.log('Tuxedos');
-
 		const tuxedoJacketData = tuxedoJackets.default;
 		const tuxedoPantData = tuxedoPants.default;
 		const tuxedoOptions = {

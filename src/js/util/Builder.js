@@ -29,6 +29,10 @@ export default class Builder {
 		return this.params.colors.reduce((color) => color.active && color);
 	}
 
+	_isThisABundle() {
+		return this.params.dropdowns && this.params.dropdowns.length > 1;
+	}
+
 	_renderColorPicker() {
 		if (this.params.colors && !isObjectEmpty(this.params.colors)) {
 			const COLOR_PICKER_WRAPPER = document.createElement('div');
@@ -57,7 +61,7 @@ export default class Builder {
 				COLOR_WRAPPER.addEventListener('click', (event) => {
 					event.preventDefault();
 
-					const COLORS = document.querySelectorAll(
+					const COLORS = this.elements.wrapper.querySelectorAll(
 						`.${env.clientPrefix}-color-container`
 					);
 
@@ -144,6 +148,69 @@ export default class Builder {
 		return TITLE;
 	}
 
+	_getImageSrc() {
+		let imageSrc;
+
+		if (this.params.dropdowns && this.params.dropdowns.length < 2) {
+			return null;
+		} else {
+			const COLORS = this.params.colors && this.params.colors.length > 0;
+
+			if (COLORS) {
+				const ACTIVE_COLOR = COLORS
+					? this._getActiveColor()
+					: this.params.image;
+
+				imageSrc =
+					typeof ACTIVE_COLOR !== 'object'
+						? ACTIVE_COLOR
+						: ACTIVE_COLOR.image;
+			} else {
+				imageSrc = this.params.image.src ? this.params.image.src : null;
+			}
+		}
+
+		return imageSrc;
+	}
+
+	_renderImage(src = false) {
+		const IMAGE_SRC = src ? src : this._getImageSrc();
+
+		if (!this.elements.image || !this.elements.image instanceof Node) {
+			const IMAGE_POSITION = this.params.image.position;
+			const IMAGE_WRAPPER = document.createElement('div');
+			const IMAGE = document.createElement('div');
+			const ATTACH_METHOD =
+				IMAGE_POSITION && IMAGE_POSITION === 'right'
+					? 'appendChild'
+					: 'prepend';
+
+			if (IMAGE_POSITION)
+				this.elements.wrapper.classList.add(
+					IMAGE_POSITION === 'right' ? 'left' : 'right'
+				);
+
+			IMAGE_WRAPPER.classList.add(`${env.clientPrefix}-image-container`);
+			IMAGE.classList.add(`${env.clientPrefix}-image`);
+
+			if (IMAGE_SRC) {
+				IMAGE.style.backgroundImage = `url('${IMAGE_SRC}')`;
+
+				IMAGE_WRAPPER.appendChild(IMAGE);
+
+				this.elements.image = IMAGE;
+
+				document
+					.querySelector(
+						`[data-builder-target="${this.params.target}"]`
+					)
+					[ATTACH_METHOD](IMAGE_WRAPPER);
+			}
+		} else {
+			this.elements.image.style.backgroundImage = `url('${IMAGE_SRC}')`;
+		}
+	}
+
 	async _events() {
 		const TARGET = this.elements.wrapper;
 
@@ -162,11 +229,17 @@ export default class Builder {
 					.replaceWith(this._renderTitle(event.detail.color.name));
 
 				// update image
-				this.elements.image.style.backgroundImage = `url('${event.detail.color.image}')`;
+				if (this._isThisABundle()) {
+					this.elements.image.style.backgroundImage = `url('${event.detail.color.image}')`;
+				}
 			}
 		});
 
-		TARGET.addEventListener('dropdown.option.change', () => {
+		TARGET.addEventListener('dropdown.option.change', (event) => {
+			if (!this._isThisABundle()) {
+				this._renderImage(event.detail.image);
+			}
+
 			this.elements.wrapper.querySelector(
 				`.${env.clientPrefix}-builder-price`
 			).innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
@@ -245,45 +318,7 @@ export default class Builder {
 		}
 
 		if (this.params.image) {
-			const IMAGE_POSITION = this.params.image.position;
-
-			if (IMAGE_POSITION)
-				TARGET.classList.add(
-					IMAGE_POSITION === 'right' ? 'left' : 'right'
-				);
-
-			const IMAGE_WRAPPER = document.createElement('div');
-			IMAGE_WRAPPER.classList.add(`${env.clientPrefix}-image-container`);
-
-			const IMAGE = document.createElement('div');
-			IMAGE.classList.add(`${env.clientPrefix}-image`);
-
-			const COLORS = this.params.colors && this.params.colors.length > 0;
-
-			const ACTIVE_COLOR = COLORS
-				? this._getActiveColor()
-				: this.params.image;
-
-			const IMAGE_SRC = COLORS
-				? typeof ACTIVE_COLOR !== 'object'
-					? ACTIVE_COLOR
-					: ACTIVE_COLOR.image
-				: this.params.image.src
-				? this.params.image.src
-				: null;
-
-			IMAGE.style.backgroundImage = `url('${IMAGE_SRC}')`;
-
-			if (IMAGE_SRC) IMAGE_WRAPPER.appendChild(IMAGE);
-
-			this.elements.image = IMAGE;
-
-			const ATTACH_METHOD =
-				IMAGE_POSITION && IMAGE_POSITION === 'right'
-					? 'appendChild'
-					: 'prepend';
-
-			WRAPPER[ATTACH_METHOD](IMAGE_WRAPPER);
+			this._renderImage();
 		}
 
 		await this._events();

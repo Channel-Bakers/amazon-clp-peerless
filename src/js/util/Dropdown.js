@@ -56,7 +56,7 @@ export default class Dropdown {
 			: null;
 
 		const OPTIONS = COLORS
-			? this.params.data[ACTIVE_COLOR.name]
+			? this.params.data[ACTIVE_COLOR.name || ACTIVE_COLOR]
 			: this.params.data;
 
 		const OPTIONS_SORTED = await this._sortOptions(OPTIONS);
@@ -84,7 +84,7 @@ export default class Dropdown {
 		return this;
 	}
 
-	rebuildOptions(color) {
+	async rebuildOptions(color) {
 		this.elements.select.innerHTML = '';
 
 		const RENDER = new Promise((resolve, reject) => {
@@ -156,54 +156,63 @@ export default class Dropdown {
 			const PRICE_TABLE = html.querySelector('#price');
 			let prices = [];
 
-			PRICE_TABLE.querySelectorAll(
-				'tr:not(#regularprice_savings):not(.aok-hidden) td > span:not(#listPriceLegalMessage):not(#ourprice_shippingmessage)'
-			).forEach(function(element) {
-				if (element.innerText.includes('$')) {
-					if (
-						'primeExclusivePricingMessage' ===
-						element.getAttribute('id')
-					) {
-						let primePrice = element
-							.querySelector('a:not(span)')
-							.innerText.trim()
-							.split('$')[1]
-							.split(' ')[0]
-							.split(',')
-							.join('');
-						primePrice = parseFloat(primePrice);
-						if (!isNaN(primePrice) && prices.length) {
-							prices.push(prices[0] - primePrice);
-						}
-					} else {
-						let thisElement = element.innerText
-							.trim()
-							.split('$')[1]
-							.split(',')
-							.join('');
-						thisElement = parseFloat(thisElement);
-						if (!isNaN(thisElement)) {
-							prices.push(thisElement);
+			if (PRICE_TABLE) {
+				PRICE_TABLE.querySelectorAll(
+					'tr:not(#regularprice_savings):not(.aok-hidden) td > span:not(#listPriceLegalMessage):not(#ourprice_shippingmessage)'
+				).forEach(function(element) {
+					if (element.innerText.includes('$')) {
+						if (
+							'primeExclusivePricingMessage' ===
+							element.getAttribute('id')
+						) {
+							let primePrice = element
+								.querySelector('a:not(span)')
+								.innerText.trim()
+								.split('$')[1]
+								.split(' ')[0]
+								.split(',')
+								.join('');
+							primePrice = parseFloat(primePrice);
+							if (!isNaN(primePrice) && prices.length) {
+								prices.push(prices[0] - primePrice);
+							}
+						} else {
+							let thisElement = element.innerText
+								.trim()
+								.split('$')[1]
+								.split(',')
+								.join('');
+							thisElement = parseFloat(thisElement);
+							if (!isNaN(thisElement)) {
+								prices.push(thisElement);
+							}
 						}
 					}
-				}
-			});
-
-			if (1 < prices.length) {
-				regularPrice = Math.max(...prices);
-			} else {
-				regularPrice = null;
+				});
 			}
 
-			salePrice = Math.min(...prices);
-
-			if (regularPrice) {
-				PRICES.regularPrice = regularPrice;
+			switch (prices.length) {
+				case '0':
+					salePrice = null;
+					regularPrice = null;
+					break;
+				case '1':
+					salePrice = prices[0];
+					regularPrice = null;
+					break;
+				case '2':
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+					salePrice = Math.min(...prices);
+					regularPrice = Math.max(...prices);
+					break;
 			}
 
-			if (salePrice) {
-				PRICES.salePrice = salePrice;
-			}
+			if (regularPrice) PRICES.regularPrice = regularPrice;
+
+			if (salePrice) PRICES.salePrice = salePrice;
 
 			return PRICES;
 		} catch (error) {
@@ -228,7 +237,9 @@ export default class Dropdown {
 
 		const PRICES = this._parsePrice(HTML);
 
-		return PRICES ? PRICES : this.activeOption.price;
+		return PRICES && !isObjectEmpty(PRICES)
+			? PRICES
+			: this.activeOption.price;
 	}
 
 	async _renderPrice() {
@@ -256,25 +267,28 @@ export default class Dropdown {
 				</g>
 			</svg>`;
 
-		// const PRICE =
-		// 	window.location.host === 'amazon.com'
-		// 		? this._scrapePrice()
-		// 		: this.activeOption.price;
-
 		const PRICES = await this._scrapePrice();
 
 		PRICE_WRAPPER.innerHTML = '';
 
-		Object.entries(PRICES).forEach(([key, value]) => {
+		if (PRICES instanceof Object) {
+			Object.entries(PRICES).forEach(([key, value]) => {
+				const PRICE_EL = document.createElement('span');
+				PRICE_EL.classList.add(key);
+				PRICE_EL.innerText = numToCurrency(value);
+	
+				const ATTACH_METHOD =
+					key === 'salePrice' ? 'appendChild' : 'prepend';
+	
+				PRICE_WRAPPER[ATTACH_METHOD](PRICE_EL);
+			});
+		} else {
 			const PRICE_EL = document.createElement('span');
-			PRICE_EL.classList.add(key);
-			PRICE_EL.innerText = numToCurrency(value);
+			PRICE_EL.classList.add('salePrice');
+			PRICE_EL.innerText = numToCurrency(PRICES);
 
-			const ATTACH_METHOD =
-				key === 'salePrice' ? 'appendChild' : 'prepend';
-
-			PRICE_WRAPPER[ATTACH_METHOD](PRICE_EL);
-		});
+			PRICE_WRAPPER.appendChild(PRICE_EL);
+		}
 
 		const PRICE_CHANGE = new CustomEvent('dropdown.price.update', {
 			detail: PRICES,
@@ -356,7 +370,7 @@ export default class Dropdown {
 		this.activeOption = SELECTED_OPTION_DATA;
 
 		const OPTION_CHANGE = new CustomEvent('dropdown.option.change', {
-			detail: SELECTED_OPTION_DATA,
+			detail: {...SELECTED_OPTION_DATA}
 		});
 
 		this.params.builder.elements.wrapper.dispatchEvent(OPTION_CHANGE);

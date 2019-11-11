@@ -269,6 +269,8 @@ export default class Dropdown {
 
 		const PRICES = await this._scrapePrice();
 
+		console.log(PRICES);
+
 		PRICE_WRAPPER.innerHTML = '';
 
 		if (PRICES instanceof Object) {

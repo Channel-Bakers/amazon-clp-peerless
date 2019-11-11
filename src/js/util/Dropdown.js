@@ -237,8 +237,6 @@ export default class Dropdown {
 
 		const PRICES = this._parsePrice(HTML);
 
-		console.log(PRICES);
-
 		return PRICES && !isObjectEmpty(PRICES)
 			? PRICES
 			: this.activeOption.price;

@@ -71,6 +71,13 @@ export default {
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
 					active: false,
 				},
+				{
+					name: 'royal blue',
+					hex: '#454f54',
+					image:
+						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
+					active: false,
+				},
 			],
 			dropdowns: [
 				{

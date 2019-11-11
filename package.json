@@ -4,9 +4,10 @@
 	"description": "",
 	"main": "main.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "jest --watch",
 		"build": "cross-env NODE_ENV=production node ./scripts/build.js",
-		"start": "cross-env NODE_ENV=development node ./scripts/start.js"
+		"start": "cross-env NODE_ENV=development node ./scripts/start.js",
+		"start:format": "node ./scripts/format.js"
 	},
 	"browserslist": [
 		"> 1%",

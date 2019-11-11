@@ -5,11 +5,11 @@
 ##Done
 - ~When you add to cart, check if cart quantity property exists~
 - ~Fill in sizes with Long, Regular, Short~ (modern outerwear needs help)
+- ~Fix bug with price scraping~
 
 ##Todo
 - Responsive CSS (tablet, phone)
 - Remove item title and price from builders with only 1 dropdown
-- Prices aren't being scraped? Or are they...?
 - Change the color hex values to the correct colors for each builder
 - **TEST, TEST, TEST**
 

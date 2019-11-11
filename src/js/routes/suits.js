@@ -1,8 +1,8 @@
 'use strict';
 
 import Builder from '../util/Builder';
-import * as slimJackets from '../asins/suits/slim/jackets.json';
-import * as slimPants from '../asins/suits/slim/pants.json';
+import * as slimJackets from '../asins/suits/jackets.json';
+import * as slimPants from '../asins/suits/pants.json';
 
 export default {
 	init() {

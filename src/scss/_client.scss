@@ -57,6 +57,10 @@ CLIENT_PREFIX {
 
 		&-details {
 			display: flex;
+		}
+
+		&-info {
+			display: flex;
 			flex-direction: column;
 		}
 
@@ -93,6 +97,10 @@ CLIENT_PREFIX {
 			letter-spacing: 0.2px;
 			margin: 8px 0;
 			width: 100%;
+		}
+
+		&-image {
+			
 		}
 	}
 

@@ -79,14 +79,14 @@ export default {
 					active: true,
 				},
 				{
-					name: 'light grey',
+					name: 'light gray',
 					hex: '#454f54',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
 					active: false,
 				},
 				{
-					name: 'medium grey',
+					name: 'medium gray',
 					hex: '#454f54',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',

@@ -55,6 +55,10 @@ body {
 
 .ck-builder-details {
   display: -ms-flexbox;
+  display: flex; }
+
+.ck-builder-info {
+  display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column; }

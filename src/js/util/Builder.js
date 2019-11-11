@@ -79,7 +79,11 @@ export default class Builder {
 				});
 			});
 
-			this.elements.wrapper.prepend(COLOR_PICKER_WRAPPER);
+			document
+				.querySelector(
+					`[data-builder-target="${this.params.target}"] .${env.clientPrefix}-builder-info`
+				)
+				.prepend(COLOR_PICKER_WRAPPER);
 		}
 
 		return this;
@@ -174,47 +178,54 @@ export default class Builder {
 	}
 
 	_renderImage(src = false) {
-		const MOBILE = document
-			.querySelector('.shipable-page')
-			.classList.contains('platform-phone');
+		const MOBILE = document.querySelector('.shipable-page')
+			? document
+					.querySelector('.shipable-page')
+					.classList.contains('platform-phone')
+			: false;
 		const IMAGE_SRC = src ? src : this._getImageSrc();
 
-		if (!this.elements.image || !this.elements.image instanceof Node) {
-			const IMAGE_POSITION = this.params.image.position;
-			const IMAGE_WRAPPER = document.createElement('div');
-			const IMAGE = document.createElement('div');
-			const TARGET = MOBILE
-				? document.querySelector(
-						`[data-builder-target="${this.params.target}"]`
-				  )
-				: document.querySelector(
-						`[data-builder-target="${this.params.target}" .${env.clientPrefix}-builder-details]`
-				  );
-			const ATTACH_METHOD =
-				MOBILE || (IMAGE_POSITION && IMAGE_POSITION === 'right')
-					? 'appendChild'
-					: 'prepend';
-
-			if (IMAGE_POSITION)
-				this.elements.wrapper.classList.add(
-					IMAGE_POSITION === 'right' ? 'left' : 'right'
-				);
-
-			IMAGE_WRAPPER.classList.add(`${env.clientPrefix}-image-container`);
-			IMAGE.classList.add(`${env.clientPrefix}-image`);
-
-			if (IMAGE_SRC) {
-				IMAGE.style.backgroundImage = `url('${IMAGE_SRC}')`;
-
-				IMAGE_WRAPPER.appendChild(IMAGE);
-
-				this.elements.image = IMAGE;
-
-				TARGET[ATTACH_METHOD](IMAGE_WRAPPER);
-			}
-		} else {
+		// The image element already exists, we don't need to create
+		// another one, let's just update the style of the existing node.
+		if (this.elements.image || !this.elements.image instanceof Node) {
 			this.elements.image.style.backgroundImage = `url('${IMAGE_SRC}')`;
+			return this;
 		}
+
+		const IMAGE_POSITION = this.params.image.position;
+		const IMAGE_WRAPPER = document.createElement('div');
+		const IMAGE = document.createElement('div');
+		const TARGET = MOBILE
+			? document.querySelector(
+					`[data-builder-target="${this.params.target}"] .${env.clientPrefix}-builder-details`
+			  )
+			: document.querySelector(
+					`[data-builder-target="${this.params.target}"]`
+			  );
+		const ATTACH_METHOD =
+			MOBILE || (IMAGE_POSITION && IMAGE_POSITION === 'right')
+				? 'appendChild'
+				: 'prepend';
+
+		if (IMAGE_POSITION)
+			this.elements.wrapper.classList.add(
+				IMAGE_POSITION === 'right' ? 'left' : 'right'
+			);
+
+		IMAGE_WRAPPER.classList.add(`${env.clientPrefix}-image-container`);
+		IMAGE.classList.add(`${env.clientPrefix}-image`);
+
+		if (IMAGE_SRC) {
+			IMAGE.style.backgroundImage = `url('${IMAGE_SRC}')`;
+
+			IMAGE_WRAPPER.appendChild(IMAGE);
+
+			this.elements.image = IMAGE;
+
+			TARGET[ATTACH_METHOD](IMAGE_WRAPPER);
+		}
+
+		return this;
 	}
 
 	async _events() {
@@ -300,6 +311,9 @@ export default class Builder {
 		const DETAILS = document.createElement('div');
 		DETAILS.classList.add(`${env.clientPrefix}-builder-details`);
 
+		const INFO = document.createElement('div');
+		INFO.classList.add(`${env.clientPrefix}-builder-info`);
+
 		const BUILDER_TITLE = this._renderTitle();
 
 		const BUILDER_PRICE = document.createElement('h6');
@@ -309,8 +323,10 @@ export default class Builder {
 		BUILDER_CAPTION.classList.add(`${env.clientPrefix}-builder-caption`);
 		BUILDER_CAPTION.innerText = this.params.caption;
 
-		DETAILS.appendChild(BUILDER_TITLE);
-		DETAILS.appendChild(BUILDER_PRICE);
+		INFO.appendChild(BUILDER_TITLE);
+		INFO.appendChild(BUILDER_PRICE);
+
+		DETAILS.appendChild(INFO);
 
 		TARGET.appendChild(DETAILS);
 		TARGET.appendChild(BUILDER_CAPTION);

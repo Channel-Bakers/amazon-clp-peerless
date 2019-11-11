@@ -21,16 +21,37 @@ export default {
 					name: 'grey',
 					hex: '#454f54',
 					image:
-						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
+						'https://images-na.ssl-images-amazon.com/images/I/91f5kSKHU5L._AC_UX679_.jpg',
 					active: true,
 				},
 				{
-					name: 'black',
+					name: 'medium grey',
+					hex: '#454f54',
+					image:
+						'https://images-na.ssl-images-amazon.com/images/I/81taEY24AeL._AC_UX679_.jpg',
+					active: false,
+				},
+				{
+					name: 'black solid',
 					hex: '#000000',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
 					active: false,
 				},
+				{
+					name: 'camel',
+					hex: '#454f54',
+					image:
+						'https://images-na.ssl-images-amazon.com/images/I/81n1O139i-L._UX679_.jpg',
+					active: false,
+				},
+				{
+					name: 'burgundy',
+					hex: '#454f54',
+					image:
+						'https://images-na.ssl-images-amazon.com/images/I/81v-5CxBZCL._UX679_.jpg',
+					active: false,
+				}
 			],
 			dropdowns: [
 				{
@@ -58,7 +79,7 @@ export default {
 			},
 			colors: [
 				{
-					name: 'black',
+					name: 'black solid',
 					hex: '#000000',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',

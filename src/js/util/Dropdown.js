@@ -34,14 +34,18 @@ export default class Dropdown {
 	}
 
 	async _sortOptions(options) {
-		const OPTIONS = uniqueObjectValues([...options], 'asin');
-		const SORTED_OPTIONS = [
-			...OPTIONS.sort((a, b) =>
-				a.size < b.size ? -1 : a.size > b.size ? 1 : 0
-			),
-		];
+		try {
+			const OPTIONS = uniqueObjectValues([...options], 'asin');
+			const SORTED_OPTIONS = [
+				...OPTIONS.sort((a, b) =>
+					a.size < b.size ? -1 : a.size > b.size ? 1 : 0
+				),
+			];
 
-		return SORTED_OPTIONS;
+			return SORTED_OPTIONS;
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	async _renderOptions(color = false) {
@@ -61,25 +65,29 @@ export default class Dropdown {
 
 		const OPTIONS_SORTED = await this._sortOptions(OPTIONS);
 
-		OPTIONS_SORTED.forEach((option) => {
-			const OPTION_ELEMENT = document.createElement('option');
-			OPTION_ELEMENT.value = option.size;
-			OPTION_ELEMENT.innerText = option.size;
+		try {
+			OPTIONS_SORTED.forEach((option) => {
+				const OPTION_ELEMENT = document.createElement('option');
+				OPTION_ELEMENT.value = option.size;
+				OPTION_ELEMENT.innerText = option.size;
 
-			const OPTION_DATA = {
-				asin: option.asin,
-				price: option.price,
-				image: option.image,
-				offeringID: option.offeringID,
-			};
+				const OPTION_DATA = {
+					asin: option.asin,
+					price: option.price,
+					image: option.image,
+					offeringID: option.offeringID,
+				};
 
-			OPTION_ELEMENT.setAttribute(
-				'data-option-params',
-				JSON.stringify(OPTION_DATA)
-			);
+				OPTION_ELEMENT.setAttribute(
+					'data-option-params',
+					JSON.stringify(OPTION_DATA)
+				);
 
-			this.elements.select.appendChild(OPTION_ELEMENT);
-		});
+				this.elements.select.appendChild(OPTION_ELEMENT);
+			});
+		} catch (error) {
+			console.log(error);
+		}
 
 		return this;
 	}
@@ -226,20 +234,25 @@ export default class Dropdown {
 			? ''
 			: 'https://cors-anywhere.herokuapp.com/';
 
-		const ASIN_REQUEST = await fetch(
-			`${PROXY}https://www.amazon.com/dp/${ASIN}?th=1&psc=1`
-		);
-
-		const ASIN_RESPONSE = await ASIN_REQUEST.text();
-
-		const PARSER = new DOMParser();
-		const HTML = PARSER.parseFromString(ASIN_RESPONSE, 'text/html');
-
-		const PRICES = this._parsePrice(HTML);
-
-		return PRICES && !isObjectEmpty(PRICES)
-			? PRICES
-			: this.activeOption.price;
+		try {
+			const ASIN_REQUEST = await fetch(
+				`${PROXY}https://www.amazon.com/dp/${ASIN}?th=1&psc=1`
+			);
+	
+			const ASIN_RESPONSE = await ASIN_REQUEST.text();
+	
+			const PARSER = new DOMParser();
+			const HTML = PARSER.parseFromString(ASIN_RESPONSE, 'text/html');
+	
+			const PRICES = this._parsePrice(HTML);
+	
+			return PRICES && !isObjectEmpty(PRICES)
+				? PRICES
+				: this.activeOption.price;
+		} catch (error) {
+			console.log(error);
+			return this.activeOption.price;
+		}
 	}
 
 	async _renderPrice() {
@@ -276,10 +289,10 @@ export default class Dropdown {
 				const PRICE_EL = document.createElement('span');
 				PRICE_EL.classList.add(key);
 				PRICE_EL.innerText = numToCurrency(value);
-	
+
 				const ATTACH_METHOD =
 					key === 'salePrice' ? 'appendChild' : 'prepend';
-	
+
 				PRICE_WRAPPER[ATTACH_METHOD](PRICE_EL);
 			});
 		} else {
@@ -363,14 +376,14 @@ export default class Dropdown {
 			this.elements.select.selectedIndex
 		];
 
-		const SELECTED_OPTION_DATA = JSON.parse(
-			SELECTED_OPTION.getAttribute('data-option-params')
-		);
+		const SELECTED_OPTION_DATA = SELECTED_OPTION
+			? JSON.parse(SELECTED_OPTION.getAttribute('data-option-params'))
+			: null;
 
 		this.activeOption = SELECTED_OPTION_DATA;
 
 		const OPTION_CHANGE = new CustomEvent('dropdown.option.change', {
-			detail: {...SELECTED_OPTION_DATA}
+			detail: SELECTED_OPTION_DATA ? {...SELECTED_OPTION_DATA} : null,
 		});
 
 		this.params.builder.elements.wrapper.dispatchEvent(OPTION_CHANGE);

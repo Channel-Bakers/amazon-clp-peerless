@@ -192,19 +192,19 @@ export default class Dropdown {
 			}
 
 			switch (prices.length) {
-				case '0':
+				case 0:
 					salePrice = null;
 					regularPrice = null;
 					break;
-				case '1':
+				case 1:
 					salePrice = prices[0];
 					regularPrice = null;
 					break;
-				case '2':
-				case '3':
-				case '4':
-				case '5':
-				case '6':
+				case 2:
+				case 3:
+				case 4:
+				case 5:
+				case 6:
 					salePrice = Math.min(...prices);
 					regularPrice = Math.max(...prices);
 					break;

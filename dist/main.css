@@ -9,10 +9,10 @@ body {
       align-items: stretch;
   -ms-flex-pack: justify;
       justify-content: space-between;
-  max-height: 720px;
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: 100;
-  -webkit-font-smoothing: antialiased; }
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility; }
 
 .ck-image {
   position: absolute;
@@ -67,7 +67,6 @@ body {
   text-transform: uppercase;
   font-weight: 100;
   letter-spacing: 1px;
-  text-rendering: optimizeLegibility;
   color: #4d4d4d;
   font-size: 22px;
   margin: 4px 0;
@@ -77,7 +76,6 @@ body {
   text-transform: uppercase;
   font-weight: 400;
   letter-spacing: 0.5px;
-  text-rendering: optimizeLegibility;
   color: #4d4d4d;
   font-size: 16px;
   margin: 4px 0;
@@ -141,7 +139,6 @@ body {
   text-transform: uppercase;
   font-weight: 100;
   letter-spacing: 1px;
-  text-rendering: optimizeLegibility;
   color: #4d4d4d;
   font-size: 14px;
   margin: 4px 0; }
@@ -150,7 +147,6 @@ body {
   text-transform: uppercase;
   font-weight: 400;
   letter-spacing: 0.5px;
-  text-rendering: optimizeLegibility;
   color: #8f8f8f;
   font-size: 14px;
   margin: 4px 0; }
@@ -294,4 +290,14 @@ body {
     line-height: 1.255;
     text-rendering: optimizeLegibility;
     font-family: 'Amazon Ember', Arial, sans-serif; }
+
+.shipable-page.platform-phone .ck-container {
+  -ms-flex-direction: column;
+      flex-direction: column; }
+
+.shipable-page.platform-phone .ck-builder-container {
+  padding-left: 20px;
+  padding-right: 20px;
+  -ms-flex: 0 1 100% !important;
+      flex: 0 1 100% !important; }
 

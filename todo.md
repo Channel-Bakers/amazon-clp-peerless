@@ -7,9 +7,9 @@
 - ~Fill in sizes with Long, Regular, Short~ (modern outerwear needs help)
 - ~Fix bug with price scraping~
 - ~Update ASIN data~
+- ~Responsive CSS & JS rendering (phone only)~
 
 ##Todo
-- Responsive CSS (tablet, phone)
 - Remove item title and price from builders with only 1 dropdown
 - Change the color hex values to the correct colors for each builder
 - **TEST, TEST, TEST**

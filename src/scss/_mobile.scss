@@ -1,0 +1,12 @@
+.shipable-page.platform-phone {
+	CLIENT_PREFIX {
+		&-container {
+			flex-direction: column;
+		}
+
+		&-builder-container {
+			padding-left: 20px;
+			padding-right: 20px; 
+		}
+	}
+}

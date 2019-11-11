@@ -43,7 +43,8 @@ CLIENT_PREFIX {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			padding: 60px 0;
+			padding-top: 60px;
+			padding-bottom: 60px;
 
 			&.right {
 				margin-right: auto;
@@ -52,6 +53,11 @@ CLIENT_PREFIX {
 			&.left {
 				margin-left: auto;
 			}
+		}
+
+		&-details {
+			display: flex;
+			flex-direction: column;
 		}
 
 		&-title {

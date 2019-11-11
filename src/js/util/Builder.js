@@ -174,14 +174,24 @@ export default class Builder {
 	}
 
 	_renderImage(src = false) {
+		const MOBILE = document
+			.querySelector('.shipable-page')
+			.classList.contains('platform-phone');
 		const IMAGE_SRC = src ? src : this._getImageSrc();
 
 		if (!this.elements.image || !this.elements.image instanceof Node) {
 			const IMAGE_POSITION = this.params.image.position;
 			const IMAGE_WRAPPER = document.createElement('div');
 			const IMAGE = document.createElement('div');
+			const TARGET = MOBILE
+				? document.querySelector(
+						`[data-builder-target="${this.params.target}"]`
+				  )
+				: document.querySelector(
+						`[data-builder-target="${this.params.target}" .${env.clientPrefix}-builder-details]`
+				  );
 			const ATTACH_METHOD =
-				IMAGE_POSITION && IMAGE_POSITION === 'right'
+				MOBILE || (IMAGE_POSITION && IMAGE_POSITION === 'right')
 					? 'appendChild'
 					: 'prepend';
 
@@ -200,11 +210,7 @@ export default class Builder {
 
 				this.elements.image = IMAGE;
 
-				document
-					.querySelector(
-						`[data-builder-target="${this.params.target}"]`
-					)
-					[ATTACH_METHOD](IMAGE_WRAPPER);
+				TARGET[ATTACH_METHOD](IMAGE_WRAPPER);
 			}
 		} else {
 			this.elements.image.style.backgroundImage = `url('${IMAGE_SRC}')`;
@@ -291,6 +297,9 @@ export default class Builder {
 		WRAPPER.appendChild(TARGET);
 		this.elements.wrapper = TARGET;
 
+		const DETAILS = document.createElement('div');
+		DETAILS.classList.add(`${env.clientPrefix}-builder-details`);
+
 		const BUILDER_TITLE = this._renderTitle();
 
 		const BUILDER_PRICE = document.createElement('h6');
@@ -300,8 +309,10 @@ export default class Builder {
 		BUILDER_CAPTION.classList.add(`${env.clientPrefix}-builder-caption`);
 		BUILDER_CAPTION.innerText = this.params.caption;
 
-		TARGET.appendChild(BUILDER_TITLE);
-		TARGET.appendChild(BUILDER_PRICE);
+		DETAILS.appendChild(BUILDER_TITLE);
+		DETAILS.appendChild(BUILDER_PRICE);
+
+		TARGET.appendChild(DETAILS);
 		TARGET.appendChild(BUILDER_CAPTION);
 
 		if (!isObjectEmpty(this.params.colors)) {

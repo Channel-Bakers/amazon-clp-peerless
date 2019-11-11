@@ -46,11 +46,18 @@ body {
       flex-direction: column;
   -ms-flex-pack: center;
       justify-content: center;
-  padding: 60px 0; }
+  padding-top: 60px;
+  padding-bottom: 60px; }
   .ck-builder-container.right {
     margin-right: auto; }
   .ck-builder-container.left {
     margin-left: auto; }
+
+.ck-builder-details {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column; }
 
 .ck-builder-title {
   text-transform: uppercase;

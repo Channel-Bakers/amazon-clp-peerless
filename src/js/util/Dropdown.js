@@ -467,7 +467,7 @@ export default class Dropdown {
 
 					const ATC_RESPONSE = await ATC_REQUEST.json();
 
-					if (ATC_RESPONSE.isOK) {
+					if (ATC_RESPONSE.isOK && ATC_RESPONSE.cartQuantity) {
 						const CART = document.getElementById('nav-cart-count');
 
 						if (CART) CART.innerHTML = ATC_RESPONSE.cartQuantity;

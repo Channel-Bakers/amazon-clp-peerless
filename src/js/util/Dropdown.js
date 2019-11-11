@@ -237,6 +237,8 @@ export default class Dropdown {
 
 		const PRICES = this._parsePrice(HTML);
 
+		console.log(PRICES);
+
 		return PRICES && !isObjectEmpty(PRICES)
 			? PRICES
 			: this.activeOption.price;
@@ -268,8 +270,6 @@ export default class Dropdown {
 			</svg>`;
 
 		const PRICES = await this._scrapePrice();
-
-		console.log(PRICES);
 
 		PRICE_WRAPPER.innerHTML = '';
 

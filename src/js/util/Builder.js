@@ -112,10 +112,10 @@ export default class Builder {
 
 			const SALE_PRICE = PRICE_WRAPPER.querySelector('.salePrice');
 
-			if (!SALE_PRICE) return;
-
-			const DROPDOWN_PRICE = strToNumber(SALE_PRICE.innerText);
-			DROPDOWN_PRICES.push(DROPDOWN_PRICE);
+			if (SALE_PRICE) {
+				const DROPDOWN_PRICE = strToNumber(SALE_PRICE.innerText);
+				DROPDOWN_PRICES.push(DROPDOWN_PRICE);
+			}
 		});
 
 		if (DROPDOWN_PRICES.length !== this.dropdowns.length) return;

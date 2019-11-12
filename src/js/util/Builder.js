@@ -110,15 +110,21 @@ export default class Builder {
 				`.${env.clientPrefix}-dropdown-price`
 			);
 
+			let dropdownPrice;
+
 			const SALE_PRICE = PRICE_WRAPPER.querySelector('.salePrice');
+			const OUT_OF_STOCK = PRICE_WRAPPER.querySelector('.outOfStock');
 
 			if (SALE_PRICE) {
-				const DROPDOWN_PRICE = strToNumber(SALE_PRICE.innerText);
-				DROPDOWN_PRICES.push(DROPDOWN_PRICE);
+				dropdownPrice = strToNumber(SALE_PRICE.innerText);
 			}
-		});
 
-		console.log(DROPDOWN_PRICES);
+			if (OUT_OF_STOCK) {
+				dropdownPrice = 0;
+			}
+
+			DROPDOWN_PRICES.push(dropdownPrice);
+		});
 
 		if (DROPDOWN_PRICES.length !== this.dropdowns.length) return;
 

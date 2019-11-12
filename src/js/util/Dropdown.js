@@ -156,6 +156,12 @@ export default class Dropdown {
 	}
 
 	_parsePrice(html) {
+		const MOBILE = document.querySelector('.shipable-page')
+			? document
+					.querySelector('.shipable-page')
+					.classList.contains('platform-phone')
+			: false;
+
 		const PRICES = {};
 		let regularPrice;
 		let salePrice;
@@ -173,42 +179,71 @@ export default class Dropdown {
 				return PRICES;
 			}
 
-			const PRICE_TABLE = html.querySelector('#price');
 			let prices = [];
 
-			if (PRICE_TABLE) {
-				PRICE_TABLE.querySelectorAll(
-					'tr:not(#regularprice_savings):not(.aok-hidden) td > span:not(#listPriceLegalMessage):not(#ourprice_shippingmessage)'
-				).forEach(function(element) {
-					if (element.innerText.includes('$')) {
-						if (
-							'primeExclusivePricingMessage' ===
-							element.getAttribute('id')
-						) {
-							let primePrice = element
-								.querySelector('a:not(span)')
-								.innerText.trim()
-								.split('$')[1]
-								.split(' ')[0]
-								.split(',')
-								.join('');
-							primePrice = parseFloat(primePrice);
-							if (!isNaN(primePrice) && prices.length) {
-								prices.push(prices[0] - primePrice);
-							}
-						} else {
-							let thisElement = element.innerText
-								.trim()
-								.split('$')[1]
-								.split(',')
-								.join('');
-							thisElement = parseFloat(thisElement);
-							if (!isNaN(thisElement)) {
-								prices.push(thisElement);
-							}
+			if (MOBILE && /Android/.test(window.navigator.userAgent)) {
+				const MOBILE_PRICE_TABLE = html.querySelector(
+					'#newPitchPriceWrapper_feature_div'
+				);
+
+				if (MOBILE_PRICE_TABLE) {
+					const SALE_PRICE_DOLLARS = MOBILE_PRICE_TABLE.querySelector(
+						'.price-large'
+					);
+
+					let salePriceCents = MOBILE_PRICE_TABLE.querySelector(
+						'.price-info-superscript'
+					);
+					salePriceCents = salePriceCents
+						? salePriceCents.innerText
+						: '00';
+
+					if (SALE_PRICE_DOLLARS) {
+						let salePrice = `${SALE_PRICE_DOLLARS.innerText}.${salePriceCents}`;
+						salePrice = parseFloat(salePrice);
+
+						if (!isNaN(salePrice)) {
+							prices.push(salePrice);
 						}
 					}
-				});
+				}
+			} else {
+				const PRICE_TABLE = html.querySelector('#price');
+
+				if (PRICE_TABLE) {
+					PRICE_TABLE.querySelectorAll(
+						'tr:not(#regularprice_savings):not(.aok-hidden) td > span:not(#listPriceLegalMessage):not(#ourprice_shippingmessage)'
+					).forEach(function(element) {
+						if (element.innerText.includes('$')) {
+							if (
+								'primeExclusivePricingMessage' ===
+								element.getAttribute('id')
+							) {
+								let primePrice = element
+									.querySelector('a:not(span)')
+									.innerText.trim()
+									.split('$')[1]
+									.split(' ')[0]
+									.split(',')
+									.join('');
+								primePrice = parseFloat(primePrice);
+								if (!isNaN(primePrice) && prices.length) {
+									prices.push(prices[0] - primePrice);
+								}
+							} else {
+								let thisElement = element.innerText
+									.trim()
+									.split('$')[1]
+									.split(',')
+									.join('');
+								thisElement = parseFloat(thisElement);
+								if (!isNaN(thisElement)) {
+									prices.push(thisElement);
+								}
+							}
+						}
+					});
+				}
 			}
 
 			switch (prices.length) {
@@ -252,7 +287,8 @@ export default class Dropdown {
 			: 'https://cors-anywhere.herokuapp.com/';
 
 		const HEADERS = new Headers({
-			'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'
+			'User-Agent':
+				'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36',
 		});
 
 		try {
@@ -260,7 +296,7 @@ export default class Dropdown {
 				`${PROXY}https://www.amazon.com/dp/${ASIN}?th=1&psc=1`,
 				{
 					method: 'GET',
-					headers: HEADERS
+					headers: HEADERS,
 				}
 			);
 
@@ -314,17 +350,16 @@ export default class Dropdown {
 		if (typeof PRICES === 'object' && !isObjectEmpty(PRICES)) {
 			if (PRICES.available) {
 				Object.entries(PRICES).forEach(([key, value]) => {
-
 					if (key !== 'available') {
 						const PRICE_EL = document.createElement('span');
 						PRICE_EL.classList.add(key);
 						PRICE_EL.innerText = numToCurrency(value);
-		
+
 						const ATTACH_METHOD =
 							key === 'salePrice' ? 'appendChild' : 'prepend';
-		
+
 						PRICE_WRAPPER[ATTACH_METHOD](PRICE_EL);
-	
+
 						if (this.elements.atc.classList.contains('disabled')) {
 							this.elements.atc.classList.remove('disabled');
 						}
@@ -334,7 +369,7 @@ export default class Dropdown {
 				const PRICE_EL = document.createElement('span');
 				PRICE_EL.classList.add('outOfStock');
 				PRICE_EL.innerText = 'Out of Stock';
-	
+
 				PRICE_WRAPPER.appendChild(PRICE_EL);
 
 				if (!this.elements.atc.classList.contains('disabled')) {

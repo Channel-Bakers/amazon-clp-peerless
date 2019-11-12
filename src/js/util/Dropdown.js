@@ -303,17 +303,20 @@ export default class Dropdown {
 		if (typeof PRICES === 'object') {
 			if (PRICES.available) {
 				Object.entries(PRICES).forEach(([key, value]) => {
-					const PRICE_EL = document.createElement('span');
-					PRICE_EL.classList.add(key);
-					PRICE_EL.innerText = numToCurrency(value);
-	
-					const ATTACH_METHOD =
-						key === 'salePrice' ? 'appendChild' : 'prepend';
-	
-					PRICE_WRAPPER[ATTACH_METHOD](PRICE_EL);
 
-					if (this.elements.atc.classList.contains('disabled')) {
-						this.elements.atc.classList.remove('disabled');
+					if (key !== 'available') {
+						const PRICE_EL = document.createElement('span');
+						PRICE_EL.classList.add(key);
+						PRICE_EL.innerText = numToCurrency(value);
+		
+						const ATTACH_METHOD =
+							key === 'salePrice' ? 'appendChild' : 'prepend';
+		
+						PRICE_WRAPPER[ATTACH_METHOD](PRICE_EL);
+	
+						if (this.elements.atc.classList.contains('disabled')) {
+							this.elements.atc.classList.remove('disabled');
+						}
 					}
 				});
 			} else {

@@ -126,8 +126,6 @@ export default class Builder {
 			DROPDOWN_PRICES.push(dropdownPrice);
 		});
 
-		console.log(DROPDOWN_PRICES);
-
 		if (DROPDOWN_PRICES.length !== this.dropdowns.length) return;
 
 		const TOTAL_PRICE = DROPDOWN_PRICES.reduce((a, b) => a + b, 0);

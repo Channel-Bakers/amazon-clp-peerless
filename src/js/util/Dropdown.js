@@ -231,8 +231,11 @@ export default class Dropdown {
 			}
 
 			if (regularPrice) PRICES.regularPrice = regularPrice;
-
 			if (salePrice) PRICES.salePrice = salePrice;
+
+			if (isObjectEmpty(PRICES)) {
+				PRICES.salePrice = this.activeOption.price;
+			}
 
 			PRICES.available = true;
 
@@ -248,9 +251,17 @@ export default class Dropdown {
 			? ''
 			: 'https://cors-anywhere.herokuapp.com/';
 
+		const HEADERS = new Headers({
+			'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'
+		});
+
 		try {
 			const ASIN_REQUEST = await fetch(
-				`${PROXY}https://www.amazon.com/dp/${ASIN}?th=1&psc=1`
+				`${PROXY}https://www.amazon.com/dp/${ASIN}?th=1&psc=1`,
+				{
+					method: 'GET',
+					headers: HEADERS
+				}
 			);
 
 			const ASIN_RESPONSE = await ASIN_REQUEST.text();
@@ -300,7 +311,7 @@ export default class Dropdown {
 
 		PRICE_WRAPPER.innerHTML = '';
 
-		if (typeof PRICES === 'object') {
+		if (typeof PRICES === 'object' && !isObjectEmpty(PRICES)) {
 			if (PRICES.available) {
 				Object.entries(PRICES).forEach(([key, value]) => {
 

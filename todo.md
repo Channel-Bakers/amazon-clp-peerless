@@ -16,6 +16,3 @@
 
 ##Todo
 - **TEST, TEST, TEST**
-
-
-#UAG

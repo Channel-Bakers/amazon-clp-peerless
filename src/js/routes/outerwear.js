@@ -10,9 +10,9 @@ export default {
 		const SLIM_OVERCOATS = slimOvercoat.default;
 		const SLIM_OVERCOAT_OPTIONS = {
 			target: 'slimOvercoats',
-			title: `Slim Fit {{COLOR}} Overcoat`,
+			title: `{{COLOR}} Slim Fit Wool Blend Overcoat Jacket`,
 			caption:
-				"Slim, polished, and versatile enough for just about any occasion. This handsome grey Lazio suit is cut from pure S110's wool by Vitale Barberis Canonico.",
+				"Fleece lined slanted exterior pockets for easy access and extra warmth. The appropriate coat for any chilly occasion.",
 			image: {
 				position: 'right',
 			},
@@ -40,7 +40,7 @@ export default {
 				},
 				{
 					name: 'camel',
-					hex: '#bd9a74',
+					hex: '#bd9a72',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/81n1O139i-L._UX679_.jpg',
 					active: false,
@@ -55,7 +55,7 @@ export default {
 			],
 			dropdowns: [
 				{
-					title: `Slim Fit {{COLOR}} Overcoat`,
+					title: `{{COLOR}} Slim Fit Wool Blend Overcoat Jacket`,
 					id: 'slimOvercoats',
 					data: SLIM_OVERCOATS,
 				},
@@ -71,9 +71,9 @@ export default {
 		const MODERN_OVERCOATS = modenOvercoat.default;
 		const MODERN_OVERCOAT_OPTIONS = {
 			target: 'modernOvercoats',
-			title: `Modern Fit {{COLOR}} Overcoat`,
+			title: `{{COLOR}} Modern Style Overcoat with Cold Weather Features`,
 			caption:
-				"Soft, polished, and versatile enough for just about any occasion. This handsome grey Lazio suit is cut from pure S110's wool by Vitale Barberis Canonico.",
+				"The coleman's interior zipper-bib and its stand collar design with tab closure will help repel and protect you from the cold and wind while the outer layer’s Front-button closure and side-entry front pockets enhance the modern design of this multifunctional overcoat.",
 			image: {
 				position: 'right',
 			},
@@ -87,14 +87,14 @@ export default {
 				},
 				{
 					name: 'charcoal',
-					hex: '#454f54',
+					hex: '#323232',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
 					active: false,
 				},
 				{
 					name: 'royal blue',
-					hex: '#454f54',
+					hex: '#101115',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
 					active: false,
@@ -102,7 +102,7 @@ export default {
 			],
 			dropdowns: [
 				{
-					title: `Modern Fit {{COLOR}} Overcoat`,
+					title: `{{COLOR}} Modern Style Overcoat with Cold Weather Features`,
 					id: 'modernOvercoats',
 					data: MODERN_OVERCOATS,
 				},

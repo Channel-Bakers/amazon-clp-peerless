@@ -11,9 +11,9 @@ export default {
 		const tuxedoOptions = {
 			target: 'tuxedo',
 			backgroundColor: '#f2f1f6',
-			title: `Tuxedo`,
+			title: `Modern Fit Tuxedo Suit Separates-Custom Blazer & Pant Size Selection`,
 			caption:
-				"Slim, polished, and versatile enough for just about any occasion. This handsome grey Lazio suit is cut from pure S110's wool by Vitale Barberis Canonico.",
+				"100% Wool, imported, bottom hemmed plain front pocket pant side seam.",
 			image: {
 				position: 'right',
 				src:
@@ -21,12 +21,12 @@ export default {
 			},
 			dropdowns: [
 				{
-					title: `Tuxedo Jacket`,
+					title: `Modern Fit Jacket`,
 					id: 'tuxedoJackets',
 					data: tuxedoJacketData,
 				},
 				{
-					title: `Tuxedo Pants`,
+					title: `Modern Fit Pants`,
 					id: 'tuxedoPants',
 					data: tuxedoPantData,
 				},

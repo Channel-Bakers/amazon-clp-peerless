@@ -10,9 +10,9 @@ export default {
 		const SLIM_PANTS = slimPants.default;
 		const SLIM_PANT_OPTIONS = {
 			target: 'slimPants',
-			title: `Slim Fit {{COLOR}} Pants`,
+			title: `{{COLOR}} X Performance Slim Fit Flat Front Dress Pant`,
 			caption:
-				"Slim, polished, and versatile enough for just about any occasion. This handsome grey Lazio suit is cut from pure S110's wool by Vitale Barberis Canonico.",
+				"Ready to wear. Arrives with a finished hemmed to avoid extra tailoring. Great for your 9-5 work week, a night out, or traveling. Wrink resistant engineered fabric.",
 			image: {
 				position: 'right',
 			},
@@ -48,7 +48,7 @@ export default {
 			],
 			dropdowns: [
 				{
-					title: `Slim Fit {{COLOR}} Pants`,
+					title: `{{COLOR}} X Performance Slim Fit Flat Front Dress Pant`,
 					id: 'slimPants',
 					data: SLIM_PANTS,
 				},
@@ -64,9 +64,9 @@ export default {
 		const SKINNY_PANTS = skinnyPants.default;
 		const SKINNY_PANT_OPTIONS = {
 			target: 'skinnyPants',
-			title: `Skinny Fit {{COLOR}} Pants`,
+			title: `{{COLOR}} Skinny Fit Performance Stretch Dress Pant`,
 			caption:
-				"Soft, polished, and versatile enough for just about any occasion. This handsome grey Lazio suit is cut from pure S110's wool by Vitale Barberis Canonico.",
+				"Calvin Klein's slimmest fit available with an ultra tapered leg and 4-way Infinite Stretch fabric for increased motion.",
 			image: {
 				position: 'right',
 			},
@@ -102,7 +102,7 @@ export default {
 			],
 			dropdowns: [
 				{
-					title: `Skinny Fit {{COLOR}} Pants`,
+					title: `{{COLOR}} Skinny Fit Performance Stretch Dress Pant`,
 					id: 'skinnyPants',
 					data: SKINNY_PANTS,
 				},

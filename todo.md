@@ -11,13 +11,11 @@
 - ~Fill in sizes with Long, Regular, Short~
 - ~Remove the background colors from images for slim fit pants (grey, navy, black) & tuxedos~
 - ~If the item is out of stock, show in place of price and disable ATC button~
+- ~Change the color hex values to the correct colors for each builder~
+- ~Change the titles and captions for each builder~
 
 ##Todo
-- Change the color hex values to the correct colors for each builder
-
 - **TEST, TEST, TEST**
 
-##Backlog
-- Change the titles? and captions for each builder
 
 #UAG

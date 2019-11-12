@@ -10,9 +10,9 @@ export default {
 		const slimSuitPants = slimPants.default;
 		const slimSuitOptions = {
 			target: 'slimSuit',
-			title: `Slim Fit {{COLOR}} Suit`,
+			title: `{{COLOR}} Slim Fit Stretch Suit Separates-Custom Jacket & Pant Size Selection`,
 			caption:
-				"Slim, polished, and versatile enough for just about any occasion. This handsome grey Lazio suit is cut from pure S110's wool by Vitale Barberis Canonico.",
+				"High performance bi-stretch fabric for maximum comfort and movement. Slim through the shoulders, chest, and waist with higher arm hole and tapered sleeve.",
 			image: {
 				position: 'left',
 			},
@@ -34,12 +34,12 @@ export default {
 			],
 			dropdowns: [
 				{
-					title: `Slim Fit {{COLOR}} Jacket`,
+					title: `{{COLOR}} Slim Fit Stretch Jacket`,
 					id: 'slimSuitJackets',
 					data: slimSuitJackets,
 				},
 				{
-					title: `Slim Fit {{COLOR}} Pants`,
+					title: `{{COLOR}} Slim Fit Stretch Pants`,
 					id: 'slimSuitPants',
 					data: slimSuitPants,
 				},

@@ -12,28 +12,28 @@ export default {
 			target: 'slimJackets',
 			title: `Slim Fit {{COLOR}} Jacket`,
 			caption:
-				"Slim, polished, and versatile enough for just about any occasion. This handsome grey Lazio suit is cut from pure S110's wool by Vitale Barberis Canonico.",
+				"This modern jacket fabric can dress up a more relaxed outfit pairing it with jeans or cotton pants, or add sophistication to your outfit by pairing it with dress pants.",
 			image: {
 				position: 'right',
 			},
 			colors: [
 				{
 					name: 'gray',
-					hex: '#454f54',
+					hex: '#70707a',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
 					active: true,
 				},
 				{
 					name: 'charcoal',
-					hex: '#454f54',
+					hex: '#3a3742',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
 					active: false,
 				},
 				{
 					name: 'navy',
-					hex: '#454f54',
+					hex: '#1c1c26',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
 					active: false,
@@ -57,23 +57,23 @@ export default {
 		const SOFT_JACKETS = softJackets.default;
 		const SOFT_JACKET_OPTIONS = {
 			target: 'softJackets',
-			title: `Soft Fit {{COLOR}} Jacket`,
+			title: `Slim Fit {{COLOR}} Soft Jacket`,
 			caption:
-				"Soft, polished, and versatile enough for just about any occasion. This handsome grey Lazio suit is cut from pure S110's wool by Vitale Barberis Canonico.",
+				"This modern jacket fabric has a more relaxed appearance, it pairs perfectly with casual bottoms, it has natural stretch for added comfort and is easy to care for and maintain.",
 			image: {
 				position: 'right',
 			},
 			colors: [
 				{
 					name: 'denim',
-					hex: '#454f54',
+					hex: '#262637',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
 					active: true,
 				},
 				{
 					name: 'charcoal',
-					hex: '#454f54',
+					hex: '#2c2b30',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
 					active: false,
@@ -81,7 +81,7 @@ export default {
 			],
 			dropdowns: [
 				{
-					title: `Soft Fit {{COLOR}} Jacket`,
+					title: `Slim Fit {{COLOR}} Soft Jacket`,
 					id: 'softJackets',
 					data: SOFT_JACKETS,
 				},

@@ -244,6 +244,11 @@ CLIENT_PREFIX {
 			justify-content: center;
 			align-items: center;
 
+			&.disabled {
+				opacity: 0.3;
+				cursor: not-allowed;
+			}
+
 			&:active, &:link, &:visited, &:hover {
 				color: rgb(255, 255, 255) !important;
 			}

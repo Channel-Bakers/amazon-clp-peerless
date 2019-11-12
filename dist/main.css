@@ -216,6 +216,9 @@ body {
       justify-content: center;
   -ms-flex-align: center;
       align-items: center; }
+  .ck-select-addToCart.disabled {
+    opacity: 0.3;
+    cursor: not-allowed; }
   .ck-select-addToCart:active, .ck-select-addToCart:link, .ck-select-addToCart:visited, .ck-select-addToCart:hover {
     color: white !important; }
 

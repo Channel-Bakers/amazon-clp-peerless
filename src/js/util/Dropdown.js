@@ -161,6 +161,18 @@ export default class Dropdown {
 		let salePrice;
 
 		try {
+			const AVAILABILITY = html.getElementById('availability');
+			const OUT_OF_STOCK = AVAILABILITY.querySelector(
+				'span'
+			).innerText.includes('out of stock');
+
+			if (OUT_OF_STOCK) {
+				PRICES.salePrice = null;
+				PRICES.regularPrice = null;
+				PRICES.available = false;
+				return PRICES;
+			}
+
 			const PRICE_TABLE = html.querySelector('#price');
 			let prices = [];
 
@@ -222,6 +234,8 @@ export default class Dropdown {
 
 			if (salePrice) PRICES.salePrice = salePrice;
 
+			PRICES.available = true;
+
 			return PRICES;
 		} catch (error) {
 			console.log(error);
@@ -246,7 +260,9 @@ export default class Dropdown {
 
 			const PRICES = this._parsePrice(HTML);
 
-			return PRICES && !isObjectEmpty(PRICES)
+			return PRICES &&
+				typeof PRICES === 'object' &&
+				!isObjectEmpty(PRICES)
 				? PRICES
 				: this.activeOption.price;
 		} catch (error) {
@@ -284,23 +300,43 @@ export default class Dropdown {
 
 		PRICE_WRAPPER.innerHTML = '';
 
-		if (PRICES instanceof Object) {
-			Object.entries(PRICES).forEach(([key, value]) => {
+		if (typeof PRICES === 'object') {
+			if (PRICES.available) {
+				Object.entries(PRICES).forEach(([key, value]) => {
+					const PRICE_EL = document.createElement('span');
+					PRICE_EL.classList.add(key);
+					PRICE_EL.innerText = numToCurrency(value);
+	
+					const ATTACH_METHOD =
+						key === 'salePrice' ? 'appendChild' : 'prepend';
+	
+					PRICE_WRAPPER[ATTACH_METHOD](PRICE_EL);
+
+					if (this.elements.atc.classList.contains('disabled')) {
+						this.elements.atc.classList.remove('disabled');
+					}
+				});
+			} else {
 				const PRICE_EL = document.createElement('span');
-				PRICE_EL.classList.add(key);
-				PRICE_EL.innerText = numToCurrency(value);
+				PRICE_EL.classList.add('outOfStock');
+				PRICE_EL.innerText = 'Out of Stock';
+	
+				PRICE_WRAPPER.appendChild(PRICE_EL);
 
-				const ATTACH_METHOD =
-					key === 'salePrice' ? 'appendChild' : 'prepend';
-
-				PRICE_WRAPPER[ATTACH_METHOD](PRICE_EL);
-			});
+				if (!this.elements.atc.classList.contains('disabled')) {
+					this.elements.atc.classList.add('disabled');
+				}
+			}
 		} else {
 			const PRICE_EL = document.createElement('span');
 			PRICE_EL.classList.add('salePrice');
 			PRICE_EL.innerText = numToCurrency(PRICES);
 
 			PRICE_WRAPPER.appendChild(PRICE_EL);
+
+			if (this.elements.atc.classList.contains('disabled')) {
+				this.elements.atc.classList.remove('disabled');
+			}
 		}
 
 		const PRICE_CHANGE = new CustomEvent('dropdown.price.update', {
@@ -418,6 +454,10 @@ export default class Dropdown {
 
 		ATC.addEventListener('click', async (event) => {
 			event.preventDefault();
+
+			if (event.target.classList.contains('diabled')) {
+				return false;
+			}
 
 			const SESSION_ID =
 				(window.CB && window.CB.sessionID) || getCookie('session-id');

@@ -17,7 +17,7 @@ export default {
 			image: {
 				position: 'right',
 				src:
-					'https://images-na.ssl-images-amazon.com/images/I/61X0YLXDviL._AC_UX569_.jpg',
+					'https://images-na.ssl-images-amazon.com/images/I/81ScI-Cv7TL._AC_UY879_.jpg',
 			},
 			dropdowns: [
 				{

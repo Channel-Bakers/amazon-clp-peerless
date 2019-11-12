@@ -8,24 +8,16 @@
 - ~Update ASIN data~
 - ~Responsive CSS & JS rendering (phone only)~
 - ~Remove item title and price from builders with only 1 dropdown~
+- ~Fill in sizes with Long, Regular, Short~
+- ~Remove the background colors from images for slim fit pants (grey, navy, black) & tuxedos~
+- ~If the item is out of stock, show in place of price and disable ATC button~
 
 ##Todo
-- Fill in sizes with Long, Regular, Short
 - Change the color hex values to the correct colors for each builder
+
 - **TEST, TEST, TEST**
 
 ##Backlog
-- Remove the background colors from images for the following items:
-	- Slim fit pants (grey, black) for EVERY option 😰
-	- Tuxedos
-- Change the titles and captions for each builder
-
-##I think this is fixed
-- 5 Sizes 38? (modern outerwear)
-	- B01M1D99S4
-	- B01LZ00XTU
-	- B01LZZ96W4
-	- B01M11JSWK
-	- B01M0PRW7I
+- Change the titles? and captions for each builder
 
 #UAG

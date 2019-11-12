@@ -19,14 +19,14 @@ export default {
 			colors: [
 				{
 					name: 'grey',
-					hex: '#454f54',
+					hex: '#616161',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91f5kSKHU5L._AC_UX679_.jpg',
 					active: true,
 				},
 				{
 					name: 'medium grey',
-					hex: '#454f54',
+					hex: '#4a4a4a',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/81taEY24AeL._AC_UX679_.jpg',
 					active: false,
@@ -40,14 +40,14 @@ export default {
 				},
 				{
 					name: 'camel',
-					hex: '#454f54',
+					hex: '#bd9a74',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/81n1O139i-L._UX679_.jpg',
 					active: false,
 				},
 				{
 					name: 'burgundy',
-					hex: '#454f54',
+					hex: '#482e31',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/81v-5CxBZCL._UX679_.jpg',
 					active: false,

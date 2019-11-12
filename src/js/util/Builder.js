@@ -118,6 +118,8 @@ export default class Builder {
 			}
 		});
 
+		console.log(DROPDOWN_PRICES);
+
 		if (DROPDOWN_PRICES.length !== this.dropdowns.length) return;
 
 		const TOTAL_PRICE = DROPDOWN_PRICES.reduce((a, b) => a + b, 0);

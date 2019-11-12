@@ -238,14 +238,14 @@ export default class Dropdown {
 			const ASIN_REQUEST = await fetch(
 				`${PROXY}https://www.amazon.com/dp/${ASIN}?th=1&psc=1`
 			);
-	
+
 			const ASIN_RESPONSE = await ASIN_REQUEST.text();
-	
+
 			const PARSER = new DOMParser();
 			const HTML = PARSER.parseFromString(ASIN_RESPONSE, 'text/html');
-	
+
 			const PRICES = this._parsePrice(HTML);
-	
+
 			return PRICES && !isObjectEmpty(PRICES)
 				? PRICES
 				: this.activeOption.price;
@@ -346,12 +346,17 @@ export default class Dropdown {
 
 		DROPDOWN_WRAPPER.setAttribute('data-select-id', this.params.id);
 
-		const DROPDOWN_TITLE = this._renderTitle();
-		const DROPDOWN_PRICE = document.createElement('h6');
-		DROPDOWN_PRICE.classList.add(`${env.clientPrefix}-dropdown-price`);
+		if (
+			this.params.builder.params.dropdowns &&
+			this.params.builder.dropdowns.length > 1
+		) {
+			const DROPDOWN_TITLE = this._renderTitle();
+			const DROPDOWN_PRICE = document.createElement('h6');
+			DROPDOWN_PRICE.classList.add(`${env.clientPrefix}-dropdown-price`);
 
-		DROPDOWN_WRAPPER.appendChild(DROPDOWN_TITLE);
-		DROPDOWN_WRAPPER.appendChild(DROPDOWN_PRICE);
+			DROPDOWN_WRAPPER.appendChild(DROPDOWN_TITLE);
+			DROPDOWN_WRAPPER.appendChild(DROPDOWN_PRICE);
+		}
 
 		this.elements.wrapper = DROPDOWN_WRAPPER;
 

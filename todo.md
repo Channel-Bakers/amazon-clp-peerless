@@ -4,13 +4,13 @@
 
 ##Done
 - ~When user adds to cart, check if cart quantity property exists~
-- ~Fill in sizes with Long, Regular, Short~ (modern outerwear needs help)
 - ~Fix bug with price scraping~
 - ~Update ASIN data~
 - ~Responsive CSS & JS rendering (phone only)~
+- ~Remove item title and price from builders with only 1 dropdown~
 
 ##Todo
-- Remove item title and price from builders with only 1 dropdown
+- Fill in sizes with Long, Regular, Short
 - Change the color hex values to the correct colors for each builder
 - **TEST, TEST, TEST**
 

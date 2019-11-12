@@ -382,17 +382,24 @@ export default class Dropdown {
 
 		DROPDOWN_WRAPPER.setAttribute('data-select-id', this.params.id);
 
-		if (
-			this.params.builder.params.dropdowns &&
-			this.params.builder.dropdowns.length > 1
-		) {
-			const DROPDOWN_TITLE = this._renderTitle();
-			const DROPDOWN_PRICE = document.createElement('h6');
-			DROPDOWN_PRICE.classList.add(`${env.clientPrefix}-dropdown-price`);
+		// if (
+		// 	this.params.builder.params.dropdowns &&
+		// 	this.params.builder.params.dropdowns.length > 1
+		// ) {
+		// 	const DROPDOWN_TITLE = this._renderTitle();
+		// 	const DROPDOWN_PRICE = document.createElement('h6');
+		// 	DROPDOWN_PRICE.classList.add(`${env.clientPrefix}-dropdown-price`);
 
-			DROPDOWN_WRAPPER.appendChild(DROPDOWN_TITLE);
-			DROPDOWN_WRAPPER.appendChild(DROPDOWN_PRICE);
-		}
+		// 	DROPDOWN_WRAPPER.appendChild(DROPDOWN_TITLE);
+		// 	DROPDOWN_WRAPPER.appendChild(DROPDOWN_PRICE);
+		// }
+
+		const DROPDOWN_TITLE = this._renderTitle();
+		const DROPDOWN_PRICE = document.createElement('h6');
+		DROPDOWN_PRICE.classList.add(`${env.clientPrefix}-dropdown-price`);
+
+		DROPDOWN_WRAPPER.appendChild(DROPDOWN_TITLE);
+		DROPDOWN_WRAPPER.appendChild(DROPDOWN_PRICE);
 
 		this.elements.wrapper = DROPDOWN_WRAPPER;
 

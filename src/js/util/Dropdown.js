@@ -465,7 +465,7 @@ export default class Dropdown {
 		ATC.addEventListener('click', async (event) => {
 			event.preventDefault();
 
-			if (event.target.classList.contains('diabled')) {
+			if (event.target.classList.contains('disabled')) {
 				return false;
 			}
 

@@ -14,7 +14,7 @@ export default {
 			caption:
 				"Fleece lined slanted exterior pockets for easy access and extra warmth. The appropriate coat for any chilly occasion.",
 			image: {
-				position: 'right',
+				position: 'left',
 			},
 			colors: [
 				{

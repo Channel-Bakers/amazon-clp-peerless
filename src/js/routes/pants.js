@@ -14,7 +14,7 @@ export default {
 			caption:
 				"Ready to wear. Arrives with a finished hemmed to avoid extra tailoring. Great for your 9-5 work week, a night out, or traveling. Wrink resistant engineered fabric.",
 			image: {
-				position: 'right',
+				position: 'left',
 			},
 			colors: [
 				{

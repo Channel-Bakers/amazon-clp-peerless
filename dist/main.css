@@ -1,8 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700&display=swap);
 body {
   margin: 0; }
-  body.ck-loaded .carousel-wrap {
-    opacity: 0; }
+  body .carousel-wrap {
+    opacity: 0;
+    display: none; }
+  body.ck-err .carousel-wrap {
+    opacity: 1;
+    display: block; }
 
 .ck-container {
   display: -ms-flexbox;

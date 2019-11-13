@@ -45,4 +45,19 @@ const removeAmazonNodes = (nodes) => {
 	}
 };
 
-export {isAmazon, isAmazonAdvertising, getCurrentAmazonTab, removeAmazonNodes};
+const hideAmazonNodes = (nodes) => {
+	if (nodes) {
+		try {
+			nodes.forEach((node) => {
+				if (node instanceof Node) {
+					node.style.display = 'none';
+					node.style.opacity = '0';
+				}
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	}
+};
+
+export {isAmazon, isAmazonAdvertising, getCurrentAmazonTab, removeAmazonNodes, hideAmazonNodes};

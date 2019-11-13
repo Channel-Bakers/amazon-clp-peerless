@@ -54,16 +54,16 @@ const OBSERVER = new MutationObserver(watchForNewNodes);
 
 (() => {
 	if (isAmazon()) {
-		document.body.classList.add(`${env.clientPrefix}-loaded`);
-
 		try {
+			document.body.classList.add(`${env.clientPrefix}-loaded`);
+
 			if (!document.getElementById('ad-landing-page-wrap')) {
 				OBSERVER.observe(TARGET_NODE, CONFIG);
 			} else {
 				init();
 			}
 		} catch (error) {
-			document.body.classList.remove(`${env.clientPrefix}-loaded`);
+			document.body.classList.add(`${env.clientPrefix}-err`);
 		}
 	} else {
 		if (!isAmazonAdvertising()) {

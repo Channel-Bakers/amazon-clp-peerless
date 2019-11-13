@@ -3,10 +3,16 @@
 body {
 	margin: 0;
 
-	&CLIENT_PREFIX-loaded {
+	.carousel-wrap {
+		opacity: 0;
+		display: none;
+	}
+
+	&CLIENT_PREFIX-err {
 		.carousel-wrap {
-			opacity: 0;
-		}
+			opacity: 1;
+			display: block;
+		}	
 	}
 }
 

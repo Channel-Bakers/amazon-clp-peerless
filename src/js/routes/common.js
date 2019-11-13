@@ -1,7 +1,7 @@
 'use strict';
 
 import {getCookie} from '../util/helpers/cookies';
-import {getCurrentAmazonTab, removeAmazonNodes} from '../util/helpers/amazon';
+import {getCurrentAmazonTab, hideAmazonNodes, removeAmazonNodes} from '../util/helpers/amazon';
 
 export default {
 	init() {
@@ -14,7 +14,12 @@ export default {
 
 		FALLBACK_NODES.forEach((selector) => {
 			const NODES = document.querySelectorAll(selector);
-			NODES && removeAmazonNodes(NODES);
+			// NODES && removeAmazonNodes(NODES);
+			NODES && hideAmazonNodes(NODES);
 		});
 	},
+
+	finalize() {
+
+	}
 };

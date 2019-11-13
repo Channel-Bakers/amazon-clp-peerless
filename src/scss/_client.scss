@@ -10,13 +10,13 @@ body {
 
 	&CLIENT_PREFIX-err {
 		.carousel-wrap {
-			opacity: 1;
-			display: block;
+			opacity: 1 !important;
+			display: block !important;
 		}
 
 		CLIENT_PREFIX-container {
-			opacity: 0;
-			display: none;
+			opacity: 0 !important;
+			display: none !important;
 		}
 	}
 }

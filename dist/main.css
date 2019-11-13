@@ -5,11 +5,11 @@ body {
     opacity: 0;
     display: none; }
   body.ck-err .carousel-wrap {
-    opacity: 1;
-    display: block; }
+    opacity: 1 !important;
+    display: block !important; }
   body.ck-err .ck-container {
-    opacity: 0;
-    display: none; }
+    opacity: 0 !important;
+    display: none !important; }
 
 .ck-container {
   display: -ms-flexbox;

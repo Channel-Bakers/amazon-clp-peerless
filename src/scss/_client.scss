@@ -2,6 +2,12 @@
 
 body {
 	margin: 0;
+
+	&CLIENT_PREFIX-loaded {
+		.carousel-wrap {
+			opacity: 0;
+		}
+	}
 }
 
 CLIENT_PREFIX {

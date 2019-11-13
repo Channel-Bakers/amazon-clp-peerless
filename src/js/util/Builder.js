@@ -25,7 +25,7 @@ export default class Builder {
 		})();
 	}
 
-	_getActiveColor() {
+	getActiveColor() {
 		return this.params.colors.reduce((color) => color.active && color);
 	}
 
@@ -34,7 +34,7 @@ export default class Builder {
 	}
 
 	_renderColorPicker() {
-		if (this.params.colors && !isObjectEmpty(this.params.colors)) {
+		if (this.params.colors && this.params.colors.length > 0) {
 			const COLOR_PICKER_WRAPPER = document.createElement('div');
 			COLOR_PICKER_WRAPPER.classList.add(
 				`${env.clientPrefix}-color-picker-container`
@@ -145,7 +145,7 @@ export default class Builder {
 		let titleText = this.params.title;
 
 		if (this.params.colors && this.params.colors.length > 0) {
-			const ACTIVE_COLOR = color ? color : this._getActiveColor();
+			const ACTIVE_COLOR = color ? color : this.getActiveColor();
 			titleText = titleText.replace(
 				'{{COLOR}}',
 				capitalize(
@@ -171,7 +171,7 @@ export default class Builder {
 
 			if (COLORS) {
 				const ACTIVE_COLOR = COLORS
-					? this._getActiveColor()
+					? this.getActiveColor()
 					: this.params.image;
 
 				imageSrc =

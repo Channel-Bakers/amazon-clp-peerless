@@ -21,11 +21,13 @@ export default {
 			dropdowns: [
 				{
 					title: `Modern Fit Jacket`,
+					image: 'https://images-na.ssl-images-amazon.com/images/I/81ScI-Cv7TL._AC_UY879_.jpg',
 					id: 'tuxedoJackets',
 					data: tuxedoJacketData,
 				},
 				{
 					title: `Modern Fit Pants`,
+					image: 'https://images-na.ssl-images-amazon.com/images/I/81ScI-Cv7TL._AC_UY879_.jpg',
 					id: 'tuxedoPants',
 					data: tuxedoPantData,
 				},

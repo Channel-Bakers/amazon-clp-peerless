@@ -21,7 +21,7 @@ export default {
 					name: 'charcoal',
 					hex: '#454f54',
 					image:
-						'https://images-na.ssl-images-amazon.com/images/I/61grhh2qwmL._AC_UY741_.jpg',
+						'https://images-na.ssl-images-amazon.com/images/I/61fOtlfSyNL._AC_UY879_.jpg',
 					active: true,
 				},
 				{
@@ -35,11 +35,19 @@ export default {
 			dropdowns: [
 				{
 					title: `{{COLOR}} Slim Fit Stretch Jacket`,
+					image: {
+						charcoal: 'https://images-na.ssl-images-amazon.com/images/I/61fOtlfSyNL._AC_UY879_.jpg',
+						black: 'https://images-na.ssl-images-amazon.com/images/I/61NhWRvi5eL._AC_SY679._SX._UX._SY._UY_.jpg'
+					},
 					id: 'slimSuitJackets',
 					data: slimSuitJackets,
 				},
 				{
 					title: `{{COLOR}} Slim Fit Stretch Pants`,
+					image: {
+						charcoal: 'https://images-na.ssl-images-amazon.com/images/I/61fOtlfSyNL._AC_UY879_.jpg',
+						black: 'https://images-na.ssl-images-amazon.com/images/I/61NhWRvi5eL._AC_SY679._SX._UX._SY._UY_.jpg'
+					},
 					id: 'slimSuitPants',
 					data: slimSuitPants,
 				},

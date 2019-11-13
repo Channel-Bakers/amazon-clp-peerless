@@ -14,6 +14,7 @@ export default class Dropdown {
 	constructor(params) {
 		const defaultParams = {
 			title: '',
+			image: '',
 			id: '',
 			data: [],
 		};
@@ -270,6 +271,7 @@ export default class Dropdown {
 				const MERCHANT_ID = html.querySelector('#merchantID').value;
 
 				if (MERCHANT_ID !== env.merchantID) {
+					console.log(MERCHANT_ID);
 					// CK is not winning the Buy Box
 					// so we can either return not available
 					// or scrape the other sellers html and look
@@ -331,7 +333,7 @@ export default class Dropdown {
 
 		try {
 			const ASIN_REQUEST = await fetch(
-				`${PROXY}https://www.amazon.com/dp/${ASIN}?th=1&psc=1`,
+				`${PROXY}https://www.amazon.com/dp/${ASIN}?smid=${env.merchantID}?th=1&psc=1`,
 				{
 					method: 'GET',
 					headers: HEADERS,
@@ -484,8 +486,41 @@ export default class Dropdown {
 		const DROPDOWN_PRICE = document.createElement('h6');
 		DROPDOWN_PRICE.classList.add(`${env.clientPrefix}-dropdown-price`);
 
-		DROPDOWN_WRAPPER.appendChild(DROPDOWN_TITLE);
-		DROPDOWN_WRAPPER.appendChild(DROPDOWN_PRICE);
+		const DETAILS_WRAPPER = document.createElement('div');
+		DETAILS_WRAPPER.classList.add(`${env.clientPrefix}-dropdown-details`);
+
+		const DETAILS_CONTENT = document.createElement('div');
+		DETAILS_CONTENT.classList.add(`${env.clientPrefix}-dropdown-content`);
+
+		DETAILS_CONTENT.appendChild(DROPDOWN_TITLE);
+		DETAILS_CONTENT.appendChild(DROPDOWN_PRICE);
+
+		if (this.params.image) {
+			const IMAGE_WRAPPER = document.createElement('div');
+			IMAGE_WRAPPER.classList.add(`${env.clientPrefix}-dropdown-image-container`);
+
+			const IMAGE = document.createElement('div');
+			IMAGE.classList.add(`${env.clientPrefix}-dropdown-image`);
+
+			let imageUrl = '';
+
+			if (this.params.builder.params.colors) {
+				const ACTIVE_COLOR = this.params.builder.getActiveColor();
+				imageUrl = this.params.image[ACTIVE_COLOR];
+			} else {
+				imageUrl = this.params.image;
+			}
+
+			IMAGE.style.backgroundImage = `url('${imageUrl})`;
+
+			IMAGE_WRAPPER.appendChild(IMAGE);
+			DETAILS_WRAPPER.append(IMAGE_WRAPPER);
+
+			this.elements.image = IMAGE;
+		}
+
+		DETAILS_WRAPPER.appendChild(DETAILS_CONTENT);
+		DROPDOWN_WRAPPER.appendChild(DETAILS_WRAPPER);
 
 		this.elements.wrapper = DROPDOWN_WRAPPER;
 
@@ -543,6 +578,10 @@ export default class Dropdown {
 			this.elements.wrapper
 				.querySelector(`.${env.clientPrefix}-dropdown-title`)
 				.replaceWith(this._renderTitle(event.detail.color.name));
+			
+			// update image
+			const IMAGE_URL = this.params.image[event.detail.color.name];
+			this.elements.image.style.backgroundImage = `url('${IMAGE_URL}')`;
 		});
 
 		ATC.addEventListener('click', async (event) => {

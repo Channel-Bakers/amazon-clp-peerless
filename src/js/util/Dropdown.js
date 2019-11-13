@@ -207,6 +207,26 @@ export default class Dropdown {
 						}
 					}
 				}
+
+				// CHECK TO SEE IF CK IS WINNING THE BUY BOX
+				// IF NOT, WE HAVE TO 
+				const MERCHANT_ID = html.querySelector('#ftSelectMerchant').value;
+
+				if (MERCHANT_ID !== env.merchantID) {
+					// CK is not winning the Buy Box
+					// so we can either return not available
+					// or scrape the other sellers html and look
+					// for their merchant ID and offerListing ID
+					// this._scrapeOtherSellers();
+
+					// This is the return not available method
+					PRICES.salePrice = null;
+					PRICES.regularPrice = null;
+					PRICES.available = false;
+					return PRICES;
+				}
+
+
 			} else {
 				const PRICE_TABLE = html.querySelector('#price');
 
@@ -243,6 +263,24 @@ export default class Dropdown {
 							}
 						}
 					});
+				}
+
+				// CHECK TO SEE IF CK IS WINNING THE BUY BOX
+				// IF NOT, WE HAVE TO 
+				const MERCHANT_ID = html.querySelector('#merchantID').value;
+
+				if (MERCHANT_ID !== env.merchantID) {
+					// CK is not winning the Buy Box
+					// so we can either return not available
+					// or scrape the other sellers html and look
+					// for their merchant ID and offerListing ID
+					// this._scrapeOtherSellers();
+
+					// This is the return not available method
+					PRICES.salePrice = null;
+					PRICES.regularPrice = null;
+					PRICES.available = false;
+					return PRICES;
 				}
 			}
 
@@ -312,8 +350,7 @@ export default class Dropdown {
 				!isObjectEmpty(PRICES)
 				? PRICES
 				: this.activeOption.price;
-		} catch (error) {
-			console.log(error);
+		} catch {
 			return this.activeOption.price;
 		}
 	}

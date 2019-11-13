@@ -17,16 +17,12 @@ const init = () => {
 		const CURRENT_ROUTE =
 			(window.CB && window.CB.tab) || getCurrentAmazonTab();
 
-		try {
-			if (CURRENT_ROUTE) {
-				routes[CURRENT_ROUTE].init();
-				routes[CURRENT_ROUTE].finalize();
-			} else {
-				routes[PRIMARY_ROUTE].init();
-				routes[PRIMARY_ROUTE].finalize();
-			}
-		} catch (error) {
-			document.body.classList.add(`${env.clientPrefix}-err`);
+		if (CURRENT_ROUTE) {
+			routes[CURRENT_ROUTE].init();
+			routes[CURRENT_ROUTE].finalize();
+		} else {
+			routes[PRIMARY_ROUTE].init();
+			routes[PRIMARY_ROUTE].finalize();
 		}
 
 		routes['common'].finalize();

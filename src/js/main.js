@@ -53,7 +53,7 @@ const watchForNewNodes = (mutations, observer) => {
 };
 
 const TARGET_NODE = document.body;
-const TABS = document.querySelectorAll('[data-component-type="Tab"]');
+const TABS = document.querySelectorAll('.lp-Tabs-Tab:not(.is-selected)');
 const CONFIG = {childList: true, subtree: true};
 const OBSERVER = new MutationObserver(watchForNewNodes);
 

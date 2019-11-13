@@ -60,7 +60,6 @@ const OBSERVER = new MutationObserver(watchForNewNodes);
 (() => {
 	TABS.forEach(tab => {
 		tab.addEventListener('click', (event) => {
-			console.log(event.target);
 			TARGET_NODE.classList.remove(`${env.clientPrefix}-loaded`);
 			TARGET_NODE.classList.remove(`${env.clientPrefix}-err`);
 		});

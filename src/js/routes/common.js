@@ -20,6 +20,6 @@ export default {
 	},
 
 	finalize() {
-
+		console.log('You\'re fired!');
 	}
 };

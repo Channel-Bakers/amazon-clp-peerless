@@ -92,4 +92,8 @@ export default {
 			...SOFT_JACKET_OPTIONS,
 		});
 	},
+
+	finalize() {
+		
+	}
 };

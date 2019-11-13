@@ -113,4 +113,8 @@ export default {
 			...SKINNY_PANT_OPTIONS,
 		});
 	},
+
+	finalize() {
+		
+	}
 };

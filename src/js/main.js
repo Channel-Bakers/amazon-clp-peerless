@@ -17,11 +17,19 @@ const init = () => {
 		const CURRENT_ROUTE =
 			(window.CB && window.CB.tab) || getCurrentAmazonTab();
 
-		if (CURRENT_ROUTE) {
-			routes[CURRENT_ROUTE].init();
-		} else {
-			routes[PRIMARY_ROUTE].init();
+		try {
+			if (CURRENT_ROUTE) {
+				routes[CURRENT_ROUTE].init();
+				routes[CURRENT_ROUTE].finalize();
+			} else {
+				routes[PRIMARY_ROUTE].init();
+				routes[PRIMARY_ROUTE].finalize();
+			}
+		} catch (error) {
+			document.body.classList.add(`${env.clientPrefix}-err`);
 		}
+
+		routes['common'].finalize();
 	} else {
 		Object.keys(routes).forEach((route) => {
 			routes[route].init();
@@ -54,16 +62,12 @@ const OBSERVER = new MutationObserver(watchForNewNodes);
 
 (() => {
 	if (isAmazon()) {
-		try {
-			document.body.classList.add(`${env.clientPrefix}-loaded`);
+		document.body.classList.add(`${env.clientPrefix}-loaded`);
 
-			if (!document.getElementById('ad-landing-page-wrap')) {
-				OBSERVER.observe(TARGET_NODE, CONFIG);
-			} else {
-				init();
-			}
-		} catch (error) {
-			document.body.classList.add(`${env.clientPrefix}-err`);
+		if (!document.getElementById('ad-landing-page-wrap')) {
+			OBSERVER.observe(TARGET_NODE, CONFIG);
+		} else {
+			init();
 		}
 	} else {
 		if (!isAmazonAdvertising()) {

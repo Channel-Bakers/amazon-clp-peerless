@@ -113,4 +113,8 @@ export default {
 			...MODERN_OVERCOAT_OPTIONS,
 		});
 	},
+
+	finalize() {
+		
+	}
 };

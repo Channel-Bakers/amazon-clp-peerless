@@ -50,4 +50,8 @@ export default {
 			...slimSuitOptions,
 		});
 	},
+
+	finalize() {
+		
+	}
 };

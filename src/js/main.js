@@ -11,9 +11,6 @@ import {
 
 const init = () => {
 	if (isAmazon()) {
-		document.body.classList.remove(`${env.clientPrefix}-loaded`);
-		document.body.classList.remove(`${env.clientPrefix}-err`);
-
 		routes['common'].init();
 
 		const PRIMARY_ROUTE = 'suits';
@@ -60,6 +57,9 @@ const CONFIG = {childList: true, subtree: true};
 const OBSERVER = new MutationObserver(watchForNewNodes);
 
 (() => {
+	document.body.classList.remove(`${env.clientPrefix}-loaded`);
+	document.body.classList.remove(`${env.clientPrefix}-err`);
+
 	if (isAmazon()) {
 		if (!document.getElementById('ad-landing-page-wrap')) {
 			OBSERVER.observe(TARGET_NODE, CONFIG);

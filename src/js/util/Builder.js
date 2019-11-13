@@ -299,7 +299,7 @@ export default class Builder {
 			`[data-builder-target="${this.params.target}"]`
 		);
 
-		if (!WRAPPER) return;
+		if (!WRAPPER || WRAPPER.innerHTML !== '') return;
 
 		WRAPPER.classList.add(`${env.clientPrefix}-container`);
 

@@ -53,12 +53,17 @@ const watchForNewNodes = (mutations, observer) => {
 };
 
 const TARGET_NODE = document.body;
+const TABS = document.querySelectorAll('[data-component-type="Tab"]');
 const CONFIG = {childList: true, subtree: true};
 const OBSERVER = new MutationObserver(watchForNewNodes);
 
 (() => {
-	document.body.classList.remove(`${env.clientPrefix}-loaded`);
-	document.body.classList.remove(`${env.clientPrefix}-err`);
+	TABS.forEach(tab => {
+		tab.addEventListener('click', () => {
+			TARGET_NODE.classList.remove(`${env.clientPrefix}-loaded`);
+			TARGET_NODE.classList.remove(`${env.clientPrefix}-err`);
+		});
+	});
 
 	if (isAmazon()) {
 		if (!document.getElementById('ad-landing-page-wrap')) {

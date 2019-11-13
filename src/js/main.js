@@ -53,13 +53,14 @@ const watchForNewNodes = (mutations, observer) => {
 };
 
 const TARGET_NODE = document.body;
-const TABS = document.querySelectorAll('.lp-Tabs-Tab:not(.is-selected)');
+const TABS = document.querySelectorAll('.lp-Tabs-Tab');
 const CONFIG = {childList: true, subtree: true};
 const OBSERVER = new MutationObserver(watchForNewNodes);
 
 (() => {
 	TABS.forEach(tab => {
-		tab.addEventListener('click', () => {
+		tab.addEventListener('click', (event) => {
+			console.log(event.target);
 			TARGET_NODE.classList.remove(`${env.clientPrefix}-loaded`);
 			TARGET_NODE.classList.remove(`${env.clientPrefix}-err`);
 		});

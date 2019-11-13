@@ -295,9 +295,6 @@ export default class Builder {
 	}
 
 	async _render() {
-
-		throw new Error('this should break the builder, but the fallback should still work');
-
 		const WRAPPER = document.querySelector(
 			`[data-builder-target="${this.params.target}"]`
 		);

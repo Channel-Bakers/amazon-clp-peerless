@@ -367,11 +367,11 @@ export default class Builder {
 
 	async _init() {
 		try {
+			document.body.classList.add(`${env.clientPrefix}-loaded`);
+
 			await this._render();
 		} catch (error) {
-			if (!document.body.classList.contains(`${env.clientPrefix}-err`)) {
-				document.body.classList.add(`${env.clientPrefix}-err`);
-			}
+			document.body.classList.add(`${env.clientPrefix}-err`);
 		}
 
 		return this;

@@ -128,11 +128,12 @@ export default class Builder {
 
 		if (DROPDOWN_PRICES.length !== this.dropdowns.length) return;
 
-		const TOTAL_PRICE = DROPDOWN_PRICES.reduce((a, b) => a + b, 0);
+		let totalPrice = DROPDOWN_PRICES.reduce((a, b) => a + b, 0);
+		totalPrice = totalPrice > 0 ? numToCurrency(totalPrice) : 'Out of Stock';
 
 		this.elements.wrapper.querySelector(
 			`.${env.clientPrefix}-builder-price`
-		).innerHTML = numToCurrency(TOTAL_PRICE);
+		).innerHTML = totalPrice;
 
 		return this;
 	}

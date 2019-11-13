@@ -12,7 +12,12 @@ body {
 		.carousel-wrap {
 			opacity: 1;
 			display: block;
-		}	
+		}
+
+		CLIENT_PREFIX-container {
+			opacity: 0;
+			display: none;
+		}
 	}
 }
 

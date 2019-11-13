@@ -7,6 +7,9 @@ body {
   body.ck-err .carousel-wrap {
     opacity: 1;
     display: block; }
+  body.ck-err .ck-container {
+    opacity: 0;
+    display: none; }
 
 .ck-container {
   display: -ms-flexbox;

@@ -366,7 +366,13 @@ export default class Builder {
 	}
 
 	async _init() {
-		await this._render();
+		try {
+			await this._render();
+		} catch (error) {
+			if (!document.body.classList.contains(`${env.clientPrefix}-err`)) {
+				document.body.classList.add(`${env.clientPrefix}-err`);
+			}
+		}
 
 		return this;
 	}

@@ -46,13 +46,9 @@ export default {
 			],
 		};
 
-		try {
-			const slimSuitBuilder = new Builder({
-				...slimSuitOptions,
-			});
-		} catch (error) {
-			document.body.classList.add(`${env.clientPrefix}-err`);
-		}
+		const slimSuitBuilder = new Builder({
+			...slimSuitOptions,
+		});
 	},
 
 	finalize() {

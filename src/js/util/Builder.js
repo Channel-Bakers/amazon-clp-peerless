@@ -96,6 +96,17 @@ export default class Builder {
 				builder: this,
 			});
 			this.dropdowns.push(DROPDOWN);
+
+			// if (this.elements.wrapper && this.elements.wrapper instanceof Node) {
+			// 	this.elements.wrapper.appendChild(DROPDOWN.html);
+			// } else {
+			// 	document.querySelector(
+			// 		`[data-builder-target="${this.params.target}"] .${env.clientPrefix}-builder-container`
+			// 	).appendChild()
+			// }
+
+			console.log(DROPDOWN);
+
 			this.elements.wrapper.appendChild(DROPDOWN.html);
 		});
 

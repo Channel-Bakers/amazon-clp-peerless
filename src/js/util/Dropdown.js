@@ -581,8 +581,10 @@ export default class Dropdown {
 				.replaceWith(this._renderTitle(event.detail.color.name));
 			
 			// update image
-			const IMAGE_URL = this.params.image[event.detail.color.name];
-			this.elements.image.style.backgroundImage = `url('${IMAGE_URL}')`;
+			if (this.elements.image) {
+				const IMAGE_URL = this.params.image[event.detail.color.name];
+				this.elements.image.style.backgroundImage = `url('${IMAGE_URL}')`;
+			}
 		});
 
 		ATC.addEventListener('click', async (event) => {

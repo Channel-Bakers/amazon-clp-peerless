@@ -124,7 +124,7 @@ export default class Builder {
 
 			if (SALE_PRICE) dropdownPrice = strToNumber(SALE_PRICE.innerText);
 			if (OUT_OF_STOCK) dropdownPrice = 0;
-			if (dropdownPrice) DROPDOWN_PRICES.push(dropdownPrice);
+			if (dropdownPrice !== undefined) DROPDOWN_PRICES.push(dropdownPrice);
 		});
 
 		if (DROPDOWN_PRICES.length !== this.dropdowns.length) return;

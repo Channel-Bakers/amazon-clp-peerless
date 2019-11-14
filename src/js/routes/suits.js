@@ -10,7 +10,7 @@ export default {
 		const slimSuitPants = slimPants.default;
 		const slimSuitOptions = {
 			target: 'slimSuit',
-			title: `{{COLOR}} Slim Fit Stretch Suit Separates-Custom Jacket & Pant Size Selection`,
+			title: `{{COLOR}} Slim Fit Stretch Suit`,
 			caption:
 				"High performance bi-stretch fabric for maximum comfort and movement. Slim through the shoulders, chest, and waist with higher arm hole and tapered sleeve.",
 			image: {
@@ -34,7 +34,7 @@ export default {
 			],
 			dropdowns: [
 				{
-					title: `{{COLOR}} Slim Fit Stretch Jacket`,
+					title: `Individual Suit Jacket`,
 					image: {
 						charcoal: 'https://images-na.ssl-images-amazon.com/images/I/61fOtlfSyNL._AC_UY879_.jpg',
 						black: 'https://images-na.ssl-images-amazon.com/images/I/61NhWRvi5eL._AC_SY679._SX._UX._SY._UY_.jpg'
@@ -43,7 +43,7 @@ export default {
 					data: slimSuitJackets,
 				},
 				{
-					title: `{{COLOR}} Slim Fit Stretch Pants`,
+					title: `Individual Suit Pants`,
 					image: {
 						charcoal: 'https://images-na.ssl-images-amazon.com/images/I/61fOtlfSyNL._AC_UY879_.jpg',
 						black: 'https://images-na.ssl-images-amazon.com/images/I/61NhWRvi5eL._AC_SY679._SX._UX._SY._UY_.jpg'

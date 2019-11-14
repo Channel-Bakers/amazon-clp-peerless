@@ -271,7 +271,6 @@ export default class Dropdown {
 				const MERCHANT_ID = html.querySelector('#merchantID').value;
 
 				if (MERCHANT_ID !== env.merchantID) {
-					console.log(MERCHANT_ID);
 					// CK is not winning the Buy Box
 					// so we can either return not available
 					// or scrape the other sellers html and look

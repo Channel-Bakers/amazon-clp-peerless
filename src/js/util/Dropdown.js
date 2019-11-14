@@ -333,7 +333,7 @@ export default class Dropdown {
 
 		try {
 			const ASIN_REQUEST = await fetch(
-				`${PROXY}https://www.amazon.com/dp/${ASIN}?smid=${env.merchantID}?th=1&psc=1`,
+				`${PROXY}https://www.amazon.com/dp/${ASIN}?smid=${env.merchantID}&th=1&psc=1`,
 				{
 					method: 'GET',
 					headers: HEADERS,

@@ -10,6 +10,8 @@ body {
   body.ck-err .ck-container {
     opacity: 0 !important;
     display: none !important; }
+  body.ck-loaded .ck-container, body.ck-loaded .ck-image-container {
+    opacity: 1; }
 
 .ck-container {
   display: -ms-flexbox;
@@ -18,10 +20,12 @@ body {
       align-items: stretch;
   -ms-flex-pack: justify;
       justify-content: space-between;
+  padding: 40px 0;
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: 100;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  opacity: 0;
   will-change: opacity;
   transition: opacity 1s ease; }
 
@@ -44,7 +48,10 @@ body {
         align-items: center;
     -ms-flex-pack: center;
         justify-content: center;
-    position: relative; }
+    position: relative;
+    opacity: 0;
+    will-change: opacity;
+    transition: opacity 1s ease; }
 
 .ck-builder-container {
   max-width: 420px;

@@ -61,6 +61,8 @@ export default class Builder {
 				COLOR_WRAPPER.addEventListener('click', (event) => {
 					event.preventDefault();
 
+					if (event.target.classList.contains('active')) return;
+
 					const COLORS = this.elements.wrapper.querySelectorAll(
 						`.${env.clientPrefix}-color-container`
 					);
@@ -307,10 +309,7 @@ export default class Builder {
 		if (!WRAPPER || WRAPPER.innerHTML !== '') return;
 
 		WRAPPER.classList.add(`${env.clientPrefix}-container`);
-
-		// Preventing FOUC
-		WRAPPER.style.opacity = '0';
-
+		
 		if (this.params.backgroundColor) {
 			WRAPPER.style.background = this.params.backgroundColor;
 		} else {
@@ -374,12 +373,6 @@ export default class Builder {
 		try {
 			await this._render();
 			document.body.classList.add(`${env.clientPrefix}-loaded`);
-			
-			setTimeout(() => {
-				document.querySelector(
-					`[data-builder-target="${this.params.target}"]`
-				).style.opacity = '1';
-			}, 100);
 		} catch (error) {
 			document.body.classList.add(`${env.clientPrefix}-err`);
 		}

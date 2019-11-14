@@ -504,19 +504,20 @@ export default class Dropdown {
 			let imageUrl = '';
 
 			if (this.params.builder.params.colors.length > 0) {
-				const ACTIVE_COLOR = this.params.builder.params.colors.reduce((color) => color.active && color);
-				console.log(ACTIVE_COLOR);
+				const ACTIVE_COLOR = this.params.builder.params.colors.reduce((color) => color.active && color.name);
 				imageUrl = this.params.image[ACTIVE_COLOR];
 			} else {
 				imageUrl = this.params.image;
 			}
 
-			IMAGE.style.backgroundImage = `url('${imageUrl})`;
+			if (imageUrl) {
+				IMAGE.style.backgroundImage = `url('${imageUrl})`;
 
-			IMAGE_WRAPPER.appendChild(IMAGE);
-			DETAILS_WRAPPER.append(IMAGE_WRAPPER);
+				IMAGE_WRAPPER.appendChild(IMAGE);
+				DETAILS_WRAPPER.append(IMAGE_WRAPPER);
 
-			this.elements.image = IMAGE;
+				this.elements.image = IMAGE;
+			}
 		}
 
 		DETAILS_WRAPPER.appendChild(DETAILS_CONTENT);

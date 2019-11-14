@@ -122,13 +122,9 @@ export default class Builder {
 			const SALE_PRICE = PRICE_WRAPPER.querySelector('.salePrice');
 			const OUT_OF_STOCK = PRICE_WRAPPER.querySelector('.outOfStock');
 
-			if (SALE_PRICE) {
-				dropdownPrice = strToNumber(SALE_PRICE.innerText);
-			}
+			if (SALE_PRICE) dropdownPrice = strToNumber(SALE_PRICE.innerText);
 
-			if (OUT_OF_STOCK) {
-				dropdownPrice = 0;
-			}
+			if (OUT_OF_STOCK) dropdownPrice = 0;
 
 			DROPDOWN_PRICES.push(dropdownPrice);
 		});
@@ -136,11 +132,12 @@ export default class Builder {
 		if (DROPDOWN_PRICES.length !== this.dropdowns.length) return;
 
 		let totalPrice = DROPDOWN_PRICES.reduce((a, b) => a + b, 0);
-		totalPrice = totalPrice > 0 ? numToCurrency(totalPrice) : 'Out of Stock';
 
 		this.elements.wrapper.querySelector(
 			`.${env.clientPrefix}-builder-price`
-		).innerHTML = totalPrice;
+		).innerHTML = totalPrice > 0
+			? numToCurrency(totalPrice)
+			: 'Out of Stock';
 
 		return this;
 	}
@@ -309,7 +306,7 @@ export default class Builder {
 		if (!WRAPPER || WRAPPER.innerHTML !== '') return;
 
 		WRAPPER.classList.add(`${env.clientPrefix}-container`);
-		
+
 		if (this.params.backgroundColor) {
 			WRAPPER.style.background = this.params.backgroundColor;
 		} else {

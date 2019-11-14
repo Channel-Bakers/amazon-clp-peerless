@@ -10,7 +10,7 @@ export default {
 		const SLIM_OVERCOATS = slimOvercoat.default;
 		const SLIM_OVERCOAT_OPTIONS = {
 			target: 'slimOvercoats',
-			title: `{{COLOR}} Slim Fit Wool Blend Overcoat Jacket`,
+			title: `{{COLOR}} Slim Fit Wool Blend Winter Coat`,
 			caption:
 				"Fleece lined slanted exterior pockets for easy access and extra warmth. The appropriate coat for any chilly occasion.",
 			image: {
@@ -55,7 +55,7 @@ export default {
 			],
 			dropdowns: [
 				{
-					title: `{{COLOR}} Slim Fit Wool Blend Overcoat Jacket`,
+					title: `{{COLOR}} Slim Fit Wool Blend Winter Coat`,
 					id: 'slimOvercoats',
 					data: SLIM_OVERCOATS,
 				},
@@ -71,7 +71,7 @@ export default {
 		const MODERN_OVERCOATS = modenOvercoat.default;
 		const MODERN_OVERCOAT_OPTIONS = {
 			target: 'modernOvercoats',
-			title: `{{COLOR}} Modern Style Overcoat with Cold Weather Features`,
+			title: `{{COLOR}} Modern Fit Wool Blend Winter Coat with Cold Weather Features`,
 			caption:
 				"The coleman's interior zipper-bib and its stand collar design with tab closure will help repel and protect you from the cold and wind while the outer layer’s Front-button closure and side-entry front pockets enhance the modern design of this multifunctional overcoat.",
 			image: {
@@ -93,7 +93,7 @@ export default {
 					active: false,
 				},
 				{
-					name: 'royal blue',
+					name: 'navy',
 					hex: '#101115',
 					image:
 						'https://images-na.ssl-images-amazon.com/images/I/91euZPBCWbL._AC_UY741_.jpg',
@@ -102,7 +102,7 @@ export default {
 			],
 			dropdowns: [
 				{
-					title: `{{COLOR}} Modern Style Overcoat with Cold Weather Features`,
+					title: `{{COLOR}} Modern Fit Wool Blend Winter Coat with Cold Weather Features`,
 					id: 'modernOvercoats',
 					data: MODERN_OVERCOATS,
 				},

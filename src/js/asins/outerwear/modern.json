@@ -80,9 +80,7 @@
 			"size": "50 Regular",
 			"price": "$141.19",
 			"offeringID": "SbSSkxQL%2BjlJUPPjZYu3v1NaUDvk8eN%2FVkr3z2kiI%2BTcmyJRSLE36zFIAoGf28lSeg4BSG2tefz8SqdyKzexdnpRIRqrGNV1fpDtcvilYMCM3MOeZXnNaA%3D%3D"
-		}
-	],
-	"charcoal solid": [
+		},
 		{
 			"asin": "B01LZBOL9T",
 			"title": "Calvin Klein Men's Coleman Top Coat",
@@ -133,7 +131,7 @@
 		{
 			"asin": "B01LZNH2XM",
 			"title": "Calvin Klein Men's Coleman Top Coat",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/7146-KO%2B83L._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__black.jpg",
 			"color": "Black Solid",
 			"size": "40 Regular",
 			"price": "$123.31",
@@ -142,7 +140,7 @@
 		{
 			"asin": "B01LWQ1DJ9",
 			"title": "Calvin Klein Men's Coleman Top Coat",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/7146-KO%2B83L._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__black.jpg",
 			"color": "Black Solid",
 			"size": "38 Regular",
 			"price": "$129.99",
@@ -151,7 +149,7 @@
 		{
 			"asin": "B01M0PUF5N",
 			"title": "Calvin Klein Men's Coleman Top Coat",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/7146-KO%2B83L._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__black.jpg",
 			"color": "Black Solid",
 			"size": "40 Short",
 			"price": "$129.99",
@@ -160,7 +158,7 @@
 		{
 			"asin": "B01M0PRD7A",
 			"title": "Calvin Klein Men's Coleman Top Coat",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/7146-KO%2B83L._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__black.jpg",
 			"color": "Black Solid",
 			"size": "38 Short",
 			"price": "$119.99",
@@ -169,7 +167,7 @@
 		{
 			"asin": "B01M0PSVHE",
 			"title": "Calvin Klein Men's Coleman Top Coat",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/7146-KO%2B83L._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__black.jpg",
 			"color": "Black Solid",
 			"size": "44 Short",
 			"price": "$196.99",
@@ -178,7 +176,7 @@
 		{
 			"asin": "B01LWQ1BSP",
 			"title": "Calvin Klein Men's Coleman Top Coat",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/7146-KO%2B83L._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__black.jpg",
 			"color": "Black Solid",
 			"size": "46 Regular",
 			"price": "$196.99",
@@ -187,7 +185,7 @@
 		{
 			"asin": "B01M0E7HM5",
 			"title": "Calvin Klein Men's Coleman Top Coat",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/7146-KO%2B83L._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__black.jpg",
 			"color": "Black Solid",
 			"size": "48 Regular",
 			"price": "$196.99",
@@ -196,7 +194,7 @@
 		{
 			"asin": "B01M0E7S9X",
 			"title": "Calvin Klein Men's Coleman Top Coat",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/7146-KO%2B83L._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__black.jpg",
 			"color": "Black Solid",
 			"size": "46 Long",
 			"price": "$149.99",
@@ -205,7 +203,7 @@
 		{
 			"asin": "B01LYCJGTG",
 			"title": "Calvin Klein Men's Coleman Top Coat",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/7146-KO%2B83L._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__black.jpg",
 			"color": "Black Solid",
 			"size": "42 Regular",
 			"price": "$196.99",
@@ -214,7 +212,7 @@
 		{
 			"asin": "B075V7VWMW",
 			"title": "Calvin Klein Men's Coleman Top Coat",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/7146-KO%2B83L._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__black.jpg",
 			"color": "Black Solid",
 			"size": "36 Regular",
 			"price": "$129.99",
@@ -223,18 +221,18 @@
 		{
 			"asin": "B075V5B388",
 			"title": "Calvin Klein Men's Coleman Top Coat",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/7146-KO%2B83L._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__black.jpg",
 			"color": "Black Solid",
 			"size": "50 Regular",
 			"price": "$149.99",
 			"offeringID": "m2d1%2BbOlBGuxoALn4TzqJjTf90tBUQo4C6t87xvdfRdGA3D3hNuFk1GHvKMfA431MPNrLUK0dVPdgxyJdfftv2TBQZXcGAUCtJ4%2B%2F0ozpdvWNTAmDsWbcTYDhzTKu3Lml7Z4DDZQW2FXW2KWNx13Ca3yUbI3DDEl"
 		}
 	],
-	"royal blue": [
+	"navy": [
 		{
 			"asin": "B07YT7DYM8",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "38 Long",
 			"price": "$141.19",
@@ -243,7 +241,7 @@
 		{
 			"asin": "B07YT75K4Z",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "40 Long",
 			"price": "$141.19",
@@ -252,7 +250,7 @@
 		{
 			"asin": "B01M1NEKT4",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "40 Short",
 			"price": "$141.19",
@@ -261,7 +259,7 @@
 		{
 			"asin": "B01LYQ389K",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "38 Regular",
 			"price": "$141.19",
@@ -270,7 +268,7 @@
 		{
 			"asin": "B01LYEB1ZN",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "36 Short",
 			"price": "$141.19",
@@ -279,7 +277,7 @@
 		{
 			"asin": "B01M0OCDTY",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "40 Regular",
 			"price": "$141.19",
@@ -288,7 +286,7 @@
 		{
 			"asin": "B01M010WCC",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "38 Short",
 			"price": "$141.19",
@@ -297,7 +295,7 @@
 		{
 			"asin": "B07YT79Z5J",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "36 Regular",
 			"price": "$141.19",
@@ -306,7 +304,7 @@
 		{
 			"asin": "B01LZP8JOO",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "44 Long",
 			"price": "$141.19",
@@ -315,7 +313,7 @@
 		{
 			"asin": "B01LX3FDOJ",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "44 Short",
 			"price": "$141.19",
@@ -324,7 +322,7 @@
 		{
 			"asin": "B01M0COE5K",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "44 Regular",
 			"price": "$141.19",
@@ -333,7 +331,7 @@
 		{
 			"asin": "B01LYEB2QY",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "42 Short",
 			"price": "$141.19",
@@ -342,7 +340,7 @@
 		{
 			"asin": "B07YT6NT4H",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "46 Short",
 			"price": "$141.19",
@@ -351,7 +349,7 @@
 		{
 			"asin": "B01M1BIHVX",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "46 Regular",
 			"price": "$141.19",
@@ -360,7 +358,7 @@
 		{
 			"asin": "B01M1BU66G",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "42 Long",
 			"price": "$141.19",
@@ -369,7 +367,7 @@
 		{
 			"asin": "B01M104AE4",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "36 Regular",
 			"price": "$141.19",
@@ -378,7 +376,7 @@
 		{
 			"asin": "B01M0OAAVI",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "46 Long",
 			"price": "$141.19",
@@ -387,7 +385,7 @@
 		{
 			"asin": "B07YT7CRLF",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._AC_UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "48 Long",
 			"price": "$141.19",
@@ -396,7 +394,7 @@
 		{
 			"asin": "B01LXQWETE",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "50 Regular",
 			"price": "$141.19",
@@ -405,7 +403,7 @@
 		{
 			"asin": "B01LYEB30Z",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "48 Regular",
 			"price": "$141.19",
@@ -414,7 +412,7 @@
 		{
 			"asin": "B07YT7H2WB",
 			"title": "Calvin Klein Men's Modern Style Overcoat with Cold Weather Features",
-			"image": "https://images-na.ssl-images-amazon.com/images/I/81CD5uOA6xL._UY741_.jpg",
+			"image": "https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6/assets/ck/outerwear/modern__navy.jpg",
 			"color": "Royal Blue",
 			"size": "50 Long",
 			"price": "$141.19",

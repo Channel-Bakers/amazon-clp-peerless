@@ -28,7 +28,7 @@ export default {
 					name: 'black',
 					hex: '#000000',
 					image:
-						'https://images-na.ssl-images-amazon.com/images/I/61NhWRvi5eL._AC_SY679._SX._UX._SY._UY_.jpg',
+						'https://images-na.ssl-images-amazon.com/images/I/61ClSwdRlPL._AC_SY879._SX._UX._SY._UY_.jpg',
 					active: false,
 				},
 			],
@@ -43,7 +43,7 @@ export default {
 					data: slimSuitJackets,
 				},
 				{
-					title: `Individual Suit Pants`,
+					title: `Individual Suit Pant`,
 					image: {
 						charcoal: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.5/assets/ck/suits/charcoal/pants.jpg',
 						black: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.5/assets/ck/suits/black/pants.jpg'

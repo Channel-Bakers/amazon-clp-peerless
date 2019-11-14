@@ -10,7 +10,7 @@ export default {
 		const SLIM_PANTS = slimPants.default;
 		const SLIM_PANT_OPTIONS = {
 			target: 'slimPants',
-			title: `{{COLOR}} X Performance Slim Fit Flat Front Dress Pant`,
+			title: `{{COLOR}} Slim Fit Performance Stretch Dress Pant`,
 			caption:
 				"Ready to wear. Arrives with a finished hemmed to avoid extra tailoring. Great for your 9-5 work week, a night out, or traveling. Wrink resistant engineered fabric.",
 			image: {
@@ -48,7 +48,7 @@ export default {
 			],
 			dropdowns: [
 				{
-					title: `{{COLOR}} X Performance Slim Fit Flat Front Dress Pant`,
+					title: `{{COLOR}} Slim Fit Performance Stretch Dress Pant`,
 					id: 'slimPants',
 					data: SLIM_PANTS,
 				},

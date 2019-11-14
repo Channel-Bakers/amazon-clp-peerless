@@ -690,6 +690,8 @@ export default class Dropdown {
 			if (!document.body.classList.contains(`${env.clientPrefix}-err`)) {
 				document.body.classList.add(`${env.clientPrefix}-err`);
 			}
+
+			console.log(error);
 		}
 
 		return this;

@@ -375,9 +375,7 @@ export default class Builder {
 
 	async _init() {
 		try {
-			console.log(document.body.classList);
 			document.body.classList.add(`${env.clientPrefix}-loaded`);
-			console.log(document.body.classList);
 
 			await this._render();
 		} catch (error) {

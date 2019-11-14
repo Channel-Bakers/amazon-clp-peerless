@@ -137,8 +137,6 @@ export default class Builder {
 			? numToCurrency(totalPrice)
 			: 'Out of Stock';
 
-		console.log(DROPDOWN_PRICES);
-
 		return this;
 	}
 

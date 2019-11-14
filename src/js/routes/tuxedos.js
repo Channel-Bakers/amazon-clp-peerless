@@ -21,13 +21,13 @@ export default {
 			dropdowns: [
 				{
 					title: `Modern Fit Jacket`,
-					image: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.4/assets/ck/tuxedos/jacket.jpg',
+					image: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.5/assets/ck/tuxedos/jacket.jpg',
 					id: 'tuxedoJackets',
 					data: tuxedoJacketData,
 				},
 				{
 					title: `Modern Fit Pants`,
-					image: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.4/assets/ck/tuxedos/pants.jpg',
+					image: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.5/assets/ck/tuxedos/pants.jpg',
 					id: 'tuxedoPants',
 					data: tuxedoPantData,
 				},

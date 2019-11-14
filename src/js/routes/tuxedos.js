@@ -10,7 +10,7 @@ export default {
 		const tuxedoPantData = tuxedoPants.default;
 		const tuxedoOptions = {
 			target: 'tuxedo',
-			title: `Modern Fit Tuxedo Suit Separates-Custom Blazer & Pant Size Selection`,
+			title: `Modern Fit Tuxedo`,
 			caption:
 				"100% Wool, imported, bottom hemmed plain front pocket pant side seam.",
 			image: {

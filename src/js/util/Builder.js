@@ -123,10 +123,8 @@ export default class Builder {
 			const OUT_OF_STOCK = PRICE_WRAPPER.querySelector('.outOfStock');
 
 			if (SALE_PRICE) dropdownPrice = strToNumber(SALE_PRICE.innerText);
-
 			if (OUT_OF_STOCK) dropdownPrice = 0;
-
-			DROPDOWN_PRICES.push(dropdownPrice);
+			if (dropdownPrice) DROPDOWN_PRICES.push(dropdownPrice);
 		});
 
 		if (DROPDOWN_PRICES.length !== this.dropdowns.length) return;

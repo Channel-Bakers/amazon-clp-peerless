@@ -16,7 +16,7 @@ export default {
 			image: {
 				position: 'right',
 				src:
-					'https://images-na.ssl-images-amazon.com/images/I/81ScI-Cv7TL._AC_UY879_.jpg',
+					'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.5/assets/ck/tuxedos/tuxedo.jpg',
 			},
 			dropdowns: [
 				{

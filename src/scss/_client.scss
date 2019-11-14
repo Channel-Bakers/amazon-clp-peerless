@@ -116,10 +116,10 @@ CLIENT_PREFIX {
 			font-size: 16px;
 			margin: 4px 0;
 			width: 100%;
-			line-height: 18px;
+			height: 18px;
 
 			svg {
-				height: 18px;
+				height: 16px;
 			}
 		}
 
@@ -211,7 +211,7 @@ CLIENT_PREFIX {
 			color: #8f8f8f;
 			font-size: 14px;
 			margin: 4px 0;
-			line-height: 14px;
+			height: 14px;
 
 			.regularPrice {
 				margin-right: 6px;
@@ -220,7 +220,7 @@ CLIENT_PREFIX {
 			}
 
 			svg {
-				height: 14px;
+				height: 12px;
 			}
 		}
 

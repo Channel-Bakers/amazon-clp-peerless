@@ -511,7 +511,7 @@ export default class Dropdown {
 			}
 
 			if (imageUrl) {
-				IMAGE.style.backgroundImage = `url('${imageUrl})`;
+				IMAGE.style.backgroundImage = `url('${imageUrl}')`;
 
 				IMAGE_WRAPPER.appendChild(IMAGE);
 				DETAILS_WRAPPER.append(IMAGE_WRAPPER);

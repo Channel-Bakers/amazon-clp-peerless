@@ -36,8 +36,8 @@ export default {
 				{
 					title: `Individual Suit Jacket`,
 					image: {
-						charcoal: 'https://images-na.ssl-images-amazon.com/images/I/61fOtlfSyNL._AC_UY879_.jpg',
-						black: 'https://images-na.ssl-images-amazon.com/images/I/61NhWRvi5eL._AC_SY679._SX._UX._SY._UY_.jpg'
+						charcoal: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.4/assets/ck/suits/charcoal/jacket.png',
+						black: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.4/assets/ck/suits/black/jacket.png'
 					},
 					id: 'slimSuitJackets',
 					data: slimSuitJackets,
@@ -45,8 +45,8 @@ export default {
 				{
 					title: `Individual Suit Pants`,
 					image: {
-						charcoal: 'https://images-na.ssl-images-amazon.com/images/I/61fOtlfSyNL._AC_UY879_.jpg',
-						black: 'https://images-na.ssl-images-amazon.com/images/I/61NhWRvi5eL._AC_SY679._SX._UX._SY._UY_.jpg'
+						charcoal: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.4/assets/ck/suits/charcoal/pants.png',
+						black: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.4/assets/ck/suits/black/pants.png'
 					},
 					id: 'slimSuitPants',
 					data: slimSuitPants,

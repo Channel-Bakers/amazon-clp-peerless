@@ -308,6 +308,9 @@ export default class Builder {
 
 		WRAPPER.classList.add(`${env.clientPrefix}-container`);
 
+		// Preventing FOUC
+		WRAPPER.style.opacity = '0';
+
 		if (this.params.backgroundColor) {
 			WRAPPER.style.background = this.params.backgroundColor;
 		} else {
@@ -369,9 +372,14 @@ export default class Builder {
 
 	async _init() {
 		try {
-			document.body.classList.add(`${env.clientPrefix}-loaded`);
-
 			await this._render();
+			document.body.classList.add(`${env.clientPrefix}-loaded`);
+			
+			setTimeout(() => {
+				document.querySelector(
+					`[data-builder-target="${this.params.target}"]`
+				).style.opacity = '1';
+			}, 100);
 		} catch (error) {
 			document.body.classList.add(`${env.clientPrefix}-err`);
 		}

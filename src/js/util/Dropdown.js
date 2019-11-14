@@ -505,6 +505,7 @@ export default class Dropdown {
 
 			if (this.params.builder.params.colors.length > 0) {
 				const ACTIVE_COLOR = this.params.builder.params.colors.reduce((color) => color.active && color);
+				console.log(ACTIVE_COLOR);
 				imageUrl = this.params.image[ACTIVE_COLOR];
 			} else {
 				imageUrl = this.params.image;

@@ -206,15 +206,21 @@ export default class Builder {
 		const IMAGE_POSITION = this.params.image.position;
 		const IMAGE_WRAPPER = document.createElement('div');
 		const IMAGE = document.createElement('div');
-		const TARGET = MOBILE
-			? document.querySelector(
-					`[data-builder-target="${this.params.target}"] .${env.clientPrefix}-builder-details`
-			  )
-			: document.querySelector(
-					`[data-builder-target="${this.params.target}"]`
-			  );
+		// const TARGET = MOBILE
+		// 	? document.querySelector(
+		// 			`[data-builder-target="${this.params.target}"] .${env.clientPrefix}-builder-details`
+		// 	  )
+		// 	: document.querySelector(
+		// 			`[data-builder-target="${this.params.target}"]`
+		// 	  );
+		const TARGET =  document.querySelector(`[data-builder-target="${this.params.target}"]`);
+		// const ATTACH_METHOD =
+		// 	MOBILE || (IMAGE_POSITION && IMAGE_POSITION === 'right')
+		// 		? 'appendChild'
+		// 		: 'prepend';
+
 		const ATTACH_METHOD =
-			MOBILE || (IMAGE_POSITION && IMAGE_POSITION === 'right')
+			!MOBILE && (IMAGE_POSITION && IMAGE_POSITION === 'right')
 				? 'appendChild'
 				: 'prepend';
 

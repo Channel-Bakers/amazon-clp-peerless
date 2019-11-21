@@ -31,13 +31,29 @@ export default {
 						'https://images-na.ssl-images-amazon.com/images/I/61ClSwdRlPL._AC_SY879._SX._UX._SY._UY_.jpg',
 					active: false,
 				},
+				{
+					name: 'navy',
+					hex: '#2a2f44',
+					image:
+						'https://images-na.ssl-images-amazon.com/images/I/61fiY6zNlkL._AC_SY606._SX._UX._SY._UY_.jpg',
+					active: false,
+				},
+				{
+					name: 'blue',
+					hex: '#3b425e',
+					image:
+						'https://images-na.ssl-images-amazon.com/images/I/61PZceKHbtL._AC_SY879._SX._UX._SY._UY_.jpg',
+					active: false,
+				},
 			],
 			dropdowns: [
 				{
 					title: `Individual Suit Jacket`,
 					image: {
 						charcoal: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.5/assets/ck/suits/charcoal/jacket.jpg',
-						black: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.5/assets/ck/suits/black/jacket.jpg'
+						black: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.5/assets/ck/suits/black/jacket.jpg',
+						navy: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6.3/assets/ck/suits/navy/jacket.jpg',
+						blue: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6.3/assets/ck/suits/blue/jacket.jpg'
 					},
 					id: 'slimSuitJackets',
 					data: slimSuitJackets,
@@ -46,7 +62,9 @@ export default {
 					title: `Individual Suit Pant`,
 					image: {
 						charcoal: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.5/assets/ck/suits/charcoal/pants.jpg',
-						black: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.5/assets/ck/suits/black/pants.jpg'
+						black: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.5/assets/ck/suits/black/pants.jpg',
+						navy: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6.3/assets/ck/suits/navy/pants.jpg',
+						blue: 'https://cdn.jsdelivr.net/gh/rdimascio/ck@1.6.3/assets/ck/suits/blue/pants.jpg'
 					},
 					id: 'slimSuitPants',
 					data: slimSuitPants,

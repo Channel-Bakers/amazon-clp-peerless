@@ -180,6 +180,19 @@ export default class Dropdown {
 				return PRICES;
 			}
 
+			const MERCHANT = html.querySelector('#merchantID')
+				? html.querySelector('#merchantID')
+				: html.querySelector('#ftSelectMerchant');
+
+			const MERCHANT_ID = MERCHANT.value;
+
+			if (MERCHANT_ID !== env.merchantID) {
+				PRICES.salePrice = null;
+				PRICES.regularPrice = null;
+				PRICES.available = false;
+				return PRICES;
+			}
+
 			let prices = [];
 
 			if (MOBILE && /Android/.test(window.navigator.userAgent)) {
@@ -207,25 +220,6 @@ export default class Dropdown {
 							prices.push(salePrice);
 						}
 					}
-				}
-
-				// CHECK TO SEE IF CK IS WINNING THE BUY BOX
-				// IF NOT, WE HAVE TO
-				const MERCHANT_ID = html.querySelector('#ftSelectMerchant')
-					.value;
-
-				if (MERCHANT_ID !== env.merchantID) {
-					// CK is not winning the Buy Box
-					// so we can either return not available
-					// or scrape the other sellers html and look
-					// for their merchant ID and offerListing ID
-					// this._scrapeOtherSellers();
-
-					// This is the return not available method
-					PRICES.salePrice = null;
-					PRICES.regularPrice = null;
-					PRICES.available = false;
-					return PRICES;
 				}
 			} else {
 				const PRICE_TABLE = html.querySelector('#price');
@@ -263,24 +257,6 @@ export default class Dropdown {
 							}
 						}
 					});
-				}
-
-				// CHECK TO SEE IF CK IS WINNING THE BUY BOX
-				// IF NOT, WE HAVE TO
-				const MERCHANT_ID = html.querySelector('#merchantID').value;
-
-				if (MERCHANT_ID !== env.merchantID) {
-					// CK is not winning the Buy Box
-					// so we can either return not available
-					// or scrape the other sellers html and look
-					// for their merchant ID and offerListing ID
-					// this._scrapeOtherSellers();
-
-					// This is the return not available method
-					PRICES.salePrice = null;
-					PRICES.regularPrice = null;
-					PRICES.available = false;
-					return PRICES;
 				}
 			}
 
@@ -505,9 +481,6 @@ export default class Dropdown {
 			let imageUrl = '';
 
 			if (this.params.builder.params.colors.length > 0) {
-				this.params.builder.params.colors.forEach((color) => {
-					console.log(color);
-				});
 				const ACTIVE_COLOR = this._getActiveColor();
 				imageUrl = this.params.image[ACTIVE_COLOR['name']];
 			} else {

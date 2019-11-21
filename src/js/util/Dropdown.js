@@ -508,10 +508,8 @@ export default class Dropdown {
 				this.params.builder.params.colors.forEach((color) => {
 					console.log(color);
 				});
-				const ACTIVE_COLOR = this.params.builder.params.colors.reduce(
-					(color) => (color && color.active) && color.name
-				);
-				imageUrl = this.params.image[ACTIVE_COLOR];
+				const ACTIVE_COLOR = this._getActiveColor();
+				imageUrl = this.params.image[ACTIVE_COLOR['name']];
 			} else {
 				imageUrl = this.params.image;
 			}

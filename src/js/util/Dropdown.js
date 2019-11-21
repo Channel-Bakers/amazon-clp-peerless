@@ -509,7 +509,7 @@ export default class Dropdown {
 					console.log(color);
 				});
 				const ACTIVE_COLOR = this.params.builder.params.colors.reduce(
-					(color) => color.active && color.name
+					(color) => (color && color.active) && color.name
 				);
 				imageUrl = this.params.image[ACTIVE_COLOR];
 			} else {

@@ -124,7 +124,8 @@ export default class Builder {
 
 			if (SALE_PRICE) dropdownPrice = strToNumber(SALE_PRICE.innerText);
 			if (OUT_OF_STOCK) dropdownPrice = 0;
-			if (dropdownPrice !== undefined) DROPDOWN_PRICES.push(dropdownPrice);
+			if (dropdownPrice !== undefined)
+				DROPDOWN_PRICES.push(dropdownPrice);
 		});
 
 		if (DROPDOWN_PRICES.length !== this.dropdowns.length) return;
@@ -133,9 +134,8 @@ export default class Builder {
 
 		this.elements.wrapper.querySelector(
 			`.${env.clientPrefix}-builder-price`
-		).innerHTML = totalPrice > 0
-			? numToCurrency(totalPrice)
-			: 'Out of Stock';
+		).innerHTML =
+			totalPrice > 0 ? numToCurrency(totalPrice) : 'Out of Stock';
 
 		return this;
 	}
@@ -213,14 +213,16 @@ export default class Builder {
 		// 	: document.querySelector(
 		// 			`[data-builder-target="${this.params.target}"]`
 		// 	  );
-		const TARGET =  document.querySelector(`[data-builder-target="${this.params.target}"]`);
+		const TARGET = document.querySelector(
+			`[data-builder-target="${this.params.target}"]`
+		);
 		// const ATTACH_METHOD =
 		// 	MOBILE || (IMAGE_POSITION && IMAGE_POSITION === 'right')
 		// 		? 'appendChild'
 		// 		: 'prepend';
 
 		const ATTACH_METHOD =
-			!MOBILE && (IMAGE_POSITION && IMAGE_POSITION === 'right')
+			!MOBILE && IMAGE_POSITION && IMAGE_POSITION === 'right'
 				? 'appendChild'
 				: 'prepend';
 

@@ -210,8 +210,9 @@ export default class Dropdown {
 				}
 
 				// CHECK TO SEE IF CK IS WINNING THE BUY BOX
-				// IF NOT, WE HAVE TO 
-				const MERCHANT_ID = html.querySelector('#ftSelectMerchant').value;
+				// IF NOT, WE HAVE TO
+				const MERCHANT_ID = html.querySelector('#ftSelectMerchant')
+					.value;
 
 				if (MERCHANT_ID !== env.merchantID) {
 					// CK is not winning the Buy Box
@@ -226,8 +227,6 @@ export default class Dropdown {
 					PRICES.available = false;
 					return PRICES;
 				}
-
-
 			} else {
 				const PRICE_TABLE = html.querySelector('#price');
 
@@ -267,7 +266,7 @@ export default class Dropdown {
 				}
 
 				// CHECK TO SEE IF CK IS WINNING THE BUY BOX
-				// IF NOT, WE HAVE TO 
+				// IF NOT, WE HAVE TO
 				const MERCHANT_ID = html.querySelector('#merchantID').value;
 
 				if (MERCHANT_ID !== env.merchantID) {
@@ -496,7 +495,9 @@ export default class Dropdown {
 
 		if (this.params.image) {
 			const IMAGE_WRAPPER = document.createElement('div');
-			IMAGE_WRAPPER.classList.add(`${env.clientPrefix}-dropdown-image-container`);
+			IMAGE_WRAPPER.classList.add(
+				`${env.clientPrefix}-dropdown-image-container`
+			);
 
 			const IMAGE = document.createElement('div');
 			IMAGE.classList.add(`${env.clientPrefix}-dropdown-image`);
@@ -504,7 +505,12 @@ export default class Dropdown {
 			let imageUrl = '';
 
 			if (this.params.builder.params.colors.length > 0) {
-				const ACTIVE_COLOR = this.params.builder.params.colors.reduce((color) => color.active && color.name);
+				this.params.builder.params.colors.forEach((color) => {
+					console.log(color);
+				});
+				const ACTIVE_COLOR = this.params.builder.params.colors.reduce(
+					(color) => color.active && color.name
+				);
 				imageUrl = this.params.image[ACTIVE_COLOR];
 			} else {
 				imageUrl = this.params.image;
@@ -579,7 +585,7 @@ export default class Dropdown {
 			this.elements.wrapper
 				.querySelector(`.${env.clientPrefix}-dropdown-title`)
 				.replaceWith(this._renderTitle(event.detail.color.name));
-			
+
 			// update image
 			if (this.elements.image) {
 				const IMAGE_URL = this.params.image[event.detail.color.name];
